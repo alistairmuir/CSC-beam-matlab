@@ -18,7 +18,7 @@ clc
 
 % Add directories containing dependent functions and configuration files.
 addpath("Functions and Subscripts")
-addpath("Config files")
+addpath("Config Files")
 
 
 
@@ -217,13 +217,11 @@ end
 
 %% Fourier Transforms
 %%% Ensure data has even number of samples (cuts off final odd sample).
-% Number of samples
-Tl = length(time_samples(:,1)) ;
-
-% Ensure signals have even number of samples for FFT.
+Tl = length(time_samples) ;
 Nmod2 = mod(Tl, 2) ;
 Tl = Tl - Nmod2 ;
-port_signals = port_signals(1:end-Nmod2,:) ;
+time_samples = time_samples(1:Tl) ;
+port_signals = port_signals(1:Tl,:) ;
 
 %%% Fourier transforms and one-sided spectra %%%%%%%%%%%%%%%%%%%%%
 switch import_FFT
@@ -251,16 +249,16 @@ switch import_FFT
             % Initialize
             if modi==1
                 len_FT          = min(length(ps1_FT), length(ps2_FT)) ;
-                port_signals_FT = complex(zeros(len_FT,2*N_modes)) ;
+                port_signals_FD = complex(zeros(len_FT,2*N_modes)) ;
                 freqs_FFT       = ps1_FT(:,1) ;
             end
             
             
             %%% Retrieve desired data.
-            port_signals_FT(:,port1) = ...
+            port_signals_FD(:,port1) = ...
                 ps1_FT(1:len_FT,2) + 1i*ps1_FT(1:len_FT,3) ;
             
-            port_signals_FT(:,port2) = ...
+            port_signals_FD(:,port2) = ...
                 ps2_FT(1:len_FT,2) + 1i*ps2_FT(1:len_FT,3) ;
             
         end
@@ -268,7 +266,7 @@ switch import_FFT
         % Current.
         I_FTimport    = readmatrix(current_FT_dir)  ;
         freqs_current = I_FTimport(:,1) ;
-        current_FT    = I_FTimport(:,2) + 1i*I_FTimport(:,3) ;
+        current_FD    = I_FTimport(:,2) + 1i*I_FTimport(:,3) ;
         
         
         
@@ -278,7 +276,7 @@ switch import_FFT
         
         %%% Port signals FFT
         % Initialize freq-domain port signals matrix.
-        port_signals_FT = complex(zeros(Tl/2,2*N_modes)) ;
+        port_signals_FD = complex(zeros(Tl/2,2*N_modes)) ;
         
         %%% Sample frequencies
         Ts = (time_samples(end)-time_samples(1))*s_CST2SI/Tl ;   % Sample period.
@@ -291,21 +289,17 @@ switch import_FFT
             % Carry out FFT
             port_FFT = fft(port_signals(:,modi)) ;
             
-            % Calc one-sided spectrum.
-            port_signals_FT(:,modi)       = port_FFT(1:Tl/2)/Tl ;
-            port_signals_FT(2:end-1,modi) = 2*port_signals_FT(2:end-1,modi) ;
+            % Take only positive frequencies
+            port_signals_FD(:,modi) = port_FFT(1:Tl/2)/Tl ;
             
         end
 
-        clear port_FFT   % Clear redundant large matrices
         
         %%% Beam current FFT.
-        freqs_current = freqs_FFT ;    % Time samples for current are same as port signals.
-        beam_current = beam_current(1:end-Nmod2,:) ;
-        current_FT   = fft(beam_current(:,2)) ;
-        % current_FT   = abs(current_FT(1:Tl/2))/Tl ;   % Take absolute?
-        current_FT = (current_FT(1:Tl/2))/Tl ;
-        current_FT(2:end-1) = 2*current_FT(2:end-1) ;
+        freqs_current = freqs_FFT ;    % Time samples for current and port signals are the same.
+        beam_current  = beam_current(1:Tl,:) ;
+        current_FD = fft(beam_current(:,2)) ;
+        current_FD = (current_FD(1:Tl/2))/Tl ;
         
 end
 
@@ -319,7 +313,7 @@ Z_interpolant = griddedInterpolant(freqs_wake, wake_Z) ;
 Z_final       = Z_interpolant(freqs_GM) ;
 
 %%% Interpolate: Current
-currentFT_interpolant = griddedInterpolant(freqs_current, current_FT) ;
+currentFT_interpolant = griddedInterpolant(freqs_current, current_FD) ;
 currentFT_final       = currentFT_interpolant(freqs_GM) ;
 
 %%% Interpolate: Every mode of signals and voltages
@@ -331,7 +325,7 @@ for modi=1:2*N_modes
     
     % Port signals (create interpolant, then interpolate at target freqs.)
     portFT_interpolant{modi} = ...
-        griddedInterpolant(freqs_FFT, port_signals_FT(:,modi)) ;
+        griddedInterpolant(freqs_FFT, port_signals_FD(:,modi)) ;
     portFT_final(:,modi) = portFT_interpolant{modi}(freqs_GM) ;
     
 end

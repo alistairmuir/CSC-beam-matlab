@@ -15,7 +15,7 @@ clc
 
 % Add directories containing dependent functions and configuration files.
 addpath("Functions and Subscripts")
-addpath("Config files")
+addpath("Config Files")
 
 
 
@@ -74,7 +74,7 @@ for segi=1:N_segs
     end
     
     % Construct array of segment lengths.
-    L_segs(segi) = seg_matrix.seg_length ;
+    L_segs(segi) = seg_matrix.Length ;
 
 end
 

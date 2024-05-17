@@ -27,16 +27,26 @@ end
 
 
 %% Impedance plot Y-axis limits
-if y_axis_limits(1)==0 && y_axis_limits(2)==0 && N_modes==1
-    % T. Flisgen's plot limits
-    plt_y_mins = [-150, -100, -50 ;
-                  -100, -150, -50 ;
-                   -50,  -50, -50 ] ;
+if y_axis_limits(1)==0 && y_axis_limits(2)==0
+    if N_modes==1
+        % T. Flisgen's plot limits
+        plt_y_mins = [-150, -100, -50 ;
+                      -100, -150, -50 ;
+                       -50,  -50, -50 ] ;
 
-    plt_y_maxs = [   0,    0,  100 ;
-                     0,    0,  100 ;
-                    50,   50,  100 ] ;
-                
+        plt_y_maxs = [   0,    0,  100 ;
+                         0,    0,  100 ;
+                        50,   50,  100 ] ;
+
+    else
+        % Default plot limits
+        y_axis_limits = [-150, 100] ;
+        
+        % Generate grid of plot limits from default values.
+        plt_y_mins = y_axis_limits(1)*ones(2*N_modes + 1) ;
+        plt_y_maxs = y_axis_limits(2)*ones(2*N_modes + 1) ;
+        
+    end
 else
     % Generate grid of plot limits from user-given values.
     plt_y_mins = y_axis_limits(1)*ones(2*N_modes + 1) ;

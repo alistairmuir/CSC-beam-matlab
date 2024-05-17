@@ -46,7 +46,7 @@ save_dir = "Results/"+problem_dir ;
 
 %% Form of generalized matrices.
 N_segs  = 2 ;    % Number of segments to be concatenated.
-N_modes = 1 ;    % Number of modes in all generalized matrices.
+N_modes = 3 ;    % Number of modes in all generalized matrices.
 
 
 %% Directories for orthogonal and generalized matrices.
@@ -60,7 +60,7 @@ orthogonal_matrices_dir = "./Matrices/"+problem_dir+"/Orthogonal_Matrices/"+...
 seg_dir = "./Matrices/"+problem_dir+"/Generalized_Matrices/" ;
 
 % List of file names containing generalized matrices for all segments in the structure.
-name_matrices = ["pillbox_TM01_hifi_new"] ;
+name_matrices = ["pillbox_3TM_hifi_new"] ;
 
 % File names of for generalized matrices for all segments in beam path in sequential order...
 % ... from z=0 to z=maximum (i.e. upstream to downstream).

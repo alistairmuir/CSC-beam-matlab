@@ -63,12 +63,12 @@ hifreq_dir = model_dir+"/Freq_hifi/Export" ;  % High Freq CST directory
 %%% Directory and filename to save generalized matrices.
 save_matrix     = true ;
 genmat_savedir  = "Matrices/Pillbox/Generalized_Matrices" ;
-genmat_filename = "pillbox_TM01_hifi_new" ;
+genmat_filename = "pillbox_3TM_hifi_new" ;
 
 
 %% Port modes
 %%% Choose modes for signal retrieval.
-Pmodes = [3] ;   % List of the modes (signals of these modes will be retrieved, others ignored).
+Pmodes = [3,7,8] ;   % List of the modes (signals of these modes will be retrieved, others ignored).
 
 
 %% Segment longitudinal length (CST units)
