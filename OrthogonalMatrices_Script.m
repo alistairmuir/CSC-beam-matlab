@@ -12,11 +12,10 @@
 
 
 %% USER INPUT
-N_modes = 1 ;    % Number of modes in matrix.
+N_modes = 2 ;    % Number of modes in matrix.
 N_segs  = 2 ;    % Number of segments
 
-save_dir = "Matrices/Pillbox/Orthogonal_Matrices/"+...
-    N_segs+"segments_"+N_ext+"modes" ;
+save_dir = "Matrices/Pillbox/Orthogonal_Matrices" ;
 
 
 %% Initialization
@@ -28,6 +27,9 @@ Fsize = (N_segs-1)*2*N_int ;
 
 P = zeros(Psize) ;
 F = zeros(Fsize) ;
+
+% Create full filepath for these matrices.
+save_path = save_dir+"/"+N_segs+"segments_"+N_ext+"modes" ;
 
 
 %% Row/column expressions for the different sections of matrices
@@ -79,7 +81,11 @@ end
 
 
 %% Save P and F matrices
-save(save_dir,'P','F')
+if exist(save_dir, 'dir')==0
+    mkdir(save_dir)
+end
+
+save(save_path,'P','F')
 
 
 %%%%%%%%%%%%%%% END %%%%%%%%%%%%%%%
