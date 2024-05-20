@@ -1,2 +1,16 @@
+# Scsc Archive
 Archive/
+
+# Large project-specific files
 CST Files/
+
+# Sphinx and virtual environment stuff
+source/
+bin/
+build/
+lib/
+Make/
+include/
+lib64/
+make.bat
+pyvenv.cfg
