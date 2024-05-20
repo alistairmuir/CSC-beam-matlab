@@ -9,8 +9,8 @@ source/
 bin/
 build/
 lib/
-Make/
 include/
 lib64/
+Makefile
 make.bat
 pyvenv.cfg
