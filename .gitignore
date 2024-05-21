@@ -1,5 +1,7 @@
 # Scsc Archive
 Archive/
+Matrices/
+Results/
 
 # Large project-specific files
 CST Files/
@@ -10,7 +12,7 @@ bin/
 build/
 lib/
 include/
-lib64/
+lib64
 Makefile
 make.bat
 pyvenv.cfg
