@@ -3,7 +3,7 @@
 % ==============================================================
 % 
 % This script is called by GeneralizedMatrix_Script.m, which constructs a generalized matrix
-% containing the specified number of modes from CST files given in this document.
+% from CST simulation results in directories given by the user, along with other information.
 % 
 % :param f_CST2SI: conversion factor of CST frequency units to SI (Hz).
 % :type f_CST2SI: double
