@@ -61,15 +61,15 @@ orthogonal_matrices_dir = "./Matrices/"+problem_dir+"/Orthogonal_Matrices/"+...
 seg_dir = "./Matrices/"+problem_dir+"/Generalized_Matrices/" ;
 
 % List of file names containing generalized matrices for all segments in the structure.
-name_matrices = ["pillbox_TM01_conjCurrent"] ;
+segment_names = ["pillbox_TM01_conjCurrent"] ;
 
 % File names of for generalized matrices for all segments in beam path in sequential order...
 % ... from z=0 to z=maximum (i.e. upstream to downstream).
-sequence_matrices = repmat(name_matrices(1),1,N_segs) ;
+segment_names = repmat(segment_names(1),1,N_segs) ;
 
 
 %% Save filename
-save_filename = save_dir + "/Z_" + N_segs + sequence_matrices(1) ;
+save_filename = save_dir + "/Z_" + N_segs + segment_names(1) ;
 
 
 %% Plot?

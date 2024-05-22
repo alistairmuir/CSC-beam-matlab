@@ -29,12 +29,12 @@ seg_dir = "./Matrices/"+name_problem+"/Generalized_Matrices/" ;
 
 %%% File names of GMs for all segments in beam path (upstream to downstream).
 %                upstream, ... , ... , downstream
-sequence_matrices = ["test"+N_modes, ...
-                    "test"+N_modes] ;
+segment_names = ["test"+N_modes, ...
+                 "test"+N_modes] ;
 
 
 %% Save filename
-save_filename = "Results/S_csc/Wake_"+sequence_matrices(1) ;
+save_filename = "Results/S_csc/Wake_"+segment_names(1) ;
 
 plot_on = false ;
 

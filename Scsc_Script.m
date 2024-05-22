@@ -31,11 +31,11 @@ PhysicalConstants
 
 %% Loading S Matrices
 % Number of segments.
-N_segs = length(sequence_matrices) ;
+N_segs = length(segment_names) ;
 L_segs = zeros(1, N_segs) ;
 
 % Load first generalized matrix to measure length for matrix initialization.
-seg_matrix = load(seg_dir+"/"+sequence_matrices(1)) ;
+seg_matrix = load(seg_dir+"/"+segment_names(1)) ;
 f          = seg_matrix.f ;
 N_samples  = length(f) ;
 
@@ -54,7 +54,7 @@ S = zeros(N_samples, N_modes*2+1, N_modes*2+1) ;
 for segi=1:N_segs
 
     % Load S-matrix.
-    seg_matrix = load(seg_dir+"/"+sequence_matrices(segi)) ;
+    seg_matrix = load(seg_dir+"/"+segment_names(segi)) ;
 
     % Check frequencies match.
     if all(f~=seg_matrix.f)
@@ -93,7 +93,7 @@ for fi = 1:N_samples
     for segi=1:N_segs
         
         % Load S-matrix.
-        seg_matrix = load(seg_dir+"/"+sequence_matrices(segi)) ;
+        seg_matrix = load(seg_dir+"/"+segment_names(segi)) ;
 
         % S block diagonal matrix.
         S_tot = blkdiag(S_tot, squeeze(seg_matrix.S(fi,:,:))) ;
@@ -113,14 +113,14 @@ for fi = 1:N_samples
     % Reorder block matrix according to internal and external quantities
     % and according to current and voltages.
     G = P*S_tot*P' ;
-        
+    
     % Split block matrix G into quadrants ready for concatenation (Ref. [1])
     G11 = G(1:N_concatmodes, 1:N_concatmodes) ;
     G12 = G(1:N_concatmodes, 1+N_concatmodes:end) ;
     
     G21 = G(1+N_concatmodes:end, 1:N_concatmodes) ;
     G22 = G(1+N_concatmodes:end, 1+N_concatmodes:end) ;
-        
+    
     % Determine generalized matrices of the concatenated structure.
     % M' == the Hermitian of M.
     S(fi,:,:) = M'*(G22+G21*((F-G11)\G12))*M ;
