@@ -1,6 +1,6 @@
 function V = func_calcVoltage_Ez(Ez_filepath, freq, m_CST2SI)
-% Function to retrieve the modal E-field along a beam path and 
-% return the induced voltage on the beam.
+% Function to retrieve the E-field along a beam path from CST file and 
+% return the induced voltage on the beam for one port mode.
 %
 % :param Efield_1D_filepath: Path to the file containing the E-field along the beamline.
 % :type Ez_filepath: string
@@ -8,6 +8,8 @@ function V = func_calcVoltage_Ez(Ez_filepath, freq, m_CST2SI)
 % :type freq: double
 % :param m_CST2SI: Conversion factor for distance units in CST file.
 % :type m_CST2SI: double
+%
+% :returns: V
 
 %%% Import physical constants
 PhysicalConstants

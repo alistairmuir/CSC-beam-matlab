@@ -6,6 +6,8 @@ function [vec_ind, vec_dep] = func_importCSTdata(filepath, conversion_factor)
 % :type filepath: string
 % :param conversion_factor: Converts independent CST variable to SI units.
 % :type conversion_factor: double
+%
+% :returns: vec_ind, vec_dep
 
 % Read CST data in.
 data = readmatrix(filepath) ;

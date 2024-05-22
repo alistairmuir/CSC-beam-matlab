@@ -5,6 +5,8 @@ function [freqs, data_FD] = func_FFT_CSTdata(data_TD, time_samples)
 % :type data_TD: double
 % :param time_samples: the time samples corresponding to the timeseries data in data_TD.
 % :type time_samples: double
+%
+% :returns: freqs, data_FD
 
 
 %%% Ensure timeseries has even number of samples (cuts off final odd sample).
