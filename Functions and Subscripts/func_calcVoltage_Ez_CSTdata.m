@@ -1,4 +1,4 @@
-function V = func_calcVoltage_Ez(Ez_filepath, freq, m_CST2SI)
+function V = func_calcVoltage_Ez_CSTdata(Ez_filepath, freq, m_CST2SI)
 % Function to retrieve the E-field along a beam path from CST file and 
 % return the induced voltage on the beam for one port mode.
 %

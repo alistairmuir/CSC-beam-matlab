@@ -131,8 +131,8 @@ for freq=1:Nf_FM
         E2_filepath = E2_dir(modi) + freqs_FM_str(freq) + " " + f_label + ".txt" ;
 
         %%% Carry out integration and return the voltages.
-        V(freq, modi)         = func_calcVoltage_Ez(E1_filepath, freqs_FM(freq), m_CST2SI) ;
-        V(freq, N_modes+modi) = func_calcVoltage_Ez(E2_filepath, freqs_FM(freq), m_CST2SI) ;
+        V(freq, modi)         = func_calcVoltage_Ez_CSTdata(E1_filepath, freqs_FM(freq), m_CST2SI) ;
+        V(freq, N_modes+modi) = func_calcVoltage_Ez_CSTdata(E2_filepath, freqs_FM(freq), m_CST2SI) ;
         
     end
 end
