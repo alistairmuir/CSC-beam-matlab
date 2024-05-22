@@ -261,12 +261,9 @@ S = complex(zeros(Nf_Smat,2*N_modes+1,2*N_modes+1)) ;
 
 for fi=1:Nf_Smat
     
-    % Concatenate S-matrix with k vector for this frequency.
-    Sk_mat = [squeeze(Sp_final(fi,:,:)), k(fi,:).'] ;
-    
-    % Concatenate S-and-k-matrix with [h,z_b] horizontal vector for
-    % generalized S-matrix for this frequency.
-    S(fi,:,:) = [Sk_mat ; [h(fi,:), Z_final(fi)]] ;
+    % Call the function to create GM for this frequency.
+    S(fi,:,:) = func_CreateGeneralizedMatrix(...
+        squeeze(Sp_final(fi,:,:)), k(fi,:), h(fi,:), Z_final(fi)) ;
     
 end
 
