@@ -66,9 +66,10 @@ for segi=1:N_segs
     
     % Check that user-specified N_modes matches generalized matrix size.
     if length(seg_matrix.S(1,1,:))~=2*N_modes+1
-        disp("   =================================================================")
-        disp("     GENERALIZED MATRIX IS NOT CORRECT SIZE FOR SPECIFIED N_modes   ")
-        disp("   =================================================================")
+        disp("   ========================================================================")
+        disp("     GENERALIZED MATRIX IS NOT CORRECT SIZE FOR SPECIFIED NUMBER OF MODES  ")
+        disp("   ========================================================================")
+        disp("      Matrix size for segment "+segi": "string(size(seg_matrix.S(1,:,:)))) ;
         return
     end
     
