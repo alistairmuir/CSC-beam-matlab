@@ -42,9 +42,8 @@ N_samples  = length(f) ;
 % Load permutation matrix, P, and feedback matrix, F
 load(orthogonal_matrices_dir)
 
-% Number of modes being concatenated through entire structure.
-N_concatmodes = 2*N_modes*(N_segs-1) ;
-
+% Number of internal modes being concatenated through entire structure.
+N_concatmodes = length(F) ;
 
 %%% Initialize final generalized S matrix.
 S = zeros(N_samples, N_modes*2+1, N_modes*2+1) ;
@@ -130,8 +129,6 @@ for fi = 1:N_samples
     
 end
 
-% Clear large matrices no longer needed.
-%clear G G11 G12 G21 G22 S_tot
 
 
 %% Save beam impedance

@@ -60,7 +60,7 @@ orthogonal_matrices_dir = "./Matrices/"+problem_dir+"/Orthogonal_Matrices/"+...
 seg_dir = "./Matrices/"+problem_dir+"/Generalized_Matrices/" ;
 
 % List of file names containing generalized matrices for all segments in the structure.
-name_matrices = ["pillbox_3TM_hifi_new"] ;
+name_matrices = ["pillbox_3TM_hifi_old"] ;
 
 % File names of for generalized matrices for all segments in beam path in sequential order...
 % ... from z=0 to z=maximum (i.e. upstream to downstream).

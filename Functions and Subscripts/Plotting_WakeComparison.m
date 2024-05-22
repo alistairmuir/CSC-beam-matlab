@@ -6,11 +6,11 @@ clc
 %% Load S_csc and direct wakes
 pmode = [1:8] ;
 
-S1 = load("Results/Pillbox/Z_2pillbox_TM01_hifi_new.mat");
-    Slabel_a(1) = "TM01" ;
+S1 = load("Results/Pillbox/Z_2pillbox_3TM_hifi_new.mat");
+    Slabel_a(1) = "3 TM new" ;
     
-S2 = load("Results/Pillbox/Z_2pillbox_3TM_hifi_new.mat");
-    Slabel_a(2) = "3 TM" ;
+S2 = load("Results/Pillbox/Z_2pillbox_3TM_hifi_old.mat");
+    Slabel_a(2) = "3 TM old" ;
 
 %%% Import direct simulation no.1
 S_direct1 = readmatrix("CST Files/Pillbox/Z_2pillbox_10GHz_15cpw_10modes_100k_10sigma.txt") ;
@@ -19,7 +19,7 @@ S_d1.S = S_direct1(:,2) + 1i*S_direct1(:,3) ;
 Slabel_a(3) = "Direct" ;
 
 %%% Import direct impedance for 1 pillbox
-S_d3 = load("Matrices/Pillbox/Generalized_Matrices/pillbox_TM01_10GHz_15cpw") ;
+S_d3 = load("Matrices/Pillbox/Generalized_Matrices/pillbox_3TM_hifi_new") ;
 Slabel_b(1) = Slabel_a(2) ;
 Slabel_b(2) = Slabel_a(3) ;
 
