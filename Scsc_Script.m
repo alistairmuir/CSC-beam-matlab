@@ -7,7 +7,7 @@
 % Created by Alistair Muir, September 2023
 % 
 % References:
-% #. "Generalization of coupled S-parameter calculation to compute beam
+% 1. "Generalization of coupled S-parameter calculation to compute beam
 % impedances in particle accelerators" - T. Flisgen, E. Gjonaj, H.W. Glock - 2020
 
 clear
@@ -78,15 +78,12 @@ for segi=1:N_segs
 
 end
 
-%%% Clear redundant variables
-clear seg_matrix
 
 
 %% S_CSC construction
 % Loop through all frequency samples.
 for fi = 1:N_samples
-    
-    
+        
     % Initialize block matrix and phase array.
     S_tot    = [] ;
     phi_segs = zeros(1,N_segs) ;
@@ -117,7 +114,7 @@ for fi = 1:N_samples
     % and according to current and voltages.
     G = P*S_tot*P' ;
         
-    % Split matrix G
+    % Split block matrix G into quadrants ready for concatenation (Ref. [1])
     G11 = G(1:N_concatmodes, 1:N_concatmodes) ;
     G12 = G(1:N_concatmodes, 1+N_concatmodes:end) ;
     
@@ -141,6 +138,7 @@ if exist(save_dir,'dir')==0
 end
 
 save(save_filename, 'S', 'f', 'Length')
+
 
 
 %% Plot
