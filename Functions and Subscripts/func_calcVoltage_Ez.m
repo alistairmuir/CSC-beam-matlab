@@ -1,4 +1,4 @@
-function V = func_integrate_Efield1D(Ez_filepath, freq, m_CST2SI)
+function V = func_calcVoltage_Ez(Ez_filepath, freq, m_CST2SI)
 % Function to retrieve the modal E-field along a beam path and 
 % return the induced voltage on the beam.
 %
