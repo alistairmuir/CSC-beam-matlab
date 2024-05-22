@@ -69,7 +69,7 @@ for segi=1:N_segs
         disp("   ========================================================================")
         disp("     GENERALIZED MATRIX IS NOT CORRECT SIZE FOR SPECIFIED NUMBER OF MODES  ")
         disp("   ========================================================================")
-        disp("      Matrix size for segment "+segi": "string(size(seg_matrix.S(1,:,:)))) ;
+        disp("     Matrix size for segment ("+segi+"): "+string(size(seg_matrix.S(1,:,:))))
         return
     end
     
