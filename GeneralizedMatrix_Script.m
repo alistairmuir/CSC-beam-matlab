@@ -66,7 +66,7 @@ Length   = Length*m_CST2SI ;
 %% Initialization
 %%% Retrieve S-parameter frequencies and array length.
 % Load first S-parameter file (S1(i),1(i)) and retrieve frequencies.
-[freqs_S, ~] = func_importCSTdata(...
+[freqs_S, ~] = func_import_CSTdata(...
     S_dir+"S1("+Pmodes(1)+"),1("+Pmodes(1)+").txt", f_CST2SI) ;
 
 %%% Find length of vectors for constructing matrices.
@@ -96,7 +96,7 @@ Sp_final  = complex(zeros(Nf_Smat,2*N_modes,2*N_modes)) ;  % Interpolated S-para
 
 %% Load wake impedance and corresponding frequency samples.
 % Wake impedence
-[freqs_wake, wake_Z] = func_importCSTdata(wake_Z_dir, f_CST2SI) ;
+[freqs_wake, wake_Z] = func_import_CSTdata(wake_Z_dir, f_CST2SI) ;
 
 
 
@@ -119,7 +119,7 @@ for modi=1:N_modes
                             portj+"("+Pmodes(modj)+").txt" ;
                 
                 % Populate S-matrix.
-                [~, Sp_matrix(:,si,sj)] = func_importCSTdata(Sij_dir, f_CST2SI) ;
+                [~, Sp_matrix(:,si,sj)] = func_import_CSTdata(Sij_dir, f_CST2SI) ;
                 
             end
         end
@@ -140,8 +140,8 @@ for freq=1:Nf_FM
         E2_filepath = E2_dir(modi) + freqs_FM_str(freq) + " " + f_label + ".txt" ;
 
         %%% Carry out integration and return the voltages.
-        V(freq, modi)         = func_calcVoltage_Ez(E1_filepath, freq, m_CST2SI) ;
-        V(freq, N_modes+modi) = func_calcVoltage_Ez(E2_filepath, freq, m_CST2SI) ;
+        V(freq, modi)         = func_calcVoltage_Ez(E1_filepath, freqs_FM(freq), m_CST2SI) ;
+        V(freq, N_modes+modi) = func_calcVoltage_Ez(E2_filepath, freqs_FM(freq), m_CST2SI) ;
         
     end
 end
@@ -160,7 +160,7 @@ switch import_FFT
         current_FT_dir = wake_dir+"/Current_FT.txt" ;
 
         % Retrieve freqs from first file of first signal.
-        [freqs_portmodes, ~] = func_importCSTdata(o1_FT_dir(1), f_CST2SI) ;
+        [freqs_portmodes, ~] = func_import_CSTdata(o1_FT_dir(1), f_CST2SI) ;
         
         % Create port signals matrix.
         portsignals_FD = complex(zeros(length(freqs_portmodes), 2*N_modes)) ;
@@ -174,13 +174,13 @@ switch import_FFT
             port2 = N_modes + modi ;
             
             %%% Populate matrix.
-            [~, portsignals_FD(:,port1)] = func_importCSTdata(o1_FT_dir(modi), f_CST2SI) ;
-            [~, portsignals_FD(:,port2)] = func_importCSTdata(o2_FT_dir(modi), f_CST2SI) ;
+            [~, portsignals_FD(:,port1)] = func_import_CSTdata(o1_FT_dir(modi), f_CST2SI) ;
+            [~, portsignals_FD(:,port2)] = func_import_CSTdata(o2_FT_dir(modi), f_CST2SI) ;
 
         end
         
         % Import Current FD.
-        [freqs_current, current_FD] = func_importCSTdata(current_FT_dir, f_CST2SI) ;
+        [freqs_current, current_FD] = func_import_CSTdata(current_FT_dir, f_CST2SI) ;
         
         
         
@@ -188,7 +188,7 @@ switch import_FFT
     case false
         
         %%% Load beam current
-        [time_samples, beam_current] = func_importCSTdata(current_dir, s_CST2SI) ;
+        [time_samples, beam_current] = func_import_CSTdata(current_dir, s_CST2SI) ;
 
         % Number of time samples.
         N_ts = length(time_samples) ;
@@ -204,8 +204,8 @@ switch import_FFT
             port2 = N_modes+modi ;
 
             % Import port signals.
-            [~, port_signals(:,port1)] = func_importCSTdata(o1_dir(modi), s_CST2SI) ;
-            [~, port_signals(:,port2)] = func_importCSTdata(o2_dir(modi), s_CST2SI) ;
+            [~, port_signals(:,port1)] = func_import_CSTdata(o1_dir(modi), s_CST2SI) ;
+            [~, port_signals(:,port2)] = func_import_CSTdata(o2_dir(modi), s_CST2SI) ;
 
         end
 
@@ -243,12 +243,12 @@ for modi=1:2*N_modes
     
 end
 
-%%% Interpolate: S-parameters (and construct matrix)
+%%% Construct interpolated S-parameters matrix
 for si=1:2*N_modes
     for sj=1:2*N_modes
         
         % Interpolate S-parameter and store in S-matrix.
-    	Sp_interpolant{si,sj}  = griddedInterpolant(freqs_S, squeeze(Sp_matrix(:,si,sj))) ;
+    	Sp_interpolant{si,sj} = griddedInterpolant(freqs_S, squeeze(Sp_matrix(:,si,sj))) ;
         Sp_final(:,si,sj) = Sp_interpolant{si,sj}(freqs_GM) ;
         
     end

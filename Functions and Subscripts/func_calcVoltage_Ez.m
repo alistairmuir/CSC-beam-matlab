@@ -13,7 +13,7 @@ function V = func_calcVoltage_Ez(Ez_filepath, freq, m_CST2SI)
 PhysicalConstants
 
 %%% Retrieve E-field along beam path.
-[z, E_z] = func_importCSTdata(Ez_filepath, m_CST2SI) ;
+[z, E_z] = func_import_CSTdata(Ez_filepath, m_CST2SI) ;
 
 %%% Calculate E-field integrand for all positions.
 dV_integrand = E_z.*exp(1i*2*pi*freq*z/c0) ;
