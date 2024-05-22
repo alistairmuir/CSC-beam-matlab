@@ -1,4 +1,4 @@
-function [vec_ind, vec_dep] = func_importCSTdata(filepath, conversion_factor)
+function [vec_ind, vec_dep] = func_import_CSTdata(filepath, conversion_factor)
 % A function that takes CST filepath as input, checks the number of columns (2 = real values,
 % 3 = complex) and outputs the independent variable and dependent variable as separate vectors.
 %
@@ -24,5 +24,12 @@ switch length(data(1,:))
         % Complex data
         vec_ind = data(:,1).*conversion_factor ;
         vec_dep = data(:,2) + 1i*data(:,3) ;
+        
+    otherwise
+        % Unfamiliar data structure
+        disp("======================================================================")
+        disp("ERROR: Unfamiliar data structure. Expecting two or three columns only.")
+        disp("======================================================================")
+        disp("======================================================================")
 end
 end

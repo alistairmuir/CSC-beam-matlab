@@ -184,7 +184,7 @@ switch import_FFT
         
         
         
-    %%%% Carry out FFTs %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    %%%% Carry out FFTs on CST timeseries data %%%%%%%%%%%%%%%%%%
     case false
         
         %%% Load beam current
@@ -219,37 +219,32 @@ end
 
 
 %% Interpolations
-% Ensures all components of an S(freq) matrix share the same frequency.
+% Ensures all components of a generalized matrix share the same frequency.
 
 %%% Interpolate: Wake
-Z_interpolant = griddedInterpolant(freqs_wake, wake_Z) ;
-Z_final       = Z_interpolant(freqs_GM) ;
+Z_final = func_interpolate_CSTdata(wake_Z, freqs_wake, freqs_GM) ;
 
 %%% Interpolate: Current
-currentFT_interpolant = griddedInterpolant(freqs_current, current_FD) ;
-currentFT_final       = currentFT_interpolant(freqs_GM) ;
+currentFT_final = func_interpolate_CSTdata(current_FD, freqs_current, freqs_GM) ;
 
-%%% Interpolate: Every mode of signals and voltages
+%%% Interpolate: Port signals and voltages
 for modi=1:2*N_modes
     
-    % Voltages (create interpolant, then interpolate at target freqs.)
-    V_interpolant{modi} = griddedInterpolant(freqs_FM, V(:,modi)) ;
-    V_final(:,modi)     = V_interpolant{modi}(freqs_GM) ;
+    % Voltages
+    V_final(:,modi) = func_interpolate_CSTdata(V(:,modi), freqs_FM, freqs_GM) ;
     
-    % Port signals (create interpolant, then interpolate at target freqs.)
-    portFT_interpolant{modi} = ...
-        griddedInterpolant(freqs_portmodes, portsignals_FD(:,modi)) ;
-    portFT_final(:,modi) = portFT_interpolant{modi}(freqs_GM) ;
+    % Port signals
+    portFT_final(:,modi) = func_interpolate_CSTdata(portsignals_FD(:,modi), ...
+        freqs_portmodes, freqs_GM) ;
     
 end
 
-%%% Construct interpolated S-parameters matrix
+
+%%% Interpolate S-parameters and store in complete S-parameter matrix.
 for si=1:2*N_modes
     for sj=1:2*N_modes
         
-        % Interpolate S-parameter and store in S-matrix.
-    	Sp_interpolant{si,sj} = griddedInterpolant(freqs_S, squeeze(Sp_matrix(:,si,sj))) ;
-        Sp_final(:,si,sj) = Sp_interpolant{si,sj}(freqs_GM) ;
+        Sp_final(:,si,sj) = func_interpolate_CSTdata(Sp_matrix(:,si,sj), freqs_S, freqs_GM) ;
         
     end
 end
@@ -280,10 +275,7 @@ for fi=1:Nf_Smat
     
     % Concatenate S-and-k-matrix with [h,z_b] horizontal vector for
     % generalized S-matrix for this frequency.
-    Skhz_mat = [Sk_mat ; [h(fi,:), Z_final(fi)]] ;
-    
-    % Write this frequency's S-matrix to generalized matrix.
-    S(fi,:,:) = Skhz_mat ;
+    S(fi,:,:) = [Sk_mat ; [h(fi,:), Z_final(fi)]] ;
     
 end
 
@@ -293,8 +285,8 @@ end
 
 if save_matrix == true
 
-    % A little housekeeping.
-    if exist(genmat_savedir, 'file')==0
+    % Make directory for saving, if not there.
+    if exist(genmat_savedir, 'dir')==0
         mkdir(genmat_savedir)
     end
 
