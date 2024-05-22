@@ -24,7 +24,7 @@ Config_Scsc_Pillbox
 
 
 
-%% Define physical constants
+%% Load physical constants
 PhysicalConstants
 
 

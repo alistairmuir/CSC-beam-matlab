@@ -5,12 +5,12 @@
 % calculate all unknown elements of S_csc for the simulation's frequency
 % range and subsequently construct the S_csc.
 % 
-% The result can be used in Erion's code to retrieve the Beam Impedance.
+% The resultant S matrix can be used in Scsc_Script.m to carry out CSC-beam, see Ref. [1].
 % 
 % Created by Alistair Muir, August 2023
 % 
 % References:
-% #. "Generalization of coupled S-parameter calculation to compute beam
+% 1. "Generalization of coupled S-parameter calculation to compute beam
 % impedances in particle accelerators" - T. Flisgen et al - 2020
 
 clear
@@ -24,11 +24,6 @@ addpath("Config Files")
 
 %% RUN CONFIGURATION SCRIPT
 Config_GeneralizedMatrix
-
-
-
-%% Physical constants
-PhysicalConstants
 
 
 
@@ -58,14 +53,13 @@ E2_dir = hifreq_dir+"/e-field (f="+freqs_FM_str(1)+") (2("+Pmodes+"))_Z (Z)/" ;
 freqs_FM = freqs_FM*f_CST2SI ;
 freqs_GM = freqs_GM*f_CST2SI ;
 
-% Convert segment lengths
+% Convert segment length
 Length   = Length*m_CST2SI ;
 
 
 
-%% Initialization
-%%% Retrieve S-parameter frequencies and array length.
-% Load first S-parameter file (S1(i),1(i)) and retrieve frequencies.
+%% Initialize all matrices.
+%%% Retrieve S-parameter frequencies using first active mode S-parameter file.
 [freqs_S, ~] = func_import_CSTdata(...
     S_dir+"S1("+Pmodes(1)+"),1("+Pmodes(1)+").txt", f_CST2SI) ;
 
@@ -73,29 +67,26 @@ Length   = Length*m_CST2SI ;
 Nf_FM   = length(freqs_FM) ;   % Field monitor frequencies.
 Nf_Smat = length(freqs_GM) ;   % Final S_matrix frequencies (chosen by user).
 Nf_Sp   = length(freqs_S) ;    % Frequencies in S-parameters CST files.
-N_modes = length(Pmodes) ;     % Number of port modes.
+N_modes = length(Pmodes) ;     % Number of modes per port.
 
-%%% Initialise multi-modal voltage matrix.
+% Initialise multi-modal voltage matrix.
 V = zeros(Nf_FM, 2*N_modes) ;
 
-%%% Initialize interpolants
-V_interpolant      = cell(2*N_modes,1) ;    % Voltage (vector)
-portFT_interpolant = cell(2*N_modes,1) ;    % Port signal (vector)
-Sp_interpolant      = cell(2*N_modes) ;      % S-parameters (matrix)
+% Initialize final interpolated multi-modal voltage matrix.
+V_final = zeros(Nf_Smat,2*N_modes) ;
 
-% Initialize final matrices
-V_final      = zeros(Nf_Smat,2*N_modes) ;    % Voltage
-portFT_final = zeros(Nf_Smat,2*N_modes) ;    % Port signals
-k = complex(zeros(Nf_Smat,2*N_modes)) ;      % k vectors (beam-portmode coupling)
-h = complex(zeros(Nf_Smat,2*N_modes)) ;      % h vectors (portmode-beam coupling)
+% Initialize final matrix for port signals.
+portFT_final = zeros(Nf_Smat,2*N_modes) ;
 
-Sp_matrix = complex(zeros(Nf_Sp,   2*N_modes,2*N_modes)) ;  % Raw S-parameter matrix.
-Sp_final  = complex(zeros(Nf_Smat,2*N_modes,2*N_modes)) ;  % Interpolated S-parameter matrix.
+% Initialize import S-parameter matrix
+Sp = complex(zeros(Nf_Sp,   2*N_modes,2*N_modes)) ;
+
+% Initialize interpolated S-parameter matrix.
+Sp_final = complex(zeros(Nf_Smat,2*N_modes,2*N_modes)) ;
 
 
 
 %% Load wake impedance and corresponding frequency samples.
-% Wake impedence
 [freqs_wake, wake_Z] = func_import_CSTdata(wake_Z_dir, f_CST2SI) ;
 
 
@@ -119,7 +110,7 @@ for modi=1:N_modes
                             portj+"("+Pmodes(modj)+").txt" ;
                 
                 % Populate S-matrix.
-                [~, Sp_matrix(:,si,sj)] = func_import_CSTdata(Sij_dir, f_CST2SI) ;
+                [~, Sp(:,si,sj)] = func_import_CSTdata(Sij_dir, f_CST2SI) ;
                 
             end
         end
@@ -164,8 +155,8 @@ switch import_FFT
         
         % Create port signals matrix.
         portsignals_FD = complex(zeros(length(freqs_portmodes), 2*N_modes)) ;
-
-                
+        
+        
         % Import all port signals in fourier domain.
         for modi=1:N_modes
             
@@ -240,11 +231,11 @@ for modi=1:2*N_modes
 end
 
 
-%%% Interpolate S-parameters and store in complete S-parameter matrix.
+%%% Interpolate S-parameters and store in a full S-parameter matrix.
 for si=1:2*N_modes
     for sj=1:2*N_modes
         
-        Sp_final(:,si,sj) = func_interpolate_CSTdata(Sp_matrix(:,si,sj), freqs_S, freqs_GM) ;
+        Sp_final(:,si,sj) = func_interpolate_CSTdata(Sp(:,si,sj), freqs_S, freqs_GM) ;
         
     end
 end

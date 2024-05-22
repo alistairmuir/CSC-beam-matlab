@@ -1,45 +1,46 @@
 %{
-Configuration file for Script to Generate a Generalized Matrix
-==============================================================
-
-This script is called by GeneralizedMatrix_Script.m, which constructs a generalized matrix
-containing the specified number of modes from CST files given in this document.
-
-:param f_CST2SI: conversion factor of CST frequency units to SI (Hz).
-:type f_CST2SI: double
-:param f_label: frequency label for plotting.
-:type f_label: string
-:param s_CST2SI: conversion factor of CST time units to SI (seconds).
-:type s_CST2SI: double
-:param m_CST2SI: conversion factor of CST length units to SI (metres).
-:type m_CST2SI: double
-:param model_dir: directory containing all CST results for the given section of beam path.
-:type model_dir: string
-:param wake_dir: directory containing the CST results from time-domain wake simulation.
-:type wake_dir: string
-:param hifreq_dir: directory containing the CST results from freq-domain simulation.
-:type hifreq_dir: string
-:param save_matrix: true = final matrix is saved in specified directory ; false = not saved.
-:type save_matrix: boolean
-:param genmat_savedir: directory where final generalized matrix is saved.
-:type genmat_savedir: string
-:param genmat_filename: name of the file containing the final generalized matrix.
-:type genmat_filename: string
-:param Pmodes: array containing all the modes to include in the final matrix 
-as numbered in CST.
-:type Pmodes: 1D array, integer
-:param Length: z-axis length of the segment in CST units.
-:type Length: double
-:param import_FFT: true = FFTs of port signals and current as calculated in CST are
-imported ; false = CST timeseries results are imported and FFTs are calculated in Matlab.
-:type import_FFT: boolean
-:param freqs_FM: Array of frequencies at which field monitors recorded the hi-freq simulation 
-E-field in CST units.
-:type freqs_FM: 1D array, double
-:param freqs_GM: Array of frequencies at which to construct the generalized matrices. It is
-sensible to keep these the same as the FM frequencies, making interpolation needed only for
-arrays with many more samples.
-:type freqs_GM: 1D array, double
+% Configuration file for Script to Generate a Generalized Matrix
+% ==============================================================
+% 
+% This script is called by GeneralizedMatrix_Script.m, which constructs a generalized matrix
+% containing the specified number of modes from CST files given in this document.
+% 
+% :param f_CST2SI: conversion factor of CST frequency units to SI (Hz).
+% :type f_CST2SI: double
+% :param f_label: frequency label for plotting.
+% :type f_label: string
+% :param s_CST2SI: conversion factor of CST time units to SI (seconds).
+% :type s_CST2SI: double
+% :param m_CST2SI: conversion factor of CST length units to SI (metres).
+% :type m_CST2SI: double
+% :param model_dir: directory containing all CST results for the given section of beam path.
+% :type model_dir: string
+% :param wake_dir: directory containing the CST results from time-domain wake simulation.
+% :type wake_dir: string
+% :param hifreq_dir: directory containing the CST results from freq-domain simulation.
+% :type hifreq_dir: string
+% :param save_matrix: true = final matrix is saved in specified directory ; false = not saved.
+% :type save_matrix: boolean
+% :param genmat_savedir: directory where final generalized matrix is saved.
+% :type genmat_savedir: string
+% :param genmat_filename: name of the file containing the final generalized matrix.
+% :type genmat_filename: string
+% :param Pmodes: array containing all the modes to include in the final matrix 
+% as numbered in CST.
+% :type Pmodes: 1D array, integer
+% :param Length: z-axis length of the segment in CST units.
+% :type Length: double
+% :param import_FFT: true = FFTs of port signals and current as calculated in CST are
+% imported ; false = CST timeseries results are imported and FFTs are calculated in Matlab.
+% :type import_FFT: boolean
+% :param freqs_FM: Array of frequencies at which field monitors recorded the hi-freq simulation 
+% E-field in CST units.
+% :type freqs_FM: 1D array, double
+% :param freqs_GM: Array of frequencies at which to construct the generalized matrices. It is
+% sensible to keep these the same as the FM frequencies, making interpolation needed only for
+% arrays with many more samples.
+% :type freqs_GM: 1D array, double
+%
 %}
 
 
@@ -63,7 +64,7 @@ hifreq_dir = model_dir+"/Freq_hifi/Export" ;  % High Freq CST directory
 %%% Directory and filename to save generalized matrices.
 save_matrix     = true ;
 genmat_savedir  = "Matrices/Pillbox/Generalized_Matrices" ;
-genmat_filename = "pillbox_TM_test2" ;
+genmat_filename = "pillbox_TM01_conjCurrent" ;
 
 
 %% Port modes
