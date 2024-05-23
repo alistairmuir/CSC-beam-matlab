@@ -76,7 +76,7 @@ V = zeros(Nf_FM, 2*N_modes) ;
 V_final = zeros(Nf_Smat,2*N_modes) ;
 
 % Initialize final matrix for port signals.
-portFT_final = zeros(Nf_Smat,2*N_modes) ;
+portFD_final = zeros(Nf_Smat,2*N_modes) ;
 
 % Initialize import S-parameter matrix
 Sp = complex(zeros(Nf_Sp,   2*N_modes,2*N_modes)) ;
@@ -216,7 +216,7 @@ end
 Z_final = func_interpolate_CSTdata(wake_Z, freqs_wake, freqs_GM) ;
 
 %%% Interpolate: Current
-currentFT_final = func_interpolate_CSTdata(current_FD, freqs_current, freqs_GM) ;
+currentFD_final = func_interpolate_CSTdata(current_FD, freqs_current, freqs_GM) ;
 
 %%% Interpolate: Port signals and voltages
 for modi=1:2*N_modes
@@ -225,7 +225,7 @@ for modi=1:2*N_modes
     V_final(:,modi) = func_interpolate_CSTdata(V(:,modi), freqs_FM, freqs_GM) ;
     
     % Port signals
-    portFT_final(:,modi) = func_interpolate_CSTdata(portsignals_FD(:,modi), ...
+    portFD_final(:,modi) = func_interpolate_CSTdata(portsignals_FD(:,modi), ...
         freqs_portmodes, freqs_GM) ;
     
 end
@@ -244,11 +244,10 @@ end
 
 %% Calculate k and h 
     
-% k(x) = b(x)/current     (See Eq.[1] in Ref [1].)
-k = portFT_final./currentFT_final ;
-    
-% h(x) = v(x)/a(x)      (See Eq.[1] in Ref [1].)
+k = func_CalcBeamCoupling(portFD_final, currentFD_final) ;
+
 h = V_final ;
+    % h(x) = v(x)/a(x)      (See Eq.[1] in Ref [1].)
     % Note: input port signals a(x) are normalized to 1 sqrt(W) peak power. See:
     % https://space.mit.edu/RADIO/CST_online/...
     %        ...mergedProjects/3D/special_overview/special_overview_waveguideover.htm
