@@ -242,15 +242,10 @@ end
 
 
 
-%% Calculate k and h 
-    
-k = func_CalcBeamCoupling(portFD_final, currentFD_final) ;
-
-h = V_final ;
-    % h(x) = v(x)/a(x)      (See Eq.[1] in Ref [1].)
-    % Note: input port signals a(x) are normalized to 1 sqrt(W) peak power. See:
-    % https://space.mit.edu/RADIO/CST_online/...
-    %        ...mergedProjects/3D/special_overview/special_overview_waveguideover.htm
+%% Calculate k and h
+% See Eq. 1 in Ref. [1]
+k = func_CalcBeamCoupling_k(portFD_final, currentFD_final) ;
+h = func_CalcBeamCoupling_h(V_final, ones(size(V_final))) ;
 
 
 

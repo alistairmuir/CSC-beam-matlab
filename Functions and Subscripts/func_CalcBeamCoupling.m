@@ -1,4 +1,4 @@
-function k = func_CalcBeamCoupling(portmodesFD, currentFD)
+function k = func_CalcBeamCoupling_k(portmodesFD, currentFD)
 % Function to calculate the coupling between port modes and beam current, see
 % "Generalization of coupled S-parameter calculation to compute beam impedances
 % in particle accelerators" - T. Flisgen et al - 2020
