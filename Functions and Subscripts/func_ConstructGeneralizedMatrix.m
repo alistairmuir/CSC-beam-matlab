@@ -1,4 +1,4 @@
-function S = func_CreateGeneralizedMatrix(Sp, k, h, z_b)
+function S = func_ConstructGeneralizedMatrix(Sp, k, h, z_b)
 % A function which constructs a generalized matrix for a single frequency from given
 % S-parameter matrix, coupling vectors and wake impedance.
 %

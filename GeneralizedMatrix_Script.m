@@ -262,7 +262,7 @@ S = complex(zeros(Nf_Smat,2*N_modes+1,2*N_modes+1)) ;
 for fi=1:Nf_Smat
     
     % Call the function to create GM for this frequency.
-    S(fi,:,:) = func_CreateGeneralizedMatrix(...
+    S(fi,:,:) = func_ConstructGeneralizedMatrix(...
         squeeze(Sp_final(fi,:,:)), k(fi,:), h(fi,:), Z_final(fi)) ;
     
 end
