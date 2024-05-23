@@ -1,4 +1,4 @@
-function V = func_calcVoltage_Ez_CSTdata(Ez_filepath, freq, m_CST2SI)
+function V = func_calcVoltage_Ez_CSTdata(Ez_filepath, freq, c0, m_CST2SI)
 % Function to retrieve the E-field along a beam path from CST file and 
 % return the induced voltage on the beam for one port mode.
 %
@@ -6,13 +6,12 @@ function V = func_calcVoltage_Ez_CSTdata(Ez_filepath, freq, m_CST2SI)
 % :type Ez_filepath: string
 % :param freq: Frequency at which to measure induced voltage.
 % :type freq: double
+% :param c0: Speed of wave propagation (speed of light).
+% :type c0: double
 % :param m_CST2SI: Conversion factor for distance units in CST file.
 % :type m_CST2SI: double
 %
 % :returns: V
-
-%%% Import physical constants
-PhysicalConstants
 
 %%% Retrieve E-field along beam path.
 [z, E_z] = func_import_CSTdata(Ez_filepath, m_CST2SI) ;

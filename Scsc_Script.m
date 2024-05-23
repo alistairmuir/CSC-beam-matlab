@@ -25,7 +25,7 @@ Config_Scsc_Pillbox
 
 
 %% Load physical constants
-PhysicalConstants
+[mu0, eps0, c0] = func_EM_PhysicalConstants() ;
 
 
 
@@ -98,13 +98,13 @@ for fi = 1:N_samples
         % S block diagonal matrix.
         S_tot = blkdiag(S_tot, squeeze(seg_matrix.S(fi,:,:))) ;
         
-        % Phase at port 1 of segment.
-        phi_segs(segi) = 2*pi*f(fi)*sum(L_segs(1:segi)) / c0 ;
+        % Phase at end of each segment.
+        phi_segs(segi) = func_CalcPhase(f(fi), sum(L_segs(1:segi)), 0, c0) ;
         
     end
     
     
-    % Array of phases port 1 of all segments.
+    % Array of phases at beginning of all segments.
     d = [1, exp(-1j*phi_segs(1:end-1))] ;
     
     % Create matrix for applying phase adjustment (ignoring downstream ext. port)

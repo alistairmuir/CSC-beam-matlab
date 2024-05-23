@@ -26,6 +26,9 @@ addpath("Config Files")
 Config_GeneralizedMatrix
 
 
+%% Physical constants
+[mu0, eps0, c0] = func_EM_PhysicalConstants() ;
+
 
 %% CST Export Directories (assumes same folder structure as CST navigation bar)
 % Wakefield and current
@@ -54,7 +57,7 @@ freqs_FM = freqs_FM*f_CST2SI ;
 freqs_GM = freqs_GM*f_CST2SI ;
 
 % Convert segment length
-Length   = Length*m_CST2SI ;
+Length = Length*m_CST2SI ;
 
 
 
@@ -131,8 +134,11 @@ for freq=1:Nf_FM
         E2_filepath = E2_dir(modi) + freqs_FM_str(freq) + " " + f_label + ".txt" ;
 
         %%% Carry out integration and return the voltages.
-        V(freq, modi)         = func_calcVoltage_Ez_CSTdata(E1_filepath, freqs_FM(freq), m_CST2SI) ;
-        V(freq, N_modes+modi) = func_calcVoltage_Ez_CSTdata(E2_filepath, freqs_FM(freq), m_CST2SI) ;
+        V(freq, modi) = func_calcVoltage_Ez_CSTdata(...
+            E1_filepath, freqs_FM(freq), c0, m_CST2SI) ;
+        
+        V(freq, N_modes+modi) = func_calcVoltage_Ez_CSTdata(...
+            E2_filepath, freqs_FM(freq), c0, m_CST2SI) ;
         
     end
 end
@@ -199,7 +205,7 @@ switch import_FFT
             [~, port_signals(:,port2)] = func_import_CSTdata(o2_dir(modi), s_CST2SI) ;
 
         end
-
+        
         
         %%% Carry out FFTs. (Port signals and current share the same time samples.)
         [freqs_portmodes, portsignals_FD] = func_FFT_CSTdata(port_signals, time_samples) ;
@@ -230,8 +236,7 @@ for modi=1:2*N_modes
     
 end
 
-
-%%% Interpolate S-parameters and store in a full S-parameter matrix.
+%%% Interpolate: S-parameters and store in a full S-parameter matrix.
 for si=1:2*N_modes
     for sj=1:2*N_modes
         
@@ -249,7 +254,7 @@ h = func_CalcBeamCoupling_h(V_final, ones(size(V_final))) ;
 
 
 
-%% Construct generalized S-matrices
+%% Construct generalized S-matrix for all frequencies.
 %%% Initialize generalized S-matrix
 S = complex(zeros(Nf_Smat,2*N_modes+1,2*N_modes+1)) ;
 
