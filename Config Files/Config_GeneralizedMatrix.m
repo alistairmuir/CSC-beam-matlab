@@ -62,9 +62,9 @@ hifreq_dir = model_dir+"/Freq_hifi/Export" ;  % High Freq CST directory
 
 
 %%% Directory and filename to save generalized matrices.
-save_matrix     = true ;
-genmat_savedir  = "Matrices/Pillbox/Generalized_Matrices" ;
-genmat_filename = "pillbox_TM01_conjCurrent" ;
+save_matrix   = true ;
+save_dir      = "Matrices/Pillbox/Generalized_Matrices" ;
+save_filename = "pillbox_TM01_new" ;
 
 
 %% Port modes
