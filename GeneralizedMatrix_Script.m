@@ -63,7 +63,7 @@ Length = Length*m_CST2SI ;
 
 %% Initialize all matrices.
 %%% Retrieve S-parameter frequencies using first active mode S-parameter file.
-[freqs_S, ~] = func_import_CSTdata(...
+[freqs_S, ~] = func_Import_CSTdata(...
     S_dir+"S1("+Pmodes(1)+"),1("+Pmodes(1)+").txt", f_CST2SI) ;
 
 %%% Find length of vectors for constructing matrices.
@@ -90,7 +90,7 @@ Sp_final = complex(zeros(Nf_Smat,2*N_modes,2*N_modes)) ;
 
 
 %% Load wake impedance and corresponding frequency samples.
-[freqs_wake, wake_Z] = func_import_CSTdata(wake_Z_dir, f_CST2SI) ;
+[freqs_wake, wake_Z] = func_Import_CSTdata(wake_Z_dir, f_CST2SI) ;
 
 
 
@@ -113,7 +113,7 @@ for modi=1:N_modes
                             portj+"("+Pmodes(modj)+").txt" ;
                 
                 % Populate S-matrix.
-                [~, Sp(:,si,sj)] = func_import_CSTdata(Sij_dir, f_CST2SI) ;
+                [~, Sp(:,si,sj)] = func_Import_CSTdata(Sij_dir, f_CST2SI) ;
                 
             end
         end
@@ -157,7 +157,7 @@ switch import_FFT
         current_FT_dir = wake_dir+"/Current_FT.txt" ;
 
         % Retrieve freqs from first file of first signal.
-        [freqs_portmodes, ~] = func_import_CSTdata(o1_FT_dir(1), f_CST2SI) ;
+        [freqs_portmodes, ~] = func_Import_CSTdata(o1_FT_dir(1), f_CST2SI) ;
         
         % Create port signals matrix.
         portsignals_FD = complex(zeros(length(freqs_portmodes), 2*N_modes)) ;
@@ -171,13 +171,13 @@ switch import_FFT
             port2 = N_modes + modi ;
             
             %%% Populate matrix.
-            [~, portsignals_FD(:,port1)] = func_import_CSTdata(o1_FT_dir(modi), f_CST2SI) ;
-            [~, portsignals_FD(:,port2)] = func_import_CSTdata(o2_FT_dir(modi), f_CST2SI) ;
+            [~, portsignals_FD(:,port1)] = func_Import_CSTdata(o1_FT_dir(modi), f_CST2SI) ;
+            [~, portsignals_FD(:,port2)] = func_Import_CSTdata(o2_FT_dir(modi), f_CST2SI) ;
 
         end
         
         % Import Current FD.
-        [freqs_current, current_FD] = func_import_CSTdata(current_FT_dir, f_CST2SI) ;
+        [freqs_current, current_FD] = func_Import_CSTdata(current_FT_dir, f_CST2SI) ;
         
         
         
@@ -185,7 +185,7 @@ switch import_FFT
     case false
         
         %%% Load beam current
-        [time_samples, beam_current] = func_import_CSTdata(current_dir, s_CST2SI) ;
+        [time_samples, beam_current] = func_Import_CSTdata(current_dir, s_CST2SI) ;
 
         % Number of time samples.
         N_ts = length(time_samples) ;
@@ -201,8 +201,8 @@ switch import_FFT
             port2 = N_modes+modi ;
 
             % Import port signals.
-            [~, port_signals(:,port1)] = func_import_CSTdata(o1_dir(modi), s_CST2SI) ;
-            [~, port_signals(:,port2)] = func_import_CSTdata(o2_dir(modi), s_CST2SI) ;
+            [~, port_signals(:,port1)] = func_Import_CSTdata(o1_dir(modi), s_CST2SI) ;
+            [~, port_signals(:,port2)] = func_Import_CSTdata(o2_dir(modi), s_CST2SI) ;
 
         end
         
@@ -219,19 +219,19 @@ end
 % Ensures all components of a generalized matrix share the same frequency.
 
 %%% Interpolate: Wake
-Z_final = func_interpolate_CSTdata(wake_Z, freqs_wake, freqs_GM) ;
+Z_final = func_Interpolate_CSTdata(wake_Z, freqs_wake, freqs_GM) ;
 
 %%% Interpolate: Current
-currentFD_final = func_interpolate_CSTdata(current_FD, freqs_current, freqs_GM) ;
+currentFD_final = func_Interpolate_CSTdata(current_FD, freqs_current, freqs_GM) ;
 
 %%% Interpolate: Port signals and voltages
 for modi=1:2*N_modes
     
     % Voltages
-    V_final(:,modi) = func_interpolate_CSTdata(V(:,modi), freqs_FM, freqs_GM) ;
+    V_final(:,modi) = func_Interpolate_CSTdata(V(:,modi), freqs_FM, freqs_GM) ;
     
     % Port signals
-    portFD_final(:,modi) = func_interpolate_CSTdata(portsignals_FD(:,modi), ...
+    portFD_final(:,modi) = func_Interpolate_CSTdata(portsignals_FD(:,modi), ...
         freqs_portmodes, freqs_GM) ;
     
 end
@@ -240,7 +240,7 @@ end
 for si=1:2*N_modes
     for sj=1:2*N_modes
         
-        Sp_final(:,si,sj) = func_interpolate_CSTdata(Sp(:,si,sj), freqs_S, freqs_GM) ;
+        Sp_final(:,si,sj) = func_Interpolate_CSTdata(Sp(:,si,sj), freqs_S, freqs_GM) ;
         
     end
 end

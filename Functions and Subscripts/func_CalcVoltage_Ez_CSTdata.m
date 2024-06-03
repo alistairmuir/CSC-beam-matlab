@@ -1,4 +1,4 @@
-function V = func_calcVoltage_Ez_CSTdata(Ez_filepath, freq, c0, m_CST2SI)
+function V = func_CalcVoltage_Ez_CSTdata(Ez_filepath, freq, c0, m_CST2SI)
 % Function to retrieve the E-field along a beam path from CST file and 
 % return the induced voltage on the beam for one port mode.
 %
@@ -14,7 +14,7 @@ function V = func_calcVoltage_Ez_CSTdata(Ez_filepath, freq, c0, m_CST2SI)
 % :returns: V
 
 %%% Retrieve E-field along beam path.
-[z, E_z] = func_import_CSTdata(Ez_filepath, m_CST2SI) ;
+[z, E_z] = func_Import_CSTdata(Ez_filepath, m_CST2SI) ;
 
 %%% Calculate E-field integrand for all positions.
 dV_integrand = E_z.*exp(1i*2*pi*freq*z/c0) ;
