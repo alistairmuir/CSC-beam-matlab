@@ -8,10 +8,12 @@
 % The resultant S matrix can be used in Scsc_Script.m to carry out CSC-beam, see Ref. [1].
 % 
 % Created by Alistair Muir, August 2023
+% Last updated by Alistair Muir, June 2024
 % 
 % References:
 % 1. "Generalization of coupled S-parameter calculation to compute beam
 % impedances in particle accelerators" - T. Flisgen et al - 2020
+%
 
 clear
 clc
