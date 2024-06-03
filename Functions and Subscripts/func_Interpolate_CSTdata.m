@@ -1,4 +1,4 @@
-function interpolated_data = func_interpolate_CSTdata(data, original_samples, query_samples)
+function interpolated_data = func_Interpolate_CSTdata(data, original_samples, query_samples)
 % Function to interpolate CST data onto the target set.
 %
 % :param data: The data to be interpolated.
