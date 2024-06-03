@@ -1,7 +1,10 @@
-# Scsc Archive
+# Scsc Archive and Results
 Archive/
 Matrices/
 Results/
+
+# Autosave results
+*.asv
 
 # Large project-specific files
 CST Files/
