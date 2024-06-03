@@ -19,6 +19,15 @@
 %
 
 
+
+%% Add Config Files directory
+addpath("Config Files")
+
+% Functions not currently used - functionalising to be done in a later update.
+addpath("Functions and Subscripts")
+
+
+
 %% Load config file
 Config_OrthogonalMatrix
 
