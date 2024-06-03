@@ -13,7 +13,7 @@ decibles = false ;
 
 %% Units
 if decibles==true
-    S = squeeze(10*log(abs(S1.S_csc))) ;
+    S = squeeze(20*log(abs(S1.S_csc))) ;
     yaxis_maglabel = "Magnitude / XdB" ;
 else
     S = abs(S1.S_csc) ;

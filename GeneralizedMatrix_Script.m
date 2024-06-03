@@ -83,7 +83,7 @@ V_final = zeros(Nf_Smat,2*N_modes) ;
 % Initialize final matrix for port signals.
 portFD_final = zeros(Nf_Smat,2*N_modes) ;
 
-% Initialize import S-parameter matrix
+% Initialize imported S-parameter matrix
 Sp = complex(zeros(Nf_Sp,   2*N_modes,2*N_modes)) ;
 
 % Initialize interpolated S-parameter matrix.

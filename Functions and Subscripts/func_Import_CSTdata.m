@@ -1,4 +1,4 @@
-function [vec_ind, vec_dep] = func_import_CSTdata(filepath, conversion_factor)
+function [vec_ind, vec_dep] = func_Import_CSTdata(filepath, conversion_factor)
 % A function that takes CST filepath as input, checks the number of columns (2 = real values,
 % 3 = complex) and outputs the independent variable and dependent variable as separate vectors.
 %
