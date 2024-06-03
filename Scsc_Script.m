@@ -11,6 +11,7 @@
 % 1. "Generalization of coupled S-parameter calculation to compute beam
 % impedances in particle accelerators" - T. Flisgen, E. Gjonaj, H.W. Glock - 2020
 %
+
 clear
 clc
 
