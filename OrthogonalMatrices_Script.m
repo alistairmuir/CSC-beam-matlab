@@ -1,4 +1,6 @@
-%% Construct and save permutation matrices P and F for Scsc_Script.
+%% Constructs permutation matrices P and F for Scsc_Script.m
+% ==========================================================
+%
 % From user input relating to the problem, this script calculates the permutation
 % matrices needed to carry out CSC-beam (Ref. 1) and stores them in a single .mat file in the 
 % user-given directory.
