@@ -11,29 +11,25 @@
 % 1. "Generalization of coupled S-parameter calculation to compute beam
 % impedances in particle accelerators" - T. Flisgen, E. Gjonaj, H.W. Glock - 2020
 %
-
 clear
 clc
 
-% Add directories containing dependent functions and configuration files.
+
+%% Add directories containing dependent functions and configuration files.
 addpath("Functions and Subscripts")
 addpath("Config Files")
-
 
 
 %% RUN CONFIGURATION SCRIPT
 Config_Scsc_Pillbox
 
 
-
 %% Carry out CSC-beam and return generalized matrix along with freqs and length of structure.
 [S, f, Length] = func_CalcScsc(seg_dir, segment_names, orthogonal_matrices_dir) ;
 
 
-
 %% Save resultant generalized matrix.
 func_SaveGM(save_dir, save_filename, S, f, Length)
-
 
 
 %% Plot
