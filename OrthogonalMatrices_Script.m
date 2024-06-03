@@ -1,28 +1,40 @@
 %% Construct and save permutation matrices P and F for Scsc_Script.
 % From user input relating to the problem, this script calculates the permutation
-% matrices needed to carry out CSC-beam and stores them in a single .mat file in the 
+% matrices needed to carry out CSC-beam (Ref. 1) and stores them in a single .mat file in the 
 % user-given directory.
+% 
+% Created by Alistair Muir, April 2024.
+% Last updated by Alistair Muir, June 2024.
+%
+% References:
+% 1. "Generalization of coupled S-parameter calculation to compute beam
+% impedances in particle accelerators" - T. Flisgen, E. Gjonaj, H.W. Glock - 2020
+%
 % :param N_modes: Number of modes included in all generalized matrices.
 % :type N_modes: integer
 % :param N_segs: Number of segments to be concatenated.
 % :type N_segs: integer
 % :param save_dir: Directory in which the permutation matrices will be saved.
 % :type save_dir: string
+%
 
 
+%% Load config file
+Config_OrthogonalMatrix
 
-%% USER INPUT
-N_modes = 2 ;    % Number of modes in matrix.
-N_segs  = 2 ;    % Number of segments
-
-save_dir = "Matrices/Pillbox/Orthogonal_Matrices" ;
 
 
 %% Initialization
-N_int = N_modes ;    % Number of internal modes (N_int)
-N_ext = N_modes ;    % Number of external modes (N_ext)
-N_matsection = N_int+N_ext+1 ;
-Psize =  N_segs*N_matsection ;
+% Number of elements in external segments (also the column containing beam impedance for seg 1).
+N_extsegment = N_ext+N_int+1 ;
+
+% Number of elements per internal segment.
+N_intsegment = N_int*2+1 ;
+
+% Size of P matrix.
+Psize = N_segs*N_intsegment ;
+
+% Size of F matrix.
 Fsize = (N_segs-1)*2*N_int ;
 
 P = zeros(Psize) ;
@@ -32,32 +44,40 @@ F = zeros(Fsize) ;
 save_path = save_dir+"/"+N_segs+"segments_"+N_ext+"modes" ;
 
 
-%% Row/column expressions for the different sections of matrices
-%%% P - beam impedance
+
+%% P: Create arrays containing indices for non-zero rows and columns.
+% P beam: rows containing beam are the final N_segs rows.
 Prows_beam = Psize-N_segs+1:Psize ;
-Pcols_beam = N_matsection:N_matsection:Psize ;
 
+% P beam: columns containing beam are final column for each segment.
+Pcols_beam = N_extsegment:N_intsegment:Psize ;
 
-%%% P - internal modes
+% P int: rows containing internal modes.
 Prows_int  = 1:(N_segs-1)*2*N_int ;
+
+% P int: columns containing internal modes.
 Pcols_int  = (1:N_int) + N_ext ;
 
-for seg = 1:N_segs-2
-    Pcols_int  = [Pcols_int, seg*N_matsection+(1:2*N_int)] ;
+for segi = 1:N_segs-2
+    Pcols_int  = [Pcols_int, segi*N_intsegment+(1:2*N_int)] ;
 end
 
 Pcols_int = [Pcols_int, Pcols_int(end)+2:Pcols_int(end)+N_int+1] ;
 
-
-%%% P - extermal modes
+% P ext: rows containing external modes.
 Prows_ext = (N_segs-1)*(2*N_int)+(1:2*N_ext) ;
+
+% P ext: columns containing external modes.
 Pcols_ext = [1:N_ext, Psize-N_ext:Psize-1] ;
 
-%%% Put em all together
+%%% Put em all together ([beam, internal, external] rows and columns).
 Prows = [Prows_beam, Prows_int, Prows_ext] ;
 Pcols = [Pcols_beam, Pcols_int, Pcols_ext] ;
 
-%%% F
+
+
+%% F: Create arrays containing indices for non-zero rows and columns.
+%%% Initialize F rows and columns arrays.
 Frows = 1:Fsize;
 Fcols = zeros(1,Fsize) ;
 
@@ -78,6 +98,7 @@ end
 for ii=1:Fsize
     F(Frows(ii), Fcols(ii)) = 1 ;
 end
+
 
 
 %% Save P and F matrices
