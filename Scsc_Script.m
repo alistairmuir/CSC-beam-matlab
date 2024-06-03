@@ -29,14 +29,8 @@ Config_Scsc_Pillbox
 
 
 
-%% Save beam impedance
-% Create save directory if needed.
-if exist(save_dir,'dir')==0
-    mkdir(save_dir)
-end
-
-% Save the file in the now-definitely-extant directory.
-save(save_filename, 'S', 'f', 'Length')
+%% Save resultant generalized matrix.
+func_SaveGM(save_dir, save_filename, S, f, Length)
 
 
 

@@ -269,22 +269,7 @@ end
 
 
 %% Save the matrices and corresponding frequencies.
-
-if save_matrix == true
-
-    % Make directory for saving, if not there.
-    if exist(genmat_savedir, 'dir')==0
-        mkdir(genmat_savedir)
-    end
-
-    % Construct complete directory.
-    Smat_savedir = genmat_savedir + "/" + genmat_filename ;
-
-    % Save the matrix, freqs and segment length in a file.
-    f = freqs_GM ;
-    save(Smat_savedir, "S", "f", "Length")
-
-end
+func_SaveGM(save_dir, save_filename, S, freqs_GM, Length)
 
 
 
