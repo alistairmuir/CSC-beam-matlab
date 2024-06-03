@@ -85,7 +85,7 @@ portFD_final = zeros(Nf_Smat,2*N_modes) ;
 Sp = complex(zeros(Nf_Sp,   2*N_modes,2*N_modes)) ;
 
 % Initialize interpolated S-parameter matrix.
-Sp_final = complex(zeros(Nf_Smat,2*N_modes,2*N_modes)) ;
+Sparams_final = complex(zeros(Nf_Smat,2*N_modes,2*N_modes)) ;
 
 
 
@@ -240,7 +240,7 @@ end
 for si=1:2*N_modes
     for sj=1:2*N_modes
         
-        Sp_final(:,si,sj) = func_Interpolate_CSTdata(Sp(:,si,sj), freqs_S, freqs_GM) ;
+        Sparams_final(:,si,sj) = func_Interpolate_CSTdata(Sp(:,si,sj), freqs_S, freqs_GM) ;
         
     end
 end
@@ -249,8 +249,8 @@ end
 
 %% Calculate k and h
 % See Eq. 1 in Ref. [1]
-k = func_CalcBeamCoupling_k(portFD_final, currentFD_final) ;
-h = func_CalcBeamCoupling_h(V_final, ones(size(V_final))) ;
+k_final = func_CalcBeamCoupling_k(portFD_final, currentFD_final) ;
+h_final = func_CalcBeamCoupling_h(V_final, ones(size(V_final))) ;
 
 
 
@@ -262,7 +262,7 @@ for fi=1:Nf_Smat
     
     % Call the function to create GM for this frequency.
     S(fi,:,:) = func_ConstructGeneralizedMatrix(...
-        squeeze(Sp_final(fi,:,:)), k(fi,:), h(fi,:), Z_final(fi)) ;
+        squeeze(Sparams_final(fi,:,:)), k_final(fi,:), h_final(fi,:), Z_final(fi)) ;
     
 end
 

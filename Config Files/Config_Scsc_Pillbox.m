@@ -13,8 +13,6 @@
 % :type problem_dir: string
 % :param save_dir: directory in which the final matrix is saved.
 % :type save_dir: string
-% :param N_segs: Number of segments to concatenate.
-% :type N_segs: int
 % :param N_modes: Number of modes included in all generalized matrices (GMs).
 % :type N_modes: int
 % :param orthogonal_matrices_dir: directory containing the required orthogonal matrix.
@@ -32,7 +30,6 @@
 %
 
 
-
 %% Conversion factors.
 f_CST2SI   =  1e9 ;    % Frequency: CST results in GHz.
 f_pltlabel = "GHz" ;   % Frequency units for plotting.
@@ -42,34 +39,25 @@ m_CST2SI = 1e-3 ;      % Metres: CST results in mm.
 
 %% Directories for loading and saving generalized matrices.
 problem_dir = "Pillbox" ;
-save_dir = "Results/"+problem_dir ;
-
-
-%% Form of generalized matrices.
-N_segs  = 2 ;    % Number of segments to be concatenated.
-N_modes = 1 ;    % Number of modes in all generalized matrices.
 
 
 %% Directories for orthogonal and generalized matrices.
-% Directory containing the orthogonal matrices
-orthogonal_matrices_dir = "./Matrices/"+problem_dir+"/Orthogonal_Matrices/"+...
-    N_segs+"segments_"+string(N_modes)+"modes" ;
-
-
-%%% Generalized matrices
 % Directory containing generalized matrices
-seg_dir = "./Matrices/"+problem_dir+"/Generalized_Matrices/" ;
-
-% List of file names containing generalized matrices for all segments in the structure.
-segment_names = ["pillbox_TM01_conjCurrent"] ;
+seg_dir = "Matrices/"+problem_dir+"/Generalized_Matrices/" ;
 
 % File names of for generalized matrices for all segments in beam path in sequential order...
 % ... from z=0 to z=maximum (i.e. upstream to downstream).
+N_segs = 2 ;    % Number of segments to be concatenated.
+segment_names = ["pillbox_TM01_new"] ;
 segment_names = repmat(segment_names(1),1,N_segs) ;
 
+% Directory containing the orthogonal matrices.
+orthogonal_matrices_dir = "./Matrices/Orthogonal_Matrices/" ;
 
-%% Save filename
-save_filename = save_dir + "/Z_" + N_segs + segment_names(1) ;
+
+%% Save directory and filename
+save_dir = "Results/"+problem_dir ;
+save_filename = "Z_" + N_segs + segment_names(1) ;
 
 
 %% Plot?
