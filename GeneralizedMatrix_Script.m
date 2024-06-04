@@ -64,30 +64,25 @@ Length = Length*m_CST2SI ;
 
 
 %% Initialize all matrices.
-%%% Retrieve S-parameter frequencies using first active mode S-parameter file.
+% Retrieve S-parameter frequencies using first active mode S-parameter file.
 [freqs_S, ~] = func_Import_CSTdata(...
     S_dir+"S1("+Pmodes(1)+"),1("+Pmodes(1)+").txt", f_CST2SI) ;
 
-%%% Find length of vectors for constructing matrices.
+% Find length of vectors for constructing matrices.
 Nf_FM   = length(freqs_FM) ;   % Field monitor frequencies.
-Nf_Smat = length(freqs_GM) ;   % Final S_matrix frequencies (chosen by user).
+Nf_GM   = length(freqs_GM) ;   % Final S_matrix frequencies (chosen by user).
 Nf_Sp   = length(freqs_S) ;    % Frequencies in S-parameters CST files.
 N_modes = length(Pmodes) ;     % Number of modes per port.
 
-% Initialise multi-modal voltage matrix.
-V = zeros(Nf_FM, 2*N_modes) ;
+%%% Initialisations
+V = zeros(Nf_FM, 2*N_modes) ;        % Multi-modal voltage matrix.
+V_final = zeros(Nf_GM,2*N_modes) ;   % Final interpolated multi-modal voltage matrix.
 
-% Initialize final interpolated multi-modal voltage matrix.
-V_final = zeros(Nf_Smat,2*N_modes) ;
+portFD_final = zeros(Nf_GM,2*N_modes) ;   % Final matrix for port signals.
 
-% Initialize final matrix for port signals.
-portFD_final = zeros(Nf_Smat,2*N_modes) ;
-
-% Initialize imported S-parameter matrix
-Sp = complex(zeros(Nf_Sp,   2*N_modes,2*N_modes)) ;
-
-% Initialize interpolated S-parameter matrix.
-Sparams_final = complex(zeros(Nf_Smat,2*N_modes,2*N_modes)) ;
+Sp = complex(zeros(Nf_Sp,   2*N_modes,2*N_modes)) ;         % Imported S-parameter matrix.
+Sparams_final = complex(zeros(Nf_GM,2*N_modes,2*N_modes)) ; % Interpolated S-parameter matrix.
+S = complex(zeros(Nf_GM,2*N_modes+1,2*N_modes+1)) ;         % Final generalized matrix.
 
 
 
@@ -131,15 +126,14 @@ end
 for freq=1:Nf_FM
     for modi=1:N_modes
         
-        %%% Construct file paths for the Ez CST data.
+        %%% Construct file paths for the Ez CST data, port 1 and port 2.
         E1_filepath = E1_dir(modi) + freqs_FM_str(freq) + " " + f_label + ".txt" ;
         E2_filepath = E2_dir(modi) + freqs_FM_str(freq) + " " + f_label + ".txt" ;
 
         %%% Carry out integration and return the voltages.
-        V(freq, modi) = func_CalcVoltage_Ez_CSTdata(...
+        V(freq, modi) = func_CalcVoltage_Ez_CSTdata(...           % Port 1
             E1_filepath, freqs_FM(freq), c0, m_CST2SI) ;
-        
-        V(freq, N_modes+modi) = func_CalcVoltage_Ez_CSTdata(...
+        V(freq, N_modes+modi) = func_CalcVoltage_Ez_CSTdata(...   % Port 2
             E2_filepath, freqs_FM(freq), c0, m_CST2SI) ;
         
     end
@@ -157,7 +151,7 @@ switch import_FFT
         o1_FT_dir      = wake_dir+"/o1("+Pmodes+"),pb_FT.txt" ;
         o2_FT_dir      = wake_dir+"/o2("+Pmodes+"),pb_FT.txt" ;
         current_FT_dir = wake_dir+"/Current_FT.txt" ;
-
+        
         % Retrieve freqs from first file of first signal.
         [freqs_portmodes, ~] = func_Import_CSTdata(o1_FT_dir(1), f_CST2SI) ;
         
@@ -175,7 +169,7 @@ switch import_FFT
             %%% Populate matrix.
             [~, portsignals_FD(:,port1)] = func_Import_CSTdata(o1_FT_dir(modi), f_CST2SI) ;
             [~, portsignals_FD(:,port2)] = func_Import_CSTdata(o2_FT_dir(modi), f_CST2SI) ;
-
+            
         end
         
         % Import Current FD.
@@ -188,24 +182,24 @@ switch import_FFT
         
         %%% Load beam current
         [time_samples, beam_current] = func_Import_CSTdata(current_dir, s_CST2SI) ;
-
+        
         % Number of time samples.
         N_ts = length(time_samples) ;
-
+        
         %%% Initialize port signals matrix
         port_signals = zeros(N_ts, 2*N_modes) ;
-
+        
         %%% Load port signals.
         for modi=1:N_modes
-
+            
             % Port indices for this mode.
             port1 = modi ;
             port2 = N_modes+modi ;
-
+            
             % Import port signals.
             [~, port_signals(:,port1)] = func_Import_CSTdata(o1_dir(modi), s_CST2SI) ;
             [~, port_signals(:,port2)] = func_Import_CSTdata(o2_dir(modi), s_CST2SI) ;
-
+            
         end
         
         
@@ -257,10 +251,8 @@ h_final = func_CalcBeamCoupling_h(V_final, ones(size(V_final))) ;
 
 
 %% Construct generalized S-matrix for all frequencies.
-%%% Initialize generalized S-matrix
-S = complex(zeros(Nf_Smat,2*N_modes+1,2*N_modes+1)) ;
-
-for fi=1:Nf_Smat
+% Loop of all S-parameter frequencies.
+for fi=1:Nf_GM
     
     % Call the function to create GM for this frequency.
     S(fi,:,:) = func_ConstructGeneralizedMatrix(...
