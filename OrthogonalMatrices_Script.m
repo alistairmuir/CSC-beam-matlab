@@ -5,7 +5,7 @@
 % matrices needed to carry out CSC-beam (Ref. 1) and stores them in a single .mat file in the 
 % user-given directory.
 % 
-% Created by Alistair Muir, April 2024.
+% Created by Alistair Muir, January 2024.
 % Last updated by Alistair Muir, June 2024.
 %
 % References:
