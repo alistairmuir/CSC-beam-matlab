@@ -13,6 +13,7 @@ function [] = func_SaveGM(save_dir, save_filename, S, f, Length)
 % :param Length: Length of the segment represented by the GM.
 % :type Length: double
 %
+% :returns: Saved generalized matrix.
 
 % Create save directory if it currently does not exist.
 if exist(save_dir,'dir')==0

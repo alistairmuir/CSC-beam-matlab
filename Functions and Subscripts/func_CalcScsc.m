@@ -2,15 +2,16 @@ function [S, freqs, Length] = func_CalcScsc(seg_dir, segment_names, orthogonal_m
 % A function to carry out Scsc-beam for generalized matrices representing adjecent
 % sections of beam path. The list order in segment_names dictates the section order.
 %
+% References:
+% 1. "Generalization of coupled S-parameter calculation to compute beam
+% impedances in particle accelerators" - T. Flisgen, E. Gjonaj, H.W. Glock - 2020
+%
 % :param seg_dir: Directory containing files for all the generalized matrices (GM).
 % :param segment_names: List of filenames, each file contains GM, freqs and Length of a segment.
 % :param orthogonal_matrices_path: Filepath to file containing orthogonal matrices P and F.
 % 
 % :returns [S, freqs, Length]:
-%
-% References:
-% 1. "Generalization of coupled S-parameter calculation to compute beam
-% impedances in particle accelerators" - T. Flisgen, E. Gjonaj, H.W. Glock - 2020
+
 
 % Physical constants
 [~, ~, c0] = func_EM_PhysicalConstants() ;

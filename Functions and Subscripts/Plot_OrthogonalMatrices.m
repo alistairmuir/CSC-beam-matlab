@@ -1,6 +1,7 @@
 %% Script to plot the CSC-Beam permutation matrix
 % Permutation matrices are plotted from user-specified directory.
 % (All non-zero elements are marked with a dot.)
+%
 % :param filepath: path to the file containing the orthogonal matrices to be plotted.
 % :param N_modes_int: Number of internal modes.
 % :param N_modes_ext: Number of external modes.

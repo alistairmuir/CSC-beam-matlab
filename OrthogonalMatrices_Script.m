@@ -18,7 +18,6 @@
 % :type N_segs: integer
 % :param save_dir: Directory in which the permutation matrices will be saved.
 % :type save_dir: string
-%
 
 
 
