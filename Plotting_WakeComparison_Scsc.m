@@ -56,19 +56,19 @@ S_diff = S2.S(:,end,end) - Sd1_terp ;
 
 %% Convert dB
 if convert_dB==true
-    S1_plot  = squeeze(20*log10(abs(S1.S(:,end,end)))) ;
-    S2_plot  = squeeze(20*log10(abs(S2.S(:,end,end)))) ;
+    S1_plot = squeeze(20*log10(abs(S1.S(:,end,end)))) ;
+    S2_plot = squeeze(20*log10(abs(S2.S(:,end,end)))) ;
 
-    Sd1_plot      = squeeze(20*log10(abs(S_d1.S))) ;
-    S_diff_plot   = squeeze(20*log10(abs(S_diff))) ;
+    Sd1_plot    = squeeze(20*log10(abs(S_d1.S))) ;
+    S_diff_plot = squeeze(20*log10(abs(S_diff))) ;
     
-    Sd3_plot = squeeze(20*log10(d3_factor*abs(S_d3.S(:,end,end)))) ;
+    Sd3_plot  = squeeze(20*log10(d3_factor*abs(S_d3.S(:,end,end)))) ;
     ylimits   = [-10,100] ;
     imp_units = "|\Omega|dB" ;
 
 else
-    S1_plot  = squeeze(abs(S1.S(:,end,end))) ;
-    S2_plot  = squeeze(abs(S2.S(:,end,end))) ;
+    S1_plot = squeeze(abs(S1.S(:,end,end))) ;
+    S2_plot = squeeze(abs(S2.S(:,end,end))) ;
     
     Sd1_plot    = squeeze(abs(S_d1.S)) ;
     S_diff_plot = squeeze(abs(S_diff)) ;
@@ -146,68 +146,68 @@ xlabel("Frequency / GHz")
 ylabel("Phase / \circ")
 
 
-if plot_1cav==true
-    %%% Beam impedance
-    figure(11); clf
-
-    hold on
-    
-    plot(S2.f./1e9,   S2_plot,  'rx', 'LineWidth', 1)
-    plot(S_d1.f,      Sd1_plot, 'k')
-    plot(S_d3.f./1e9, Sd3_plot, 'k--', 'LineWidth', 1)
-    %plot(S1.f./1e9,   S_diff_plot, 'kx', 'LineWidth', 0.5)
-
-    for ii=1:length(pmode)
-        xline(f_co(ii),":",'Color',[0,(ii+1)/(length(pmode)+1),0], 'LineWidth', 1.5)
-    end
-
-    hold off
-
-    ax1 = gca ;
-    ax1.FontSize = 12 ;
-
-    xlim([0,10])
-    ylim(ylimits)
-
-    if convert_dB == false
-        set(gca, 'YScale', 'log')
-    end
-
-    grid on
-    grid minor
-
-    legend(Slabel_b, 'FontSize', 9, 'Location', 'northeast')
-
-    xlabel("Frequency / GHz")
-    ylabel("Impedance / "+imp_units)
-
-
-    %%% Phase
-    figure(21); clf
-
-    hold on
-    
-    plot(S2.f./1e9,  squeeze(rad2deg(angle(S2.S(:,end,end)))), 'rx',  'LineWidth', 1)
-    plot(S_d1.f,     squeeze(rad2deg(angle(S_d1.S))), 'k')
-    plot(S_d3.f/1e9, squeeze(rad2deg(angle(S_d3.S(:,end,end)))), 'k--', 'LineWidth', 1)
-    
-    for ii=1:length(pmode)
-        xline(f_co(ii),":",'Color',[0,(ii+1)/(length(pmode)+1),0], 'LineWidth', 1.5)
-    end
-
-    hold off
-
-    ax2 = gca ;
-    ax2.FontSize = 12 ;
-
-    grid on
-    grid minor
-
-    legend(Slabel_a, 'FontSize', 9, 'Location', 'northwest')
-
-    xlim([0,10])
-    ylim([-200,200])
-    xlabel("Frequency / GHz")
-    ylabel("Phase / \circ")
-
-end
+% if plot_1cav==true
+%     %%% Beam impedance
+%     figure(11); clf
+% 
+%     hold on
+%     
+%     plot(S2.f./1e9,   S2_plot,  'rx', 'LineWidth', 1)
+%     plot(S_d1.f,      Sd1_plot, 'k')
+%     plot(S_d3.f./1e9, Sd3_plot, 'k--', 'LineWidth', 1)
+%     %plot(S1.f./1e9,   S_diff_plot, 'kx', 'LineWidth', 0.5)
+% 
+%     for ii=1:length(pmode)
+%         xline(f_co(ii),":",'Color',[0,(ii+1)/(length(pmode)+1),0], 'LineWidth', 1.5)
+%     end
+% 
+%     hold off
+% 
+%     ax1 = gca ;
+%     ax1.FontSize = 12 ;
+% 
+%     xlim([0,10])
+%     ylim(ylimits)
+% 
+%     if convert_dB == false
+%         set(gca, 'YScale', 'log')
+%     end
+% 
+%     grid on
+%     grid minor
+% 
+%     legend(Slabel_b, 'FontSize', 9, 'Location', 'northeast')
+% 
+%     xlabel("Frequency / GHz")
+%     ylabel("Impedance / "+imp_units)
+% 
+% 
+%     %%% Phase
+%     figure(21); clf
+% 
+%     hold on
+%     
+%     plot(S2.f./1e9,  squeeze(rad2deg(angle(S2.S(:,end,end)))), 'rx',  'LineWidth', 1)
+%     plot(S_d1.f,     squeeze(rad2deg(angle(S_d1.S))), 'k')
+%     plot(S_d3.f/1e9, squeeze(rad2deg(angle(S_d3.S(:,end,end)))), 'k--', 'LineWidth', 1)
+%     
+%     for ii=1:length(pmode)
+%         xline(f_co(ii),":",'Color',[0,(ii+1)/(length(pmode)+1),0], 'LineWidth', 1.5)
+%     end
+% 
+%     hold off
+% 
+%     ax2 = gca ;
+%     ax2.FontSize = 12 ;
+% 
+%     grid on
+%     grid minor
+% 
+%     legend(Slabel_a, 'FontSize', 9, 'Location', 'northwest')
+% 
+%     xlim([0,10])
+%     ylim([-200,200])
+%     xlabel("Frequency / GHz")
+%     ylabel("Phase / \circ")
+% 
+% end

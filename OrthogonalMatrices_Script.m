@@ -25,7 +25,8 @@
 addpath("Config Files")
 
 % Functions not currently used - functionalising to be done in a later update.
-addpath("Functions and Subscripts")
+%addpath("Functions")
+%addpath("Subscripts")
 
 
 

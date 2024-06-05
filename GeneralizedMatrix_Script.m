@@ -18,7 +18,8 @@ clear
 clc
 
 % Add directories containing dependent functions and configuration files.
-addpath("Functions and Subscripts")
+addpath("Functions")
+addpath("Subscripts")
 addpath("Config Files")
 
 
