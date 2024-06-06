@@ -2,8 +2,7 @@
 % ===========================================
 % 
 % This script is called by both GeneralizedMatrix_Script.m and Scsc_Script.m.
-% It assumes the generalized matrix is present in the workspace, along with some plotting
-% variables.
+% It assumes the generalized matrix is held in variable S.
 %
 % :param S: The generalized S-parameter matrix (GM) whose data will be plotted (M-by-N-by-N).
 % :type S: double
