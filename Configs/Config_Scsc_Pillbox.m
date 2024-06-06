@@ -27,7 +27,6 @@
 % :type save_filename: string
 % :param plot_on: Choose whether to plot the beam impedance from the result matrix.
 % :type plot_on: boolean
-%
 
 
 %% Conversion factors.

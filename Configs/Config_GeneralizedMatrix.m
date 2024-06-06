@@ -69,7 +69,7 @@ save_filename = "pillbox_TM01_new" ;
 
 %% Port modes
 %%% Choose modes for signal retrieval.
-Pmodes = [3] ;   % List of the modes (signals of these modes will be retrieved, others ignored).
+Pmodes = [3] ;   % List of port modes to be included.
 
 
 %% Segment longitudinal length (CST units)
@@ -92,7 +92,6 @@ freqs_GM = freqs_FM ;
 
 %% Plotting
 plot_results  = true ; % Plot results?
-plt_fontsize  = 10 ;   % Font size of axis and tick labels.
 plt_port      = 1 ;    % Choose port mode for which the cut-off frequency will be plotted.
 y_axis_limits = [0,0] ; % Limits on the y-axis (0,0 = T. Flisgen's limits)
 
