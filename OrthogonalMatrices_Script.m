@@ -22,7 +22,7 @@
 
 
 %% Add Config Files directory
-addpath("Config Files")
+addpath("Configs")
 
 % Functions not currently used - functionalising to be done in a later update.
 %addpath("Functions")

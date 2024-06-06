@@ -18,7 +18,7 @@ clc
 %% Add directories containing dependent functions and configuration files.
 addpath("Functions")
 addpath("Subscripts")
-addpath("Config Files")
+addpath("Configs")
 
 
 %% RUN CONFIGURATION SCRIPT
