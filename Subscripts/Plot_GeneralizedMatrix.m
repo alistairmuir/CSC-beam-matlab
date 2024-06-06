@@ -15,9 +15,8 @@ plt_fontsize = 10 ;
 % Line width for cut-off frequencies.
 fco_lw = 1 ;
 
-% Y-axes limits
+% Set default y-axis limits if not given.
 if ~exist('y_axis_limits', 'var')
-    % Default plot limits
     y_axis_limits = [-150, 100] ;
 end
 
