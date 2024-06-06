@@ -7,8 +7,11 @@ function [S, freqs, Length] = func_CalcScsc(seg_dir, segment_names, orthogonal_m
 % impedances in particle accelerators" - T. Flisgen, E. Gjonaj, H.W. Glock - 2020
 %
 % :param seg_dir: Directory containing files for all the generalized matrices (GM).
+% :type seg_dir: string
 % :param segment_names: List of filenames, each file contains GM, freqs and Length of a segment.
+% :type segment_names: string
 % :param orthogonal_matrices_path: Filepath to file containing orthogonal matrices P and F.
+% :type orthogonal_matrices_path: string
 % 
 % :returns [S, freqs, Length]:
 
@@ -69,7 +72,7 @@ for fi = 1:N_f
         L_segs(segi) = seg_matrix.Length ;
         
         % Phase at end of each segment.
-        phi_segs(segi) = func_CalcPhase(freqs(fi), sum(L_segs(1:segi)), 0, c0) ;
+        phi_segs(segi) = func_CalcPhase(deg2rad(freqs(fi)), sum(L_segs(1:segi)), 0, c0) ;
         
     end
     
