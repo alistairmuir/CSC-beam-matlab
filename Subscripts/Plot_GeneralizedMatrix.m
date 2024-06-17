@@ -1,5 +1,4 @@
 %% Script for plotting the generalized matrix
-%  ==========================================
 % 
 % This script is called by both GeneralizedMatrix_Script.m and Scsc_Script.m.
 % It assumes the generalized matrix is held in variable, S.

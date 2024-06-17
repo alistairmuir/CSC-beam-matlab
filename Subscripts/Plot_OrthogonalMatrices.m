@@ -1,5 +1,4 @@
 %% Script to plot the CSC-Beam permutation matrix
-%  ==============================================
 %
 % Permutation matrices are plotted from user-specified directory.
 % The plots portray the matrix with rows on Y-axis, columns on X-axis, and all non-zero elements

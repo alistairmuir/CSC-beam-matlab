@@ -1,5 +1,4 @@
 %% Script to carry out CSC-Beam method on ready-made generalized matrices
-% =======================================================================
 % 
 % Script to calculate S_csc from S matrices provided by "GeneralizedMatrix_Script.m".
 % Adapted from code in SUPPLEMENTARY MATERIAL of Ref. [1].

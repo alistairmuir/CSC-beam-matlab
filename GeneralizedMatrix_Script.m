@@ -1,5 +1,4 @@
 %% Script to produce a generalized S-parameter matrix
-% ===================================================
 % 
 % Script to retrieve CST results from Hi-Freq and Wakefield simulations,
 % calculate all unknown elements of S_csc for the simulation's frequency
