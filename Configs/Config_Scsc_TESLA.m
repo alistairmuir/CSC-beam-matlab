@@ -1,5 +1,5 @@
-%% -- Depricated -- Config file for carrying out CSC-Beam on TESLA-style pipeline.
-%  ===============================================================================
+%% Depricated config file!
+%  =======================
 
 %% Conversion factors.
 f_CST2SI =  1e9 ;   % Frequency: CST results in GHz.
