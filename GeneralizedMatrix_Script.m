@@ -53,7 +53,7 @@ E2_dir = hifreq_dir+"/e-field (f="+freqs_FM_str(1)+") (2("+Pmodes+"))_Z (Z)/" ;
 
 
 
-%% Convert input arrays to SI units.
+%% Convert to SI units
 % Convert frequency arrays
 freqs_FM = freqs_FM*f_CST2SI ;
 freqs_GM = freqs_GM*f_CST2SI ;
