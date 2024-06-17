@@ -13,7 +13,7 @@ function [] = func_SaveGM(save_dir, save_filename, S, f, Length)
 % :param Length: Physical length of the beamline segment represented by the GM.
 % :type Length: double
 %
-% :returns: A .mat file containing S, f and Length.
+% :returns: "filename".mat file is saved containing 3 objects: S, f and Length.
 
 % Create save directory if it currently does not exist.
 if exist(save_dir,'dir')==0

@@ -120,7 +120,7 @@ end
 
 
 %% Calculate beam voltages for all modes
-%%% Equation 31 in Ref [1].
+%%% Equation 5 in Ref [1].
 
 %%% Loop over all modes, all frequencies, and carry out integration.
 for freq=1:Nf_FM
@@ -205,7 +205,7 @@ switch import_FFT
         
         %%% Carry out FFTs. (Port signals and current share the same time samples.)
         [freqs_portmodes, portsignals_FD] = func_FFT_CSTdata(port_signals, time_samples) ;
-        [freqs_current, current_FD]       = func_FFT_CSTdata(beam_current, time_samples) ;
+        [freqs_current,   current_FD]     = func_FFT_CSTdata(beam_current, time_samples) ;
         
 end
 
@@ -268,7 +268,7 @@ func_SaveGM(save_dir, save_filename, S, freqs_GM, Length)
 
 
 %% Plotting
-if plot_results==true
+if plot_on
     % Return freqs to CST units for plotting.
     f = freqs_GM./f_CST2SI ;
     

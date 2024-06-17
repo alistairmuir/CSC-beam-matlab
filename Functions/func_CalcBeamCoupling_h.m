@@ -7,8 +7,7 @@ function h = func_CalcBeamCoupling_h(VoltagesFD, portsignalsFD)
 % (See Eq.[1] in Ref [1].)
 %
 % Note: input port signals a(x) are normalized to 1 sqrt(W) peak power. See:
-% https://space.mit.edu/RADIO/CST_online/...
-% ...mergedProjects/3D/special_overview/special_overview_waveguideover.htm
+% https://space.mit.edu/RADIO/CST_online/mergedProjects/3D/special_overview/special_overview_waveguideover.htm
 %
 % :param VoltagesFD: Matrix containing freq. domain (FD) beam voltages (N-by-M).
 % :type VoltagesFD: complex double

@@ -11,7 +11,7 @@ function S = func_ConstructGeneralizedMatrix(Sp, k, h, z_b)
 % :param z_b: direct beam impedance with no influence from port modes.
 % :type z_b: double
 %
-% :returns: S (M-by-M, where $M=N+1$)
+% :returns: S (M-by-M, where M=N+1)
 
 % Concatenate S-matrix with k vector.
 Sp_k = [Sp, k(:)] ;

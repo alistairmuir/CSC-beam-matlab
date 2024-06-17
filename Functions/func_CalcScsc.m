@@ -13,7 +13,7 @@ function [S, freqs, Length] = func_CalcScsc(seg_dir, segment_names, orthogonal_m
 % :param orthogonal_matrices_path: Filepath to file containing orthogonal matrices P and F.
 % :type orthogonal_matrices_path: string
 % 
-% :returns: S (N-by-M-by-M), freqs (1-by-N), Length]
+% :returns: S (N-by-M-by-M), freqs (1-by-N), Length
 
 
 % Physical constants
