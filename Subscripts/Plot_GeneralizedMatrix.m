@@ -17,6 +17,9 @@ plt_fontsize = 10 ;
 % Line width for cut-off frequencies.
 fco_lw = 1 ;
 
+% Tick marks for x-axis
+plt_xticks = 0:10 ;
+
 % Set default y-axis limits if not given.
 if ~exist('y_axis_limits', 'var')
     y_axis_limits = [-150, 100] ;
@@ -58,10 +61,6 @@ if exist('Pmodes', 'var') && exist('wake_dir', 'var')
         f_co(fii) = load(file_fco(fii)) ;
     end
     
-else
-    % Set values to draw a zero-width line (avoids more messy IF-statements in the plotting bit).
-    f_co   = 0 ;
-    fco_lw = 0 ;
 end
 
 
@@ -69,14 +68,24 @@ end
 if y_axis_limits(1)==0 && y_axis_limits(2)==0
     
     if N_modes==1
-        % T. Flisgen's plot limits
-        plt_y_mins = [-150, -100, -50 ;
-                      -100, -150, -50 ;
-                       -50,  -50, -50 ] ;
+        % T. Flisgen's plot limits for one pillbox
+%         plt_y_mins = [-150, -100, -50 ;
+%                       -100, -150, -50 ;
+%                        -50,  -50, -50 ] ;
+% 
+%         plt_y_maxs = [   0,    0,  100 ;
+%                          0,    0,  100 ;
+%                         50,   50,  100 ] ;
+                    
+        % T. Flisgen's plot limits for two pillboxes
+       plt_y_mins = [-200,-300, -150 ;
+                     -300,-200,  -60 ;
+                     -150,-100,  -20 ] ;
+                    
+        plt_y_maxs = [ 50,  50, 100 ;
+                       50,  50,  60 ;
+                      100, 100, 100 ] ;
 
-        plt_y_maxs = [   0,    0,  100 ;
-                         0,    0,  100 ;
-                        50,   50,  100 ] ;
 
     else
         % Default plot limits
@@ -141,7 +150,14 @@ if N_modes < 4
             ax.FontSize = plt_fontsize ;
             xlabel("f / "+f_label, 'FontSize', plt_fontsize)
             ylabel("|"+Sgen_symbol+"| / "+yunits(plti), 'FontSize', plt_fontsize)
-            xline(f_co, 'b--', 'LineWidth', fco_lw)
+            
+            if exist('plt_xticks', 'var')
+                xticks(plt_xticks)
+            end
+            
+            if exist('f_co', 'var')
+                xline(f_co, 'b--', 'LineWidth', fco_lw)
+            end
 
         end
     end
@@ -180,7 +196,14 @@ if N_modes < 4
             ax.FontSize = plt_fontsize ;
             xlabel("f / "+f_label, 'FontSize', plt_fontsize)
             ylabel("arg("+Sgen_symbol+") / \circ", 'FontSize', plt_fontsize)
-            xline(f_co, 'b--', 'LineWidth', fco_lw)
+
+            if exist('plt_xticks', 'var')
+                xticks(plt_xticks)
+            end
+
+            if exist('f_co', 'var')
+                xline(f_co, 'b--', 'LineWidth', fco_lw)
+            end
 
         end
     end
@@ -196,8 +219,11 @@ else
     ax.FontSize = 20 ;
     xlabel("f / "+f_label, 'FontSize', 20)
     ylabel("|z_b| / "+yunits(end), 'FontSize', 20)
-    xticks(0:5:10)
-    xline(5.74, 'r--')
+
+    if exist('plt_xticks', 'var')
+        xticks(plt_xticks)
+    end
+
     title("Beam Impedance (Magnitude)", 'FontSize', 15)
 
     % Phase
@@ -209,8 +235,11 @@ else
     ax.FontSize = 20 ;
     xlabel("f / "+f_label, 'FontSize', 20)
     ylabel("arg(|z_b|) / \circ", 'FontSize', 20)
-    xticks(0:5:10)
-    xline(5.74, 'r--')
+
+    if exist('plt_xticks', 'var')
+        xticks(plt_xticks)
+    end
+
     title("Beam Impedance (Phase)", 'FontSize', 15)
 
 end

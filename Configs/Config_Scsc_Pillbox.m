@@ -50,9 +50,10 @@ save_filename = "Z_" + N_segs + segment_names(1) ;
 
 
 %% Plot?
-plot_on    = false ;   % Plot the final generalized matrix?
-f_pltlabel = "GHz" ;   % Frequency units for plotting.
-
+plot_on  = true ;   % Plot the final generalized matrix?
+f_label  = "GHz" ;   % Frequency units for plotting.
+f_CST2SI = 1e9 ;
+y_axis_limits = [0,0] ; % Limits on the y-axis (0,0 = T. Flisgen's limits)
 
 %%%%%%%%%%%%%%%%%%%%   END   %%%%%%%%%%%%%%%%%%%%
 

@@ -92,6 +92,5 @@ plot_on       = true ; % Plot results?
 plt_port      = 1 ;    % Choose port mode for which the cut-off frequency will be plotted.
 y_axis_limits = [0,0] ; % Limits on the y-axis (0,0 = T. Flisgen's limits)
 
-
 %%%%%%%%%%%%%%%%%%%%   END   %%%%%%%%%%%%%%%%%%%%
 
