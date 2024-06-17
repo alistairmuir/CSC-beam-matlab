@@ -1,12 +1,20 @@
 %% Script to plot the CSC-Beam permutation matrix
+%  ==============================================
+%
 % Permutation matrices are plotted from user-specified directory.
-% (All non-zero elements are marked with a dot.)
+% The plots portray the matrix with rows on Y-axis, columns on X-axis, and all non-zero elements
+% marked with a dot.
 %
 % :param filepath: path to the file containing the orthogonal matrices to be plotted.
+% :type  filepath: string
 % :param N_modes_int: Number of internal modes.
+% :type  N_modes_int: integer
 % :param N_modes_ext: Number of external modes.
+% :type  N_modes_ext: integer
 % :param N_segs: Number of segments to be concatenated in CSC-beam.
-% :param markercolour: RGB colour to mark the non-zero elements in the plots.
+% :type  N_segs: integer
+% :param markercolour: [R,G,B] colour to mark the non-zero elements in the plots.
+% :type  markercolour: double
 
 
 

@@ -1,39 +1,29 @@
-%% Configuration file for carrying out CSC-Beam on coupled Pillbox segments
-% =========================================================================
+%% Configuration file for running Scsc_Script.m on pillbox pipeline
+%  ================================================================
 %
-% :param f_CST2SI: conversion factor of CST frequency units to SI (Hz).
-% :type f_CST2SI: double
+% This script is called by Scsc_Script.m to retrieve a series of generalized matrices (GMs) and 
+% perform CSC-beam to output the generalized matrix, S, for the entire beam path represented by
+% the GMs. S is saved along with the frequencies corresponding to S and the total length, Length, of
+% the entire structure.
+%
 % :param f_label: frequency label for plotting.
-% :type f_label: string
-% :param s_CST2SI: conversion factor of CST time units to SI (seconds).
-% :type s_CST2SI: double
-% :param m_CST2SI: conversion factor of CST length units to SI (metres).
-% :type m_CST2SI: double
+% :type  f_label: string
 % :param problem_dir: directory containing all relevant matrices (the "problem" directory).
-% :type problem_dir: string
+% :type  problem_dir: string
 % :param save_dir: directory in which the final matrix is saved.
-% :type save_dir: string
+% :type  save_dir: string
 % :param N_modes: Number of modes included in all generalized matrices (GMs).
-% :type N_modes: int
+% :type  N_modes: int
 % :param orthogonal_matrices_dir: directory containing the required orthogonal matrix.
-% :type orthogonal_matrices_dir: string
+% :type  orthogonal_matrices_dir: string
 % :param seg_dir: directory containing the GMs for this problem.
-% :type seg_dir: string
-% :param name_matrices: array of filenames for all the GMs in the problem.
-% :type name_matrices: 1D array, string
-% :param sequence_matrices: array of GMs in correct beam-path sequence from upstream to downstream.
-% :type sequence_matrices: 1D array, string
+% :type  seg_dir: string
+% :param segment_names: array of filenames for all the GMs in the problem.
+% :type  segment_names: 1D array, string
 % :param save_filename: directory into which the result matrix is stored.
-% :type save_filename: string
+% :type  save_filename: string
 % :param plot_on: Choose whether to plot the beam impedance from the result matrix.
-% :type plot_on: boolean
-
-
-%% Conversion factors.
-f_CST2SI   =  1e9 ;    % Frequency: CST results in GHz.
-f_pltlabel = "GHz" ;   % Frequency units for plotting.
-s_CST2SI = 1e-9 ;      % Seconds: CST results in ns.
-m_CST2SI = 1e-3 ;      % Metres: CST results in mm.
+% :type  plot_on: boolean
 
 
 %% Directories for loading and saving generalized matrices.
@@ -60,8 +50,8 @@ save_filename = "Z_" + N_segs + segment_names(1) ;
 
 
 %% Plot?
-plot_on      = false ; % Plot the final generalized matrix?
-plt_fontsize = 10 ;    % Font size of axis and tick labels.
+plot_on    = false ;   % Plot the final generalized matrix?
+f_pltlabel = "GHz" ;   % Frequency units for plotting.
 
 
 %%%%%%%%%%%%%%%%%%%%   END   %%%%%%%%%%%%%%%%%%%%

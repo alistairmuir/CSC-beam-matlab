@@ -1,11 +1,14 @@
 %% Script for plotting the generalized matrix
-% ===========================================
+%  ==========================================
 % 
 % This script is called by both GeneralizedMatrix_Script.m and Scsc_Script.m.
-% It assumes the generalized matrix is held in variable S.
+% It assumes the generalized matrix is held in variable, S.
 %
-% :param S: The generalized S-parameter matrix (GM) whose data will be plotted (M-by-N-by-N).
-% :type S: double
+% Two plots showing whole matrix, the first plot showing magnitude and the second showing
+% phase. Two additional plots show only the beam impedance (lower right subplot of first plots).
+%
+% :param S: The generalized S-parameter matrix whose data will be plotted (M-by-N-by-N).
+% :type  S: double
 
 
 %% Plotting aesthetics

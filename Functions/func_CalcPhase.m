@@ -1,18 +1,19 @@
 function phase = func_CalcPhase(freq, distance, phi0, speed)
 % Function to return phase of a wave of a given frequency after travelling a given distance 
-% at a given speed. If inputs are arrays, they must be the same length.
+% at a given speed. All parameters must be either vectors or matrices of common size, or otherwise
+% singles.
 % Note: phi0 and freq assumed to be in radians.
 %
-% :param freq: Wave frequency.
+% :param freq: Wave frequency (N-by-M or single).
 % :type freq: double
-% :param length: Distance travelled.
+% :param length: Distance travelled (N-by-M or single).
 % :type length: double
-% :param phi0: Phase at zero distance.
+% :param phi0: Phase at zero distance (N-by-M or single).
 % :type phi0: double
-% :param speed: Speed of propagation.
+% :param speed: Speed of propagation (N-by-M or single).
 % :type speed: double
 %
-% :returns: phase
+% :returns: phase (N-by-M)
 
 phase = phi0 + freq.*distance./speed ;
 end

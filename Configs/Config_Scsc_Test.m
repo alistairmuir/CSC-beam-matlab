@@ -1,12 +1,5 @@
-%%Configuration file for carrying out CSC-Beam on test segments.
-% ==============================================================
-
-
-%% Conversion factors.
-f_CST2SI   =  1e9 ;    % Frequency: CST results in GHz.
-f_pltlabel = "GHz" ;   % Frequency units for plotting.
-s_CST2SI   = 1e-9 ;    % Seconds: CST results in ns.
-m_CST2SI   = 1e-3 ;    % Metres: CST results in mm.
+%% Configuration file for carrying out CSC-Beam on test segments.
+%  ==============================================================
 
 
 %% Problem folder
@@ -37,7 +30,6 @@ segment_names = ["test"+N_modes, ...
 save_filename = "Results/S_csc/Wake_"+segment_names(1) ;
 
 plot_on = false ;
-
+f_pltlabel = "GHz" ;   % Frequency units for plotting.
 
 %%%%%%%%%%%%%%%%%%%%   END   %%%%%%%%%%%%%%%%%%%%
-
