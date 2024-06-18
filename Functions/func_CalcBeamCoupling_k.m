@@ -7,10 +7,10 @@ function k = func_CalcBeamCoupling_k(portmodesFD, currentFD)
 % (See Eq.[1])
 %
 % :param portmodesFD: Matrix containing freq. domain (FD) wave amplitudes for
-%   one or multiple port modes respectively (N-by-M).
-% :type portmodesFD: complex double
+%                       one or multiple port modes respectively (N-by-M).
+% :type  portmodesFD: complex double
 % :param currentFD: Vector of length N, containing FD current of the beam (N-by-1).
-% :type currentFD: complex double
+% :type  currentFD: complex double
 %
 % :returns: k (N-by-M)
 

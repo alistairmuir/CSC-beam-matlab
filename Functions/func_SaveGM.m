@@ -3,15 +3,15 @@ function [] = func_SaveGM(save_dir, save_filename, S, f, Length)
 % in a .mat file within the given directory.
 %
 % :param directory: String containing directory to store the save file.
-% :type directory: string
+% :type  directory: string
 % :param filename: Filename of the save file.
-% :type filename: string
+% :type  filename: string
 % :param S: Generalized matrix (GM) to be saved (M-by-N-by-N).
-% :type S: double
+% :type  S: double
 % :param f: Frequencies corresponding to each leaf of the GM (M-by-1).
-% :type f: double
+% :type  f: double
 % :param Length: Physical length of the beamline segment represented by the GM.
-% :type Length: double
+% :type  Length: double
 %
 % :returns: "filename".mat file is saved containing 3 objects: S, f and Length.
 

@@ -2,9 +2,9 @@ function [freqs, data_FD] = func_FFT_CSTdata(data_TD, time_samples)
 % Function to return 1D spectrum from timeseries vector input.
 %
 % :param data_TD: timeseries vector or matrix where each column is a timeseries.
-% :type data_TD: double
+% :type  data_TD: double
 % :param time_samples: the time samples corresponding to the timeseries data in data_TD.
-% :type time_samples: double
+% :type  time_samples: double
 %
 % :returns: freqs (1-by-N), data_FD (1-by-N)
 

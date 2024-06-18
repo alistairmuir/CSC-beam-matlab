@@ -3,9 +3,9 @@ function [vec_ind, vec_dep] = func_Import_CSTdata(filepath, conversion_factor)
 % 3 = complex) and outputs the independent variable and dependent variable as separate vectors.
 %
 % :param filepath: Filepath containing CST tabulated data (real or complex).
-% :type filepath: string
+% :type  filepath: string
 % :param conversion_factor: Converts independent CST variable to SI units.
-% :type conversion_factor: double
+% :type  conversion_factor: double
 %
 % :returns: vec_ind (N-by-1), vec_dep (N-by-1)
 

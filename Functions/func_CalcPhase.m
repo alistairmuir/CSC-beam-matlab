@@ -5,13 +5,13 @@ function phase = func_CalcPhase(freq, distance, phi0, speed)
 % Note: phi0 and freq assumed to be in radians.
 %
 % :param freq: Wave frequency (N-by-M or single).
-% :type freq: double
+% :type  freq: double
 % :param length: Distance travelled (N-by-M or single).
-% :type length: double
+% :type  length: double
 % :param phi0: Phase at zero distance (N-by-M or single).
-% :type phi0: double
+% :type  phi0: double
 % :param speed: Speed of propagation (N-by-M or single).
-% :type speed: double
+% :type  speed: double
 %
 % :returns: phase (N-by-M)
 
