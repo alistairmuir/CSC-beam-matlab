@@ -1,8 +1,9 @@
 function [mu0, eps0, c0] = func_EM_PhysicalConstants()
-% Function to return EM physical constants in SI units:
-%   - vacuum permeability, mu0 (N/A^2)
-%   - vacuum permittivity, eps0 (F/m)
-%   - vacuum speed of light, c0 (m/s)
+% This function returns the following physical constants:
+%
+%  - vacuum permeability,  mu0 (N/A^2)
+%  - vacuum permittivity, eps0 (F/m)
+%  - vacuum speed of light, c0 (m/s)
 %
 % :returns: mu0, eps0, c0
 
