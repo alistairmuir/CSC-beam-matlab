@@ -26,7 +26,7 @@ files specified by the user in the configuration file, ``Config_GeneralizedMatri
 
 The script has the following sections, which call the given functions:
 
-   - Add dependent paths
+   - Add dependent paths:\
          The directories containing required functions, configuration files
          and subscripts are all added to the working directory.
    - Run configuration script
