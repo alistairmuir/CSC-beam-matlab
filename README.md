@@ -26,51 +26,51 @@ files specified by the user in the configuration file, ``Config_GeneralizedMatri
 
 The script has the following sections, which call the given functions:
 
-   #. Add dependent paths
+   - Add dependent paths
          The directories containing required functions, configuration files
          and subscripts are all added to the working directory.
-   #. Run configuration script
+   - Run configuration script
          Run the configuration script that contains all user-specified variables.
       - ``Config_GeneralizedMatrix``
-   #. Import physical constants
+   - Import physical constants
          Physical constants needed for calculations are loaded from a library function.
       - ``func_EM_PhysicalConstants``
-   #. CST export directories
+   - CST export directories
          Directories for all needed CST files are constructed.
-   #. Convert to SI units
+   - Convert to SI units
          Frequencies and lengths given in CST units are converted to SI units.
-   #. Initialize all matrices
+   - Initialize all matrices
          All matrices to be populated later are initialized.
-   #. Load direct wake impedance and corresponding frequency samples
+   - Load direct wake impedance and corresponding frequency samples
        Load results from time-domain (TD) CST simulation.
       - ``func_Import_CSTdata``
-   #. Populate S-parameter matrix
+   - Populate S-parameter matrix
          Loops through all modes from both ports, and populates a complete
          S-parameter matrix from the frequency-domain (FD) CST simulation results.
       - ``func_Import_CSTdata``
-   #. Calculate beam voltages for all modes
+   - Calculate beam voltages for all modes
          Retrieves the Ez field for each mode and calculate the induced voltage.
       - ``func_CalcVoltage_Ez_CSTdata``
       - ``func_Import_CSTdata`` (called in ``func_CalcVoltage_Ez_CSTdata``)
-   #. Fourier transforms
+   - Fourier transforms
          Carries out fourier transform on all TD data.
       - ``func_Import_CSTdata``
       - ``func_FFT_CSTdata``
-   #. Interpolations
+   - Interpolations
          Interpolates all results to user-specified frequency values, ensuring each
          'leaf' of a generalized matrix represents the same frequency.
       - ``func_Interpolate_CSTdata``
-   #. Calculate k and h
+   - Calculate k and h
          Beam coupling parameters are calculated using the respective functions.
       - ``func_CalcBeamCoupling_k``
       - ``func_CalcBeamCoupling_h``
-   #. Construct generalized S-matrix for all frequencies
+   - Construct generalized S-matrix for all frequencies
          The final generalized matrix is constructed from all the interpolated data.
       - ``func_ConstructGeneralizedMatrix``
-   #. Save the matrix and corresponding frequencies
+   - Save the matrix and corresponding frequencies
        Save the generalized matrix for the entire structure.
       - ``func_SaveGM``
-   #. Plot
+   - Plot
        Runs a script which plots the whole matrix when only 1 or 2 modes are included,
        and only plots the direct impedance for larger matrices.
       - ``Plot_GeneralizedMatrix``
@@ -83,22 +83,22 @@ for the entire beam path represented by the input matrices.
 
 The script has the following sections:
 
-   #. Add dependent paths
+   - Add dependent paths
        The directories containing required functions, configuration files
        and subscripts are all added to the working directory.
-   #. Run configuration script
+   - Run configuration script
        Run the configuration script that contains all user-specified variables.
       - ``Config_Scsc_Pillbox`` (the use may wish to change to a different config
         file, but must ensure the file defines all the necessary variables).
-   #. Carry out CSC-beam
+   - Carry out CSC-beam
        The new GM is calculated from the given sequence of GMs.
       - ``func_CalcScsc``
       - ``func_EM_PhysicalConstants`` (called in ``func_CalcScsc``)
       - ``func_CalcPhase`` (called in ``func_CalcScsc``)
-   #. Save new GM
+   - Save new GM
        Save the generalized matrix for the entire structure.
       - ``func_SaveGM``
-   #. Plot
+   - Plot
        Runs a script which plots the whole matrix when only 1 or 2 modes are included,
        and only plots the direct impedance for larger matrices.
       - ``Plot_GeneralizedMatrix``
@@ -111,21 +111,21 @@ external port modes, and the save directory).
 
 The script has the following sections:
 
-   #. Add dependent paths
+   - Add dependent paths
        Adds the configuration file folder to the working path.
-   #. Load config file
+   - Load config file
        Loads the configuration file.
-   #. Initialization
+   - Initialization
        Constructs empty matrices for P and F matrices with sizes calculated
        from the number of segments and modes.
-   #. P: Create arrays containing indices for non-zero rows and columns
+   - P: Create arrays containing indices for non-zero rows and columns
        Indices for the non-zero elements of each row and each column are
        stored.
-   #. F: Create arrays containing indices for non-zero rows and columns
+   - F: Create arrays containing indices for non-zero rows and columns
        Indices for the non-zero elements of each row and each column are
        stored.
-   #. Loop over all co-ordinates to populate the matrices
+   - Loop over all co-ordinates to populate the matrices
        All pairs of [row,column] indices given in the above arrays are set
        to 1, creating the complete P and F matrices.
-   #. Save P and F matrices
+   - Save P and F matrices
        The matrices are saved in the directory set in the config file.
