@@ -7,8 +7,10 @@
 % out CSC-beam and stores them in a single .mat file in the user-given directory. The saved matrices 
 % are ready to be loaded and used by Scsc_Script.m.
 %
-% :param N_modes: Number of modes included in all generalized matrices.
-% :type  N_modes: integer
+% :param N_ext: Number of external modes included in all generalized matrices.
+% :type  N_ext: integer
+% :param N_int: Number of internal modes included in all generalized matrices.
+% :type  N_int: integer
 % :param N_segs: Number of segments to be concatenated.
 % :type  N_segs: integer
 % :param save_dir: Directory in which the permutation matrices will be saved.
