@@ -14,21 +14,21 @@ clear
 clc
 
 
-%% Add directories containing dependent functions and configuration files.
+%% Add dependent paths
 addpath("Functions")
 addpath("Subscripts")
 addpath("Configs")
 
 
-%% RUN CONFIGURATION SCRIPT
+%% Run configuration script
 Config_Scsc_Pillbox
 
 
-%% Carry out CSC-beam and return generalized matrix along with freqs and length of structure.
+%% Carry out CSC-beam
 [S, f, Length] = func_CalcScsc(seg_dir, segment_names, orthogonal_matrices_dir) ;
 
 
-%% Save resultant generalized matrix.
+%% Save new GM
 func_SaveGM(save_dir, save_filename, S, f, Length)
 
 

@@ -11,22 +11,14 @@
 % References:
 % 1. "Generalization of coupled S-parameter calculation to compute beam
 % impedances in particle accelerators" - T. Flisgen, E. Gjonaj, H.W. Glock - 2020
-%
-% :param N_modes: Number of modes included in all generalized matrices.
-% :type N_modes: integer
-% :param N_segs: Number of segments to be concatenated.
-% :type N_segs: integer
-% :param save_dir: Directory in which the permutation matrices will be saved.
-% :type save_dir: string
 
 
-
-%% Add Config Files directory
+%% Add dependent paths
 addpath("Configs")
 
-% Functions not currently used - functionalising to be done in a later update.
-%addpath("Functions")
-%addpath("Subscripts")
+% Functionalising to be done in a later update.
+% addpath("Functions")
+% addpath("Subscripts")
 
 
 
@@ -56,7 +48,7 @@ save_path = save_dir+"/"+N_segs+"segments_"+N_ext+"modes" ;
 
 
 
-%% P: Create arrays containing indices for non-zero rows and columns.
+%% P: Create arrays containing indices for non-zero rows and columns
 % P beam: rows containing beam are the final N_segs rows.
 Prows_beam = Psize-N_segs+1:Psize ;
 
@@ -87,7 +79,7 @@ Pcols = [Pcols_beam, Pcols_int, Pcols_ext] ;
 
 
 
-%% F: Create arrays containing indices for non-zero rows and columns.
+%% F: Create arrays containing indices for non-zero rows and columns
 %%% Initialize F rows and columns arrays.
 Frows = 1:Fsize;
 Fcols = zeros(1,Fsize) ;
@@ -99,7 +91,7 @@ end
 
 
 
-%% Loop over all coords to fix the permutations.
+%% Loop over all co-ordinates to populate the matrices
 %%% P
 for ii=1:Psize
     P(Prows(ii), Pcols(ii)) = 1 ;

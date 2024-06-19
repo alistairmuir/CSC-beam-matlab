@@ -16,14 +16,15 @@
 clear
 clc
 
-% Add directories containing dependent functions and configuration files.
+
+%% Add dependent paths
 addpath("Functions")
 addpath("Subscripts")
 addpath("Configs")
 
 
 
-%% RUN CONFIGURATION SCRIPT
+%% Run configuration script
 Config_GeneralizedMatrix
 
 
@@ -31,7 +32,9 @@ Config_GeneralizedMatrix
 [mu0, eps0, c0] = func_EM_PhysicalConstants() ;
 
 
-%% CST Export Directories (assumes same folder structure as CST navigation bar)
+%% CST export directories
+% Note: assumes same folder structure as CST navigation bar
+
 % Wakefield and current
 wake_Z_dir  = wake_dir+"/Particle Beams/ParticleBeam1/Wake impedance/Z.txt" ;
 current_dir = wake_dir+"/Particle Beams/ParticleBeam1/Current.txt" ;
@@ -62,7 +65,7 @@ Length = Length*m_CST2SI ;
 
 
 
-%% Initialize all matrices.
+%% Initialize all matrices
 % Retrieve S-parameter frequencies using first active mode S-parameter file.
 [freqs_S, ~] = func_Import_CSTdata(...
     S_dir+"S1("+Pmodes(1)+"),1("+Pmodes(1)+").txt", f_CST2SI) ;
@@ -85,12 +88,12 @@ S = complex(zeros(Nf_GM,2*N_modes+1,2*N_modes+1)) ;         % Final generalized 
 
 
 
-%% Load wake impedance and corresponding frequency samples.
+%% Load direct wake impedance and corresponding frequency samples
 [freqs_wake, wake_Z] = func_Import_CSTdata(wake_Z_dir, f_CST2SI) ;
 
 
 
-%% Populate S-matrix
+%% Populate S-parameter matrix
 %%% Loop through all CST S-parameters, populating matrix.
 for modi=1:N_modes
     for porti=1:2
@@ -140,7 +143,7 @@ end
 
 
 
-%% Fourier Transforms
+%% Fourier transforms
 switch import_FFT
     
     %%%% Use imported CST FFTs %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -249,7 +252,7 @@ h_final = func_CalcBeamCoupling_h(V_final, ones(size(V_final))) ;
 
 
 
-%% Construct generalized S-matrix for all frequencies.
+%% Construct generalized S-matrix for all frequencies
 % Loop of all S-parameter frequencies.
 for fi=1:Nf_GM
     
@@ -261,12 +264,12 @@ end
 
 
 
-%% Save the matrices and corresponding frequencies.
+%% Save the matrix and corresponding frequencies
 func_SaveGM(save_dir, save_filename, S, freqs_GM, Length)
 
 
 
-%% Plotting
+%% Plot
 if plot_on
     % Return freqs to CST units for plotting.
     f = freqs_GM./f_CST2SI ;
