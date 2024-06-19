@@ -54,14 +54,14 @@ m_CST2SI = 1e-3 ;    % Metres  (1e-3:  mm --> m).
 %% Directories for loading and saving.
 %%% Directories containing CST results.
 model_dir  = "CST Files/Pillbox" ;
-wake_dir   = model_dir+"/Wake_hifi/Export" ;  % Wake CST directory
-hifreq_dir = model_dir+"/Freq_hifi/Export" ;  % High Freq CST directory
+wake_dir   = model_dir+"/Wake_12GHz_15cpw_3modes_10sigma/Export" ;  % Wake CST directory
+hifreq_dir = model_dir+"/Freq_12GHz_tetra_3modes/Export" ;  % High Freq CST directory
 
 
 %%% Directory and filename to save generalized matrices.
 save_matrix   = true ;
 save_dir      = "Matrices/Pillbox/Generalized_Matrices" ;
-save_filename = "pillbox_TM01_new" ;
+save_filename = "pillbox_TM01_june_conj" ;
 
 
 %% Port modes

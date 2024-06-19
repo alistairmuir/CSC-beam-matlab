@@ -6,10 +6,10 @@ clc
 %% Load S_csc and direct wakes
 pmode = [1:8] ;
 
-S1 = load("Results/Pillbox/Z_2pillbox_TM01_hifi_new.mat");
+S1 = load("Results/Pillbox/Z_2pillbox_TM01_new.mat");
                        Slabel_a(1) = "Old" ;
     
-S2 = load("Results/Pillbox/Z_2pillbox_TM01_new.mat");
+S2 = load("Results/Pillbox/Z_2pillbox_TM01_june.mat");
                        Slabel_a(2) = "New" ;
 
 %%% Import direct simulation no.1

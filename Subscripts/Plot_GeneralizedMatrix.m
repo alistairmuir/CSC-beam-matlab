@@ -108,7 +108,7 @@ end
 
 %% The plotting
 %%% Only plot whole generalized S-matrix if it is not too large.
-if N_modes < 4
+if N_modes < 3
     
     %%% y-axis units
     yunits = [repmat("dB",1,2*N_modes), "dB\surd\Omega"] ;
@@ -212,13 +212,11 @@ else
     %%% Just Beam impedance (z_b)
     % Magnitude
     figure(3); clf
-    plot(freqs_Smat(:),SGen_db(:,end,end), 'X', 'MarkerSize', 8, 'MarkerEdgeColor', '#A0A')
+    plot(f(:),S_db(:,end,end), 'X', 'MarkerSize', 8, 'MarkerEdgeColor', '#A0A')
     grid on
     grid minor
-    ax = gca ;
-    ax.FontSize = 20 ;
-    xlabel("f / "+f_label, 'FontSize', 20)
-    ylabel("|z_b| / "+yunits(end), 'FontSize', 20)
+    xlabel("f / "+f_label, 'FontSize', plt_fontsize)
+    ylabel("|z_b| / dB", 'FontSize', plt_fontsize)
 
     if exist('plt_xticks', 'var')
         xticks(plt_xticks)
@@ -228,13 +226,11 @@ else
 
     % Phase
     figure(4); clf
-    plot(freqs_Smat(:),phase_SGen(:,end,end), 'X', 'MarkerSize', 8, 'MarkerEdgeColor', '#A0A')
+    plot(f(:),S_phase(:,end,end), 'X', 'MarkerSize', 8, 'MarkerEdgeColor', '#A0A')
     grid on
     grid minor
-    ax = gca ;
-    ax.FontSize = 20 ;
-    xlabel("f / "+f_label, 'FontSize', 20)
-    ylabel("arg(|z_b|) / \circ", 'FontSize', 20)
+    xlabel("f / "+f_label, 'FontSize', plt_fontsize)
+    ylabel("arg(|z_b|) / \circ", 'FontSize', plt_fontsize)
 
     if exist('plt_xticks', 'var')
         xticks(plt_xticks)
