@@ -20,10 +20,10 @@
 % :type  hifreq_dir: string
 % :param save_matrix: true = final matrix is saved in specified directory ; false = not saved.
 % :type  save_matrix: boolean
-% :param savedir: directory where final generalized matrix is saved.
-% :type  savedir: string
-% :param genmat_filename: name of the file containing the final generalized matrix.
-% :type  genmat_filename: string
+% :param save_dir: directory where final generalized matrix is saved.
+% :type  save_dir: string
+% :param save_filename: name of the file containing the final generalized matrix.
+% :type  save_filename: string
 % :param Pmodes: array containing all the modes to include in the final matrix 
 %                as numbered in CST (1D array).
 % :type  Pmodes: integer
@@ -39,6 +39,12 @@
 %                  sensible to keep these the same as the FM frequencies, making interpolation 
 %                  needed only for arrays with many more samples (1D array).
 % :type  freqs_GM: double
+% :param plot_on: Switch to turn on/off plotting
+% :type  plot_on: boolean
+% :param plt_port: Select of which port to plot the cut-off frequencies of all modes (1 or 2).
+% :type  plt_port: integer
+% :param y_axis_limits: Minimum and maximum Y-axis values in dB.
+% :ttype y_axis_limits: double
 
 
 
