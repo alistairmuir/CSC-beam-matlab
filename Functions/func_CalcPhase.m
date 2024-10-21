@@ -16,4 +16,5 @@ function phase = func_CalcPhase(freq, distance, phi0, speed)
 % :returns: phase (N-by-M)
 
 phase = phi0 + freq.*distance./speed ;
+
 end
