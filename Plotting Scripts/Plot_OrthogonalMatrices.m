@@ -14,18 +14,19 @@
 % :type  N_segs: integer
 % :param markercolour: [R,G,B] colour to mark the non-zero elements in the plots.
 % :type  markercolour: double
-
+clc
+clear
 
 
 %% USER INPUT
 filepath = ...
-    "/home/alistair/git/CSC-beam-matlab/Matrices/TESLA/Orthogonal_Matrices/"+...
-    "orthogonal_matrices" ;
+    "/home/alistair/git/CSC-beam-matlab/Matrices/Pillbox/Orthogonal_Matrices/"+...
+    "NoBeam_2segments_3modes" ;
 
 %%% Info regarding modes and segments (for plotting axes)
-N_modes_int = 18 ;    % number of internal modes expected
-N_modes_ext = 18 ;    % number of external modes expected
-N_segs      = 11 ;    % number of segments expected
+N_modes_int = 3 ;    % number of internal modes expected
+N_modes_ext = 3 ;    % number of external modes expected
+N_segs      = 2 ;    % number of segments expected
 
 markercolour = [0.7, 0, 0.7] ;
 
@@ -65,11 +66,12 @@ plot(1:Np,pcols,'.', 'MarkerSize', 7, 'MarkerEdgeColor', markercolour)
 set(plt1, 'Ydir', 'reverse')
 xticks(0:N_modes_int+N_modes_ext+1:Np)
 yticks(0:N_modes_int+N_modes_ext+1:Np)
-xticklabels(0:N_segs)
-yticklabels(0:N_segs)
+xticklabels(1:N_segs)
+yticklabels(1:N_segs)
 xlim([0,Np])
 ylim([0,Np])
 grid on
+grid minor
 title("Permutation Matrix, P")
 
 figure(2); clf;
@@ -78,10 +80,11 @@ plot(1:Nf,fcols,'.', 'MarkerSize', 7, 'MarkerEdgeColor', markercolour)
 set(plt2, 'Ydir', 'reverse')
 xticks(0:N_modes_int+N_modes_ext:Nf)
 yticks(0:N_modes_int+N_modes_ext:Nf)
-xticklabels(0:N_segs)
-yticklabels(0:N_segs)
+xticklabels(1:N_segs)
+yticklabels(1:N_segs)
 xlim([0,Nf])
 ylim([0,Nf])
 grid on
+grid minor
 title("Feedback Matrix, F")
 

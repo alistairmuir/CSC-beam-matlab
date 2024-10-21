@@ -28,14 +28,14 @@ Config_OrthogonalMatrix
 
 
 %% Initialization
-% Number of elements in external segments (also the column containing beam impedance for seg 1).
+% Number of elements in external segments.
 N_extsegment = N_ext+N_int+1 ;
 
 % Number of elements per internal segment.
 N_intsegment = N_int*2+1 ;
 
 % Size of P matrix.
-Psize = N_segs*N_intsegment ;
+Psize = 2*((N_segs-1)*N_int + N_ext + 1) ;
 
 % Size of F matrix.
 Fsize = (N_segs-1)*2*N_int ;
@@ -49,28 +49,33 @@ save_path = save_dir+"/"+N_segs+"segments_"+N_ext+"modes" ;
 
 
 %% P: Create arrays containing indices for non-zero rows and columns
-% P beam: rows containing beam are the final N_segs rows.
+%%% P beam: rows containing beam are the final N_segs rows.
 Prows_beam = Psize-N_segs+1:Psize ;
 
-% P beam: columns containing beam are final column for each segment.
+%%% P beam: columns containing beam are final column for each segment.
 Pcols_beam = N_extsegment:N_intsegment:Psize ;
 
-% P int: rows containing internal modes.
+%%% P int: rows containing internal modes.
 Prows_int  = 1:(N_segs-1)*2*N_int ;
 
-% P int: columns containing internal modes.
+%%% P int: columns containing internal modes.
+% First segment
 Pcols_int  = (1:N_int) + N_ext ;
 
-for segi = 1:N_segs-2
-    Pcols_int  = [Pcols_int, segi*N_intsegment+(1:2*N_int)] ;
+% Internal segments:
+for segi = 2:N_segs-1
+    Pcols_int  = [Pcols_int, N_extsegment+(segi-2)*N_intsegment+(1:2*N_int)] ;
+    % It is (segi-2), because both the first segment and the current segment is subtracted in order
+    % for index to be 1 for the current segment's first column.
 end
 
+% Final segment
 Pcols_int = [Pcols_int, Pcols_int(end)+2:Pcols_int(end)+N_int+1] ;
 
-% P ext: rows containing external modes.
+%%% P ext: rows containing external modes.
 Prows_ext = (N_segs-1)*(2*N_int)+(1:2*N_ext) ;
 
-% P ext: columns containing external modes.
+%%% P ext: columns containing external modes.
 Pcols_ext = [1:N_ext, Psize-N_ext:Psize-1] ;
 
 %%% Put em all together ([beam, internal, external] rows and columns).

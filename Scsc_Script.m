@@ -21,7 +21,7 @@ addpath("Configs")
 
 
 %% Run configuration script
-Config_Scsc_Pillbox
+Config_Scsc_Test
 
 
 %% Carry out CSC-beam
