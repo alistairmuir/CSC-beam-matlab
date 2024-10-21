@@ -45,7 +45,7 @@ orthogonal_matrices_path = orthogonal_matrices_dir + "/" + ...
 load(orthogonal_matrices_path, 'P', 'F')
 
 % Total number of all internal modes being concatenated throughout entire structure.
-N_concatmodes = length(F) ;
+N_intmodes = length(F) ;
 
 % Intialize final generalized matrix for complete path.
 S = complex(zeros(N_f,N_size,N_size)) ;
@@ -64,7 +64,7 @@ for fi = 1:N_f
         
         % Load S-matrix.
         seg_matrix = load(seg_dir+"/"+segment_names(segi)) ;
-
+        
         % S block diagonal matrix.
         S_tot = blkdiag(S_tot, squeeze(seg_matrix.S(fi,:,:))) ;
         
@@ -76,27 +76,15 @@ for fi = 1:N_f
         
     end
     
-    
-    % Array of phases at beginning of all segments.
-    d = [1, exp(-1j*phi_segs(1:end-1))] ;
-    
     % Create matrix for applying phase adjustment (ignoring downstream ext. port)
-    M = blkdiag(eye(2*N_modes), d.') ;
+    M = func_ConstructM(phi_segs, N_modes) ;
     
     % Reorder block matrix according to internal and external quantities
     % and according to current and voltages.
-    G = P*S_tot*P' ;
-    
-    % Split block matrix G into quadrants ready for concatenation (Ref. [1])
-    G11 = G(1:N_concatmodes, 1:N_concatmodes) ;
-    G12 = G(1:N_concatmodes, 1+N_concatmodes:end) ;
-    
-    G21 = G(1+N_concatmodes:end, 1:N_concatmodes) ;
-    G22 = G(1+N_concatmodes:end, 1+N_concatmodes:end) ;
-    
+    G = func_CalcG(S_tot, P) ;
+
     % Determine generalized matrices of the concatenated structure.
-    % M' == the Hermitian of M.
-    S(fi,:,:) = M'*(G22+G21*((F-G11)\G12))*M ;
+    S(fi,:,:) = func_CalcSfinal(M, G, F, N_intmodes) ;
     
 end
 
@@ -104,3 +92,4 @@ end
 Length = sum(L_segs) ;
 
 end
+
