@@ -17,6 +17,6 @@ function M = func_ConstructM(phi_segs, N_modes)
 d = [1, exp(-1j*phi_segs(1:end-1))] ;
 
 % Create matrix for applying phase adjustment (ignoring downstream ext. port)
-M = blkdiag(eye(2*N_modes), d') ;
+M = blkdiag(eye(2*N_modes), d.') ;
 
 end
