@@ -19,10 +19,10 @@
 
 %% Number of things
 % Number of external modes.
-N_ext = 2 ;
+N_ext = 3 ;
 
 % Number of internal modes.
-N_int = 2 ;
+N_int = 3 ;
 
 % Number of segments to be concatenated.
 N_segs  = 2 ;
@@ -31,3 +31,4 @@ N_segs  = 2 ;
 %% Directory for results
 % Note: Filename is automatic, and includes number of modes and segments.
 save_dir = "Matrices/Pillbox/Orthogonal_Matrices" ;
+

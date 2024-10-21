@@ -67,7 +67,7 @@ hifreq_dir = model_dir+"/Freq_12GHz_tetra_3modes/Export" ;  % High Freq CST dire
 %%% Directory and filename to save generalized matrices.
 save_matrix   = true ;
 save_dir      = "Matrices/Pillbox/Generalized_Matrices" ;
-save_filename = "pillbox_TM01_june_conj" ;
+save_filename = "pillbox_3modes" ;
 
 
 %% Port modes
