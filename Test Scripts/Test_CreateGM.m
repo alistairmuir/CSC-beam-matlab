@@ -4,21 +4,27 @@ clear
 
 
 %% User input
-f  = 1:1:10 ;
-Nf = length(f) ;
-
+f = 1 ;
 N_modes = 2 ;
-S_size = 2*N_modes+1 ;
 
-save_name = "Matrices/Test/Generalized_Matrices/test"+N_modes ;
+plot_on = false ;
+
+save_name = "test_"+N_modes+"modes" ;
+save_dir  = "Matrices/Test/Generalized_Matrices" ;
 
 
 %% Create test matrix
-S = zeros(Nf,S_size,S_size)+1e-3 ;
+%%% Assess sizes.
+Nf = length(f) ;
+S_size = 2*N_modes+1 ;
 
-% Diagonal test
+% Initialize
+S = zeros(Nf,S_size,S_size)+1 ;
+
+
+%% User input: Create matrix
 for ii=1:S_size
-    S(:,ii,ii) = [1:Nf]'./Nf ;
+    S(:,ii,ii) = 1+ii ;
 end
 
 % Full asymmetrical test.
@@ -36,15 +42,22 @@ Length = 0.1 ;
 
 %% Plot and save S matrix
 %%% Plot
-figure(1); clf;
-hold on
-for ii = 1:S_size^2
-    scatter(f,S(:,ii), ii*5)
+if plot_on==true
+    figure(1); clf;
+    hold on
+    for ii = 1:S_size^2
+        scatter(f,S(:,ii), ii*5)
+    end
+    set(gca,'YScale','log')
+    grid on
+    grid minor
 end
-set(gca,'YScale','log')
-grid on
-grid minor
 
-%%% Save
-save(save_name, 'S', 'f', 'Length')
+disp("S (full matrix):")
+disp(S)
+
+
+%% Save
+save_fullname = save_dir+"/"+save_name ;
+save(save_fullname, 'S', 'f', 'Length')
 
