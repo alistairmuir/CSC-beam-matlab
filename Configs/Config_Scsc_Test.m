@@ -43,7 +43,6 @@
 %% Problem folder
 name_problem = "Test" ;
 
-
 %% Number of modes
 N_modes = 2 ;
 
@@ -52,15 +51,16 @@ N_modes = 2 ;
 % Directory containing the orthogonal matrices
 orthogonal_matrices_dir = "Matrices/"+name_problem+"/Orthogonal_Matrices/" ;
 
-%%% Generalized matrices
-% Directory containing generalized matrices
+
+%% Generalized matrices
+%%% Directory containing generalized matrices
 seg_dir = "./Matrices/"+name_problem+"/Generalized_Matrices/" ;
 
 
 %%% File names of GMs for all segments in beam path (upstream to downstream).
 %                upstream, ... , ... , downstream
-segment_names = ["test"+N_modes, ...
-                 "test"+N_modes] ;
+segment_names = ["test_"+N_modes+"modes", ...
+                 "test_"+N_modes+"modes"] ;
 
 
 %% Save filename
@@ -69,5 +69,7 @@ save_filename = segment_names(1) ;
 
 plot_on = false ;
 f_pltlabel = "GHz" ;   % Frequency units for plotting.
+f_CST2SI = 1e9 ;
 
 %%%%%%%%%%%%%%%%%%%%   END   %%%%%%%%%%%%%%%%%%%%
+
