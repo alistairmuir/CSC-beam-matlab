@@ -6,22 +6,22 @@ clc
 %% Load S_csc and direct wakes
 pmode = [1:8] ;
 
-S1 = load("Results/Pillbox/Z_2pillbox_TM01_new.mat");
-                       Slabel_a(1) = "Old" ;
-    
+Slabel_a(1) = "CSC-beam (8 modes)" ;
+Slabel_a(2) = "Direct" ;
+
+
+S1 = load("Results/Pillbox/Z_2pillbox_8modes.mat");
 S2 = load("Results/Pillbox/Z_2pillbox_TM01_june.mat");
-                       Slabel_a(2) = "New" ;
+                       
 
 %%% Import direct simulation no.1
 S_direct1 = readmatrix("CST Files/Pillbox/Z_2pillbox_10GHz_15cpw_10modes_100k_10sigma.txt") ;
 S_d1.f = S_direct1(:,1) ;
 S_d1.S = S_direct1(:,2) + 1i*S_direct1(:,3) ;
-Slabel_a(3) = "Direct" ;
 
 %%% Import direct impedance for 1 pillbox
 S_d3 = load("Matrices/Pillbox/Generalized_Matrices/pillbox_3TM_hifi_new") ;
-Slabel_b(1) = Slabel_a(2) ;
-Slabel_b(2) = Slabel_a(3) ;
+
 
 %%% Turn on one-cavity plot
 plot_1cav = true ;
@@ -83,12 +83,12 @@ end
 
 %% Plots
 %%% Beam impedance
-figure(10); clf
+figure(1); clf
 
 hold on
 
 plot(S1.f./1e9,  S1_plot, 'bx', 'LineWidth', 1.5)
-plot(S2.f./1e9,  S2_plot, 'rx', 'LineWidth', 1)
+%plot(S2.f./1e9,  S2_plot, 'rx', 'LineWidth', 1)
 plot(S_d1.f,    Sd1_plot,  'k')
 %plot(S_d3.f./1e9,    Sd3_plot, 'k--', 'LineWidth', 1)
 %plot(S1.f./1e9, S_diff_plot, 'kx', 'LineWidth', 0.5)
@@ -123,9 +123,9 @@ figure(20); clf
 
 hold on
 plot(S1.f./1e9, squeeze(rad2deg(angle(S1.S(:,end,end)))), 'bx',  'LineWidth', 1.5)
-plot(S2.f./1e9, squeeze(rad2deg(angle(S2.S(:,end,end)))), 'rx',  'LineWidth', 1)
+%plot(S2.f./1e9, squeeze(rad2deg(angle(S2.S(:,end,end)))), 'rx',  'LineWidth', 1)
 plot(S_d1.f, squeeze(rad2deg(angle(S_d1.S))), 'k')
-plot(S_d3.f/1e9, squeeze(rad2deg(angle(S_d3.S(:,end,end)))), 'k--', 'LineWidth', 1)
+%plot(S_d3.f/1e9, squeeze(rad2deg(angle(S_d3.S(:,end,end)))), 'k--', 'LineWidth', 1)
 for ii=1:length(pmode)
     xline(f_co(ii),":",'Color',[0,(ii+1)/(length(pmode)+1),0], 'LineWidth', 1.5)
 end

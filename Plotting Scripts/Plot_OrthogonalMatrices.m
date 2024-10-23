@@ -21,7 +21,7 @@ clear
 %% USER INPUT
 filepath = ...
     "/home/alistair/git/CSC-beam-matlab/Matrices/Pillbox/Orthogonal_Matrices/"+...
-    "NoBeam_2segments_3modes" ;
+    "2segments_3modes" ;
 
 %%% Info regarding modes and segments (for plotting axes)
 N_modes_int = 3 ;    % number of internal modes expected
@@ -62,28 +62,28 @@ end
 %%% indicating the non-zero element positions.
 figure(1); clf;
 plt1 = axes ;
-plot(1:Np,pcols,'.', 'MarkerSize', 7, 'MarkerEdgeColor', markercolour)
+plot(1:Np,pcols,'.', 'MarkerSize', 15, 'MarkerEdgeColor', markercolour)
 set(plt1, 'Ydir', 'reverse')
-xticks(0:N_modes_int+N_modes_ext+1:Np)
-yticks(0:N_modes_int+N_modes_ext+1:Np)
-xticklabels(1:N_segs)
-yticklabels(1:N_segs)
-xlim([0,Np])
-ylim([0,Np])
+%xticks(0:N_modes_int+N_modes_ext+1:Np)
+%xticklabels(1:N_segs)
+yticks(1:Np)
+yticklabels(1:Np)
+xlim([1,Np])
+ylim([1,Np])
 grid on
 grid minor
 title("Permutation Matrix, P")
 
 figure(2); clf;
 plt2 = axes ;
-plot(1:Nf,fcols,'.', 'MarkerSize', 7, 'MarkerEdgeColor', markercolour)
+plot(1:Nf,fcols,'.', 'MarkerSize', 15, 'MarkerEdgeColor', markercolour)
 set(plt2, 'Ydir', 'reverse')
-xticks(0:N_modes_int+N_modes_ext:Nf)
-yticks(0:N_modes_int+N_modes_ext:Nf)
-xticklabels(1:N_segs)
-yticklabels(1:N_segs)
-xlim([0,Nf])
-ylim([0,Nf])
+%xticks(0:N_modes_int+N_modes_ext:Nf)
+%xticklabels(1:N_segs)
+yticks(1:Nf)
+yticklabels(1:Nf)
+xlim([1,Nf])
+ylim([1,Nf])
 grid on
 grid minor
 title("Feedback Matrix, F")
