@@ -33,7 +33,7 @@ N_segs = length(segment_names) ;
 L_segs = zeros(1,N_segs) ;
 L_segs(1) = seg_matrix.Length ;
 
-% Calculate number of modes from first segment matrix.
+% Calculate number of modes from GM of first segment.
 N_size  = length(seg_matrix.S(1,1,:)) ;
 N_modes = (N_size-1)/2 ;
 
@@ -82,7 +82,7 @@ for fi = 1:N_f
     % Reorder block matrix according to internal and external quantities
     % and according to current and voltages.
     G = func_CalcG(S_tot, P) ;
-
+    
     % Determine generalized matrices of the concatenated structure.
     S(fi,:,:) = func_CalcSfinal(M, G, F, N_intmodes) ;
     

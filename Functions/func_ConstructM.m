@@ -1,4 +1,4 @@
-function M = func_ConstructM(phi_segs, N_modes)
+function M = func_ConstructM(phi_segs, N_ext)
 % A function to construct the phase-adjustment M matrix in CSC-beam method given in ref [1].
 %
 % References:
@@ -7,16 +7,18 @@ function M = func_ConstructM(phi_segs, N_modes)
 %
 % :param phi_segs: Array of phase angles for port 2 of all segments.
 % :type  phi_segs: double array
-% :param N_modes: Number of total port modes to be concatenated.
-% :type  N_modes: integer
+% :param N_ext: Number of external port modes to be concatenated.
+% :type  N_ext: integer
 % 
-% :returns: M (2*N_modes-by-2*N_modes+1)
+% :returns: M (2*N_ext-by-2*N_ext+1)
 
 
 % Array containing the phases at beginning of all segments.
-d = [1, exp(-1j*phi_segs(1:end-1))] ;
+d = [1, exp(1j.*phi_segs(1:end-1))] ;
 
 % Create matrix for applying phase adjustment (ignoring downstream ext. port)
-M = blkdiag(eye(2*N_modes), d.') ;
+% (Applying factor of two for reflected and transmitted signals - treated as separate modes in the 
+% literature.)
+M = blkdiag(eye(2*N_ext), d) ;
 
 end
