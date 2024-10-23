@@ -19,10 +19,10 @@
 
 %% Number of things
 % Number of external modes.
-N_ext = 3 ;
+N_ext = 8 ;
 
 % Number of internal modes.
-N_int = 3 ;
+N_int = 8 ;
 
 % Number of segments to be concatenated.
 N_segs  = 2 ;
