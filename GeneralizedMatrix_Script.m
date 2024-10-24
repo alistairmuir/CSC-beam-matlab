@@ -19,7 +19,7 @@ clc
 
 %% Add dependent paths
 addpath("Functions")
-addpath("Subscripts")
+addpath("Plotting Scripts")
 addpath("Configs")
 
 
