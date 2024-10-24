@@ -16,8 +16,8 @@ clc
 
 %% Add dependent paths
 addpath("Functions")
-addpath("Subscripts")
-addpath("Configs")
+addpath("Plotting Scripts")
+addpath(genpath("Configs"))
 
 
 %% Run configuration script
