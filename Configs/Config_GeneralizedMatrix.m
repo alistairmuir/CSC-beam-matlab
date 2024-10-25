@@ -12,7 +12,8 @@
 % :type  s_CST2SI: double
 % :param m_CST2SI: conversion factor of CST length units to SI (metres).
 % :type  m_CST2SI: double
-% :param model_dir: directory containing all CST results for the given section of beam path.
+% :param model_dir: directory containing all CST results for the given section of beam path. (NOT
+% USED IN MAIN SCRIPT).
 % :type  model_dir: string
 % :param wake_dir: directory containing the CST results from time-domain wake simulation.
 % :type  wake_dir: string
@@ -59,9 +60,9 @@ m_CST2SI = 1e-3 ;    % Metres  (1e-3:  mm --> m).
 
 %% Directories for loading and saving.
 %%% Directories containing CST results.
-model_dir  = "CST Files/Pillbox" ;
-wake_dir   = model_dir+"/Wake_12GHz_15cpw_3modes_10sigma/Export" ;  % Wake CST directory
-hifreq_dir = model_dir+"/Freq_12GHz_tetra_3modes/Export" ;  % High Freq CST directory
+model_dir = "CST Files/Pillbox" ;
+wake_dir  = model_dir+"/Wake_12GHz_15cpw_3modes_10sigma/Export" ;  % Wake CST directory
+freq_dir  = model_dir+"/Freq_12GHz_tetra_3modes/Export" ;  % High Freq CST directory
 
 
 %%% Directory and filename to save generalized matrices.
