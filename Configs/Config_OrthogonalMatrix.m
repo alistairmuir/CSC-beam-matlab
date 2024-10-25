@@ -16,19 +16,24 @@
 % :param save_dir: Directory in which the permutation matrices will be saved.
 % :type  save_dir: string
 
+% Problem name (used only for defining save_dir in this config file.)
+problem_name = "Pillbox" ;
+
 
 %% Number of things
 % Number of external modes.
-N_ext = 8 ;
+N_ext = 10 ;
 
 % Number of internal modes.
-N_int = 8 ;
+N_int = 10 ;
 
 % Number of segments to be concatenated.
 N_segs  = 2 ;
 
 
-%% Directory for results
-% Note: Filename is automatic, and includes number of modes and segments.
-save_dir = "Matrices/Pillbox/Orthogonal_Matrices" ;
+%% Save results
+% Create full filepath for these matrices.
+save_dir = "Matrices/"+problem_name+"/Orthogonal_Matrices" ;
+
+
 
