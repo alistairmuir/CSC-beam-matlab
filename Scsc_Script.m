@@ -4,7 +4,7 @@
 % Adapted from code in SUPPLEMENTARY MATERIAL of Ref. [1].
 % 
 % Created by Alistair Muir, September 2023
-% Last updated by Alistair Muir, June 2024
+% Last updated by Alistair Muir, October 2024
 % 
 % References:
 % 1. "Generalization of coupled S-parameter calculation to compute beam
