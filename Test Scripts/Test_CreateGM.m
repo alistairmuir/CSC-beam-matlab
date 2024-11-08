@@ -4,12 +4,12 @@ clear
 
 
 %% User input
-f = 1 ;
-N_modes = 2 ;
+f = 1 ;  % Hz
+N_modes = 1 ;
 
 plot_on = false ;
 
-save_name = "test_"+N_modes+"modes" ;
+save_name = "oddtest_"+N_modes+"modes" ;
 save_dir  = "Matrices/Test/Generalized_Matrices" ;
 
 
@@ -19,12 +19,14 @@ Nf = length(f) ;
 S_size = 2*N_modes+1 ;
 
 % Initialize
-S = zeros(Nf,S_size,S_size)+1 ;
+S = zeros(Nf,S_size,S_size) ;
 
 
 %% User input: Create matrix
-for ii=1:S_size
-    S(:,ii,ii) = 1+ii ;
+for fi=1:Nf
+    for ii=1:S_size
+        S(fi,:,:) = 0 ;
+    end
 end
 
 % Full asymmetrical test.
@@ -34,8 +36,15 @@ end
 %         0.07     0.05     0.03     0.02     0.01   ;
 %         0.007    0.005    0.003    0.002    0.001  ;
 %         0.0007   0.0005   0.0003   0.0002   0.0001 ;
-%         0.00007  0.00005  0.00003  0.00002  0.00001] * (2*sii/Nf) ;
+%         0.00007  0.00005  0.00003  0.00002  0.00001] ;
 % end
+
+for sii=1:Nf
+    S(sii,:,:) = squeeze(S(sii,:,:)) + ...
+       [3   7  11 ;
+        0.4 4  0.5 ;
+        13  17 5 ] * sii ;
+end
 
 Length = 0.1 ;
 
