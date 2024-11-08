@@ -87,15 +87,18 @@ S = complex(zeros(Nf_GM,2*N_modes+1,2*N_modes+1)) ;         % Final generalized 
 
 
 %%% Populate S-parameter matrix
-%%% Loop through all CST S-parameters, populating matrix.
-for modi=1:N_modes
-    for porti=1:2
+% Loop through all CST S-parameters, populating matrix.
+
+%%% Column element - cycle through all modes at each port.
+for porti=1:2
+    for modi=1:N_modes
     
         % ith row of S-parameter matrix
         si = modi + N_modes*(porti-1) ;
         
-        for modj=1:N_modes
-            for portj=1:2
+        %%% Row element - cycle through all modes at each port.
+        for portj=1:2
+            for modj=1:N_modes
                 
                 % jth column of S-parameter matrix
                 sj = modj + N_modes*(portj-1) ;
@@ -205,7 +208,7 @@ end
 
 
 %%% Interpolations
-% Ensures all components of a generalized matrix share the same frequency.
+% (Ensures all components of a generalized matrix share the same frequency.)
 
 %%% Interpolate: Wake
 Z_final = func_Interpolate_CSTdata(wake_Z, freqs_wake, freqs_GM) ;
@@ -224,6 +227,7 @@ for modi=1:2*N_modes
         freqs_portmodes, freqs_GM) ;
     
 end
+
 
 %%% Interpolate: S-parameters and store in a full S-parameter matrix.
 for si=1:2*N_modes
@@ -252,3 +256,4 @@ for fi=1:Nf_GM
 end
 
 end
+
