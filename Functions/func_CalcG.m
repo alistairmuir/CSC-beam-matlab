@@ -14,8 +14,6 @@ function G = func_CalcG(S_tot, P)
 
 % Reorder block matrix according to internal and external quantities
 % and according to current and voltages.
-
-
 G = P*S_tot*P' ;
 
 end
