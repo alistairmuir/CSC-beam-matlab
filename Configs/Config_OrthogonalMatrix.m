@@ -17,18 +17,18 @@
 % :type  save_dir: string
 
 % Problem name (used only for defining save_dir in this config file.)
-problem_name = "Pillbox" ;
+problem_name = "Test" ;
 
 
 %% Number of things
 % Number of external modes.
-N_ext = 10 ;
+N_ext = 1 ;
 
 % Number of internal modes.
-N_int = 10 ;
+N_int = 1 ;
 
 % Number of segments to be concatenated.
-N_segs  = 2 ;
+N_segs = 2 ;
 
 
 %% Save results

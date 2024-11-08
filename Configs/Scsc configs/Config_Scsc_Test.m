@@ -44,7 +44,7 @@
 name_problem = "Test" ;
 
 %% Number of modes
-N_modes = 2 ;
+N_modes = 1 ;
 
 
 %% Orthogonal matrices
@@ -59,8 +59,8 @@ seg_dir = "./Matrices/"+name_problem+"/Generalized_Matrices/" ;
 
 %%% File names of GMs for all segments in beam path (upstream to downstream).
 %                upstream, ... , ... , downstream
-segment_names = ["test_"+N_modes+"modes", ...
-                 "test_"+N_modes+"modes"] ;
+segment_names = ["oddtest_"+N_modes+"modes", ...
+                 "oddtest_"+N_modes+"modes"] ;
 
 
 %% Save filename

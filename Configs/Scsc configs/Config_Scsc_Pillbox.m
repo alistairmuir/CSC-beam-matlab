@@ -44,15 +44,15 @@ seg_dir = "Matrices/"+problem_dir+"/Generalized_Matrices/" ;
 % File names of for generalized matrices for all segments in beam path in sequential order...
 % ... from z=0 to z=maximum (i.e. upstream to downstream).
 N_segs = 2 ;    % Number of segments to be concatenated.
-segment_names = ["pillbox_TM01"] ;
+segment_names = ["pillbox_8modes"] ;
 segment_names = repmat(segment_names(1),1,N_segs) ;
 
 % Directory containing the orthogonal matrices.
-orthogonal_matrices_dir = "./Matrices/"+problem_dir+"/Orthogonal_Matrices/" ;
+orthogonal_matrices_dir = "Matrices/"+problem_dir+"/Orthogonal_Matrices/" ;
 
 
 %% Save directory and filename
-save_dir = "Results/"+problem_dir ;
+save_dir = "Matrices/"+N_segs+problem_dir ;
 save_filename = "Z_" + N_segs + segment_names(1) ;
 
 

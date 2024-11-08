@@ -61,19 +61,19 @@ m_CST2SI = 1e-3 ;    % Metres  (1e-3:  mm --> m).
 %% Directories for loading and saving.
 %%% Directories containing CST results.
 model_dir = "CST Files/Pillbox" ;
-wake_dir  = model_dir+"/Wake_12GHz_15cpw_3modes_10sigma/Export" ;  % Wake CST directory
-freq_dir  = model_dir+"/Freq_12GHz_tetra_3modes/Export" ;  % High Freq CST directory
+wake_dir  = model_dir+"/Wake_10GHz_15cpw_8modes_10sigma/Export" ;  % Wake CST directory
+freq_dir  = model_dir+"/Freq_10GHz_tetra_8modes/Export" ;  % High Freq CST directory
 
 
 %%% Directory and filename to save generalized matrices.
 save_matrix   = true ;
 save_dir      = "Matrices/Pillbox/Generalized_Matrices" ;
-save_filename = "pillbox_TM01" ;
+save_filename = "pillbox_8modes" ;
 
 
 %% Port modes
 %%% Choose modes for signal retrieval.
-Pmodes = [3] ;   % List of port modes to be included.
+Pmodes = [1:8] ;   % List of port modes to be included.
 
 
 %% Segment longitudinal length (CST units)
@@ -89,8 +89,8 @@ import_FFT = false ;   % true = CST FFTs imported, false = Matlab carries out FF
 freqs_FM = (0.125:0.125:10)' ;   % Must be given in CST units.
 
 %%% Frequencies at which to evaluate Generalized S-matrix.
-% Usually best to use freqs of Field Monitors - all other components will 
-% have more dense frequency sets.
+% Recommended to use same freqs as Field Monitors (freqs_FM). All other components will 
+% have much more dense frequency sets.
 freqs_GM = freqs_FM ;
 
 
