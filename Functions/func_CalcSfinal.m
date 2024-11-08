@@ -31,6 +31,6 @@ G22 = G(1+N_intmodes:end, 1+N_intmodes:end) ;
 % Calculate the generalized matrix by mode-matching the internal modes, adding them to the external
 % modes, and applying the phase-adjustment by matrix-multiplying with M (Ref. [1]).
 % Note: M' == the Hermitian of M.
-S = M*(G22+G21*((F-G11)\G12))*M' ;
+S = M'*(G22+G21*((F-G11)\G12))*M ;
 
 end

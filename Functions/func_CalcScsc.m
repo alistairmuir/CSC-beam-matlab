@@ -75,7 +75,7 @@ for fi = 1:N_f
         phi_segs(segi) = func_CalcPhase(deg2rad(freqs(fi)), sum(L_segs(1:segi)), 0, c0) ;
         
     end
-    
+        
     % Create matrix for applying phase adjustment (ignoring downstream ext. port)
     M = func_ConstructM(phi_segs, N_modes) ;
     

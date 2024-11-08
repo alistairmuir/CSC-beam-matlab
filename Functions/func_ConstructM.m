@@ -14,11 +14,10 @@ function M = func_ConstructM(phi_segs, N_ext)
 
 
 % Array containing the phases at beginning of all segments.
-d = [1, exp(1j.*phi_segs(1:end-1))] ;
+d = [1, exp(-1j.*phi_segs(1:end-1))] ;
 
-% Create matrix for applying phase adjustment (ignoring downstream ext. port)
-% (Applying factor of two for reflected and transmitted signals - treated as separate modes in the 
-% literature.)
-M = blkdiag(eye(2*N_ext), d) ;
+% Create matrix for applying phase adjustment.
+% (Applying factor of two for the two ports.)
+M = blkdiag(eye(2*N_ext), d.') ;
 
 end
