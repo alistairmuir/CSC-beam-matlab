@@ -18,7 +18,9 @@ plt_fontsize = 10 ;
 fco_lw = 1 ;
 
 % Tick marks for x-axis
-plt_xticks = 0:10 ;
+if ~exist('plt_xticks', 'var')
+    plt_xticks = (0:10) ;
+end
 
 % Set default y-axis limits if not given.
 if ~exist('y_axis_limits', 'var')
@@ -29,7 +31,12 @@ end
 %% Calculations from S matrix
 % Get number of port modes, if not already known.
 if ~exist('N_modes', 'var')
-    N_modes = (length(S(1,1,:))-1)/2 ;   % assumes number of modes at port1 and port2 are same.
+    switch mod(length(S(1,1,:)),2)
+        case 0
+            N_modes = length(S(1,1,:))/2 ;   % without beam.
+        case 1
+            N_modes = (length(S(1,1,:))-1)/2 ;   % with beam.
+    end
 end
 
 % Calc GM magnitude in dB.
@@ -151,9 +158,7 @@ if N_modes < 3
             xlabel("f / "+f_label, 'FontSize', plt_fontsize)
             ylabel("|"+Sgen_symbol+"| / "+yunits(plti), 'FontSize', plt_fontsize)
             
-            if exist('plt_xticks', 'var')
-                xticks(plt_xticks)
-            end
+            xticks(plt_xticks)
             
             if exist('f_co', 'var')
                 xline(f_co, 'b--', 'LineWidth', fco_lw)
@@ -197,9 +202,7 @@ if N_modes < 3
             xlabel("f / "+f_label, 'FontSize', plt_fontsize)
             ylabel("arg("+Sgen_symbol+") / \circ", 'FontSize', plt_fontsize)
 
-            if exist('plt_xticks', 'var')
-                xticks(plt_xticks)
-            end
+            xticks(plt_xticks)
 
             if exist('f_co', 'var')
                 xline(f_co, 'b--', 'LineWidth', fco_lw)
