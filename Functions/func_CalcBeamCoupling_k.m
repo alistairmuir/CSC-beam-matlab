@@ -14,5 +14,5 @@ function k = func_CalcBeamCoupling_k(portmodesFD, currentFD)
 %
 % :returns: k (N-by-M)
 
-k = portmodesFD./conj(currentFD(:)) ;
+k = portmodesFD./currentFD(:) ;
 end
