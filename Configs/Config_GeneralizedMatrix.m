@@ -61,19 +61,19 @@ m_CST2SI = 1e-3 ;    % Metres  (1e-3:  mm --> m).
 %% Directories for loading and saving.
 %%% Directories containing CST results.
 model_dir = "CST Files/Pillbox" ;
-wake_dir  = model_dir+"/Wake_10GHz_15cpw_8modes_10sigma/Export" ;  % Wake CST directory
+wake_dir  = model_dir+"/Wake_15GHz_30cpw_3modes_10sigma_1M/Export" ;  % Wake CST directory
 freq_dir  = model_dir+"/Freq_10GHz_tetra_8modes/Export" ;  % High Freq CST directory
 
 
 %%% Directory and filename to save generalized matrices.
 save_matrix   = true ;
 save_dir      = "Matrices/Pillbox/Generalized_Matrices" ;
-save_filename = "pillbox_8modes" ;
+save_filename = "pillbox_3modes_augmented" ;
 
 
 %% Port modes
 %%% Choose modes for signal retrieval.
-Pmodes = [1:8] ;   % List of port modes to be included.
+Pmodes = [1,2,3] ;   % List of port modes to be included.
 
 
 %% Segment longitudinal length (CST units)
@@ -81,7 +81,7 @@ Length = 100 ;    % usually mm
 
 
 %% Import CST FFTs (otherwise let Matlab carry them out)
-import_FFT = false ;   % true = CST FFTs imported, false = Matlab carries out FFTs.
+import_FFT = true ;   % true = CST FFTs imported, false = Matlab carries out FFTs.
 
 
 %% Frequency arrays
