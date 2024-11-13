@@ -13,6 +13,7 @@ function [freqs, data_FD] = func_FFT_CSTdata(data_TD, time_samples)
 % Determine whether number of time samples, N_ts, is odd or even.
 N_s = length(time_samples) ;
 Nmod2 = mod(N_s, 2) ;
+N_pow2 = 2.^nextpow2(N_s) ;
 
 % Reduce N_ts by 1 if N_ts is odd (N_ts is unchanged if even).
 N_s = N_s - Nmod2 ;
@@ -31,7 +32,7 @@ freqs = fs/N_s*(0:N_s/2-1) ;
 
 
 %%% Carry out FFT
-data_rawFFT = fft(data_TD) ;
+data_rawFFT = fft(data_TD, N_pow2) ;
 
 %%% Post FFT treatments to form one-sided spectra.
 % Take only positive frequencies for one-sided spectra.
