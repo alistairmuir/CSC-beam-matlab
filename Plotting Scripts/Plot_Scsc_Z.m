@@ -4,14 +4,14 @@ clc
 
 
 %% Load S_csc and direct wakes
-pmode = [1:8] ;
+pmode = [1:3] ;
 
-plotlabels(1) = "CSC-beam (TM01)" ;
-plotlabels(2) = "CSC-beam (8 modes)" ;
+plotlabels(1) = "CSC-beam (3 modes)" ;
+plotlabels(2) = "CSC-beam (3 modes aug)" ;
 plotlabels(3) = "CST Direct" ;
 
-S1 = load("Matrices/2Pillbox/Z_2pillbox_TM01.mat") ;
-S2 = load("Matrices/2Pillbox/Z_2pillbox_8modes.mat") ;
+S1 = load("Matrices/2Pillbox/Z_2pillbox_3modes_hifi.mat") ;
+S2 = load("Matrices/2Pillbox/Z_2pillbox_3modes_augmented.mat") ;
 
 %%% Import direct simulation no.1
 S_direct1 = readmatrix("CST Files/2Pillbox/Z_2pillbox_10GHz_15cpw_10modes_100k_10sigma.txt") ;
@@ -118,7 +118,7 @@ ylabel("Impedance / "+imp_units)
 
 
 %%% Phase
-figure(20); clf
+figure(2); clf
 
 hold on
 plot(S1.f./1e9, squeeze(rad2deg(angle(S1.S(:,end,end)))), 'bx',  'LineWidth', 1.5)

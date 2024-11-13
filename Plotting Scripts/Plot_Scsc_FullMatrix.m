@@ -9,7 +9,7 @@ addpath(genpath("Results"))
 
 %% USER INPUT
 % Directory for the S-matrix .mat file
-S_dir = "Z_2pillbox_TM01" ;
+S_dir = "pillbox_TM01_hifi" ;
 
 % Plot limits
 y_axis_limits = [0,0] ;
