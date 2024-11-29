@@ -27,6 +27,11 @@ if ~exist('y_axis_limits', 'var')
     y_axis_limits = [-150, 100] ;
 end
 
+% Figure numbers
+if ~exist('figi', 'var')
+    figi=1;
+end
+
 
 %% Calculations from S matrix
 % Get number of port modes, if not already known.
@@ -76,22 +81,22 @@ if y_axis_limits(1)==0 && y_axis_limits(2)==0
     
     if N_modes==1
         % T. Flisgen's plot limits for one pillbox
-%         plt_y_mins = [-150, -100, -50 ;
-%                       -100, -150, -50 ;
-%                        -50,  -50, -50 ] ;
-% 
-%         plt_y_maxs = [   0,    0,  100 ;
-%                          0,    0,  100 ;
-%                         50,   50,  100 ] ;
+        plt_y_mins = [-150, -100, -50 ;
+                      -100, -150, -50 ;
+                       -50,  -50, -50 ] ;
+
+        plt_y_maxs = [   0,    0,  100 ;
+                         0,    0,  100 ;
+                        50,   50,  100 ] ;
                     
         % T. Flisgen's plot limits for two pillboxes
-       plt_y_mins = [-200,-300, -150 ;
-                     -300,-200,  -60 ;
-                     -150,-100,  -20 ] ;
-                    
-        plt_y_maxs = [ 50,  50, 100 ;
-                       50,  50,  60 ;
-                      100, 100, 100 ] ;
+%        plt_y_mins = [-200,-300, -150 ;
+%                      -300,-200,  -60 ;
+%                      -150,-100,  -20 ] ;
+%                     
+%         plt_y_maxs = [ 50,  50, 100 ;
+%                        50,  50,  60 ;
+%                       100, 100, 100 ] ;
 
 
     else
@@ -124,7 +129,7 @@ if N_modes < 3
     
 
     %%% Plot: generalized matrix magntidue
-    figure(1); clf
+    figure(figi); clf
     for pii=1:2*N_modes+1
         for pjj=1:2*N_modes+1
 
@@ -168,7 +173,7 @@ if N_modes < 3
     end
 
     %%% Plot: SGen_Mat phase
-    figure(2); clf
+    figure(figi+1); clf
     for pii=1:2*N_modes+1
         for pjj=1:2*N_modes+1
 
@@ -214,7 +219,7 @@ if N_modes < 3
 else
     %%% Just Beam impedance (z_b)
     % Magnitude
-    figure(3); clf
+    figure(figi); clf
     plot(f(:),S_db(:,end,end), 'X', 'MarkerSize', 8, 'MarkerEdgeColor', '#A0A')
     grid on
     grid minor
@@ -228,7 +233,7 @@ else
     title("Beam Impedance (Magnitude)", 'FontSize', 15)
 
     % Phase
-    figure(4); clf
+    figure(figi+1); clf
     plot(f(:),S_phase(:,end,end), 'X', 'MarkerSize', 8, 'MarkerEdgeColor', '#A0A')
     grid on
     grid minor
