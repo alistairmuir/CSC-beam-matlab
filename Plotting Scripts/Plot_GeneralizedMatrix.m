@@ -32,6 +32,26 @@ if ~exist('figi', 'var')
     figi=1;
 end
 
+% Clear figures by default.
+if ~exist('clear_plots', 'var')
+    clear_plots = true ;
+end
+
+% Default marker colour.
+if ~exist('marker_col', 'var')
+    marker_col = '#A0A' ;
+end
+
+% Default marker
+if ~exist('mkr', 'var')
+    mkr = 'X' ;
+end
+
+% Legend
+if ~exist('legend_labels', 'var')
+    legend_labels = 'CSC-beam' ;
+end
+
 
 %% Calculations from S matrix
 % Get number of port modes, if not already known.
@@ -85,8 +105,8 @@ if y_axis_limits(1)==0 && y_axis_limits(2)==0
                       -100, -150, -50 ;
                        -50,  -50, -50 ] ;
 
-        plt_y_maxs = [   0,    0,  100 ;
-                         0,    0,  100 ;
+        plt_y_maxs = [   0,    0,   50 ;
+                         0,    0,   50 ;
                         50,   50,  100 ] ;
                     
         % T. Flisgen's plot limits for two pillboxes
@@ -129,7 +149,11 @@ if N_modes < 3
     
 
     %%% Plot: generalized matrix magntidue
-    figure(figi); clf
+    figure(figi);
+    if clear_plots
+        clf
+    end
+    
     for pii=1:2*N_modes+1
         for pjj=1:2*N_modes+1
 
@@ -153,7 +177,8 @@ if N_modes < 3
             subplot(2*N_modes+1,2*N_modes+1,plti)
 
             % Plot
-            plot(f(:),S_db(:,pii,pjj), 'X', 'MarkerSize', 8, 'MarkerEdgeColor', '#A0A')
+            hold on    % Hold on - to allow multiple results.
+            plot(f(:),S_db(:,pii,pjj), mkr, 'MarkerSize', 8, 'MarkerEdgeColor', marker_col)
             %xlim([0,10])
             ylim([plt_y_mins(pii,pjj),plt_y_maxs(pii,pjj)])
             grid on
@@ -168,12 +193,18 @@ if N_modes < 3
             if exist('f_co', 'var')
                 xline(f_co, 'b--', 'LineWidth', fco_lw)
             end
+            
+            legend(legend_labels, 'Location', 'southeast')
 
         end
     end
 
     %%% Plot: SGen_Mat phase
-    figure(figi+1); clf
+    figure(figi+1);
+    if clear_plots
+        clf
+    end
+    
     for pii=1:2*N_modes+1
         for pjj=1:2*N_modes+1
 
@@ -197,7 +228,8 @@ if N_modes < 3
             subplot(2*N_modes+1,2*N_modes+1,plti)
             
             % Plot
-            plot(f(:), S_phase(:,pii,pjj), 'X', 'MarkerSize', 8, 'MarkerEdgeColor', '#A0A')
+            hold on    % Hold on - to allow multiple results.
+            plot(f(:), S_phase(:,pii,pjj), mkr, 'MarkerSize', 8, 'MarkerEdgeColor', marker_col)
             %xlim([0,10])
             ylim([-200,200])
             grid on
@@ -212,6 +244,8 @@ if N_modes < 3
             if exist('f_co', 'var')
                 xline(f_co, 'b--', 'LineWidth', fco_lw)
             end
+            
+            legend(legend_labels)
 
         end
     end
@@ -219,8 +253,13 @@ if N_modes < 3
 else
     %%% Just Beam impedance (z_b)
     % Magnitude
-    figure(figi); clf
-    plot(f(:),S_db(:,end,end), 'X', 'MarkerSize', 8, 'MarkerEdgeColor', '#A0A')
+    figure(figi);
+    if clear_plots
+        clf
+    end
+
+    hold on    % Hold on - to allow multiple results.
+    plot(f(:),S_db(:,end,end), mkr, 'MarkerSize', 8, 'MarkerEdgeColor', marker_col)
     grid on
     grid minor
     xlabel("f / "+f_label, 'FontSize', plt_fontsize)
@@ -233,8 +272,13 @@ else
     title("Beam Impedance (Magnitude)", 'FontSize', 15)
 
     % Phase
-    figure(figi+1); clf
-    plot(f(:),S_phase(:,end,end), 'X', 'MarkerSize', 8, 'MarkerEdgeColor', '#A0A')
+    figure(figi+1);
+    if clear_plots
+        clf
+    end
+    
+    hold on    % Hold on - to allow multiple results.
+    plot(f(:),S_phase(:,end,end), mkr, 'MarkerSize', 8, 'MarkerEdgeColor', marker_col)
     grid on
     grid minor
     xlabel("f / "+f_label, 'FontSize', plt_fontsize)
