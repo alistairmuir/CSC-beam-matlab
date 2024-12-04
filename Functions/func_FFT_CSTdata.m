@@ -15,7 +15,8 @@ N_pow2 = 2.^nextpow2(N_s) ;
 
 % Apply Hann window.
 hann_window = hann(N_s*2) ;
-data_TD = data_TD.*(hann_window(N_s+1:end)) ;      % Hann window (for wide main lobe)
+data_TD = data_TD.*(hann_window(N_s+1:end)) ;
+        % Latter half of Hann window = raised cosine with zero at final data point.
 
 %%% Calculate sample frequencies
 % Frequency interval.
