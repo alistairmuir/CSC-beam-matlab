@@ -10,10 +10,16 @@ function interpolated_data = func_Interpolate_CSTdata(data, original_samples, qu
 %
 % :returns: interpolated_data (1D array of same length as query_samples)
 
-% Create the interpolant using Matlab's griddedInterpolant function.
-interpolant = griddedInterpolant(original_samples, data) ;
+%%%%% Using GriddedInterpolant
+%%% % Create the interpolant using Matlab's griddedInterpolant function.
+%%%interpolant = griddedInterpolant(original_samples, data) ;
+%%%
+%%% % Retrieve values for data at the query samples.
+%%%interpolated_data = interpolant(query_samples) ;
 
-% Retrieve values for data at the query samples.
-interpolated_data = interpolant(query_samples) ;
+%%% Using interp1
+% Interpolate the data (separate interpolation done for real and imag parts).
+interpolated_data = interp1(original_samples, real(data), query_samples, 'linear') + ...
+    1j.*interp1(original_samples, imag(data), query_samples, 'linear') ;
 
 end
