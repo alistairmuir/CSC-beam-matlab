@@ -47,6 +47,11 @@ if ~exist('mkr', 'var')
     mkr = 'X' ;
 end
 
+% Default marker size
+if ~exist('marker_size', 'var')
+    marker_size = 8 ;
+end
+
 % Legend
 if ~exist('legend_labels', 'var')
     legend_labels = 'CSC-beam' ;
@@ -101,8 +106,8 @@ if y_axis_limits(1)==0 && y_axis_limits(2)==0
     
     if N_modes==1
         % T. Flisgen's plot limits for one pillbox
-        plt_y_mins = [-150, -100, -50 ;
-                      -100, -150, -50 ;
+        plt_y_mins = [-150, -200, -50 ;
+                      -200, -150, -50 ;
                        -50,  -50, -50 ] ;
 
         plt_y_maxs = [   0,    0,   50 ;
@@ -178,7 +183,7 @@ if N_modes < 3
 
             % Plot
             hold on    % Hold on - to allow multiple results.
-            plot(f(:),S_db(:,pii,pjj), mkr, 'MarkerSize', 8, 'MarkerEdgeColor', marker_col)
+            plot(f(:),S_db(:,pii,pjj), mkr, 'MarkerSize', marker_size, 'MarkerEdgeColor', marker_col)
             %xlim([0,10])
             ylim([plt_y_mins(pii,pjj),plt_y_maxs(pii,pjj)])
             grid on
@@ -229,7 +234,7 @@ if N_modes < 3
             
             % Plot
             hold on    % Hold on - to allow multiple results.
-            plot(f(:), S_phase(:,pii,pjj), mkr, 'MarkerSize', 8, 'MarkerEdgeColor', marker_col)
+            plot(f(:), S_phase(:,pii,pjj), mkr, 'MarkerSize', marker_size, 'MarkerEdgeColor', marker_col)
             %xlim([0,10])
             ylim([-200,200])
             grid on
@@ -245,7 +250,7 @@ if N_modes < 3
                 xline(f_co, 'b--', 'LineWidth', fco_lw)
             end
             
-            legend(legend_labels)
+            legend(legend_labels, 'Location', 'southwest')
 
         end
     end
