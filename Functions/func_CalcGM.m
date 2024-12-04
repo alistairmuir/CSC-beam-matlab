@@ -48,11 +48,11 @@ function [S, Length] = func_CalcGM(wake_dir, freq_dir, ...
 % Make string of FM freqs in CST units, for folder names and plotting.
 freqs_FM_str = string(freqs_FM) ;
 
-% Convert frequency arrays
+% Convert frequency arrays to SI units.
 freqs_FM = func_ConvertUnits(freqs_FM, f_CST2SI) ;
 freqs_GM = func_ConvertUnits(freqs_GM, f_CST2SI) ;
 
-% Convert segment length
+% Convert segment length to SI units.
 Length = func_ConvertUnits(Length, m_CST2SI) ;
 
 
@@ -87,16 +87,16 @@ S = complex(zeros(Nf_GM,2*N_modes+1,2*N_modes+1)) ;         % Final generalized 
 
 
 %%% Populate S-parameter matrix
-% Loop through all CST S-parameters, populating matrix.
+%%%% Loop through all CST S-parameters, populating matrix.
 
-%%% Column element - cycle through all modes at each port.
+% (Column element - cycle through all modes at each port.)
 for porti=1:2
     for modi=1:N_modes
     
         % ith row of S-parameter matrix
         si = modi + N_modes*(porti-1) ;
         
-        %%% Row element - cycle through all modes at each port.
+        % (Row element - cycle through all modes at each port.)
         for portj=1:2
             for modj=1:N_modes
                 
