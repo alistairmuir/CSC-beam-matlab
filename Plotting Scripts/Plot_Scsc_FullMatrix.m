@@ -7,7 +7,7 @@ addpath(genpath("Results"))
 
 %% USER INPUT
 % Directory for the S-matrix .mat file
-S_dir = "Matrices/2Pillbox/2cavityCSC_BEAM_Alistair_corrected" ;
+S_dir = "Matrices/2Pillbox/2cavityCSC_BEAM_Alistair" ;
 
 % Plot limits
 y_axis_limits = [0,0] ;
@@ -31,7 +31,7 @@ f = f./f_CST2SI ;
 % Plotting bits
 figi = 1 ;
 clear_plots = false ;
-marker_col = '#0FF' ;
+marker_col = '#0AD' ;
 marker_size = 5 ;
 mkr = 'o' ;
 legend_labels = ["Thomas", "Alistair", "Alistair"] ;

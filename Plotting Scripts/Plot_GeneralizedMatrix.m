@@ -155,6 +155,7 @@ if N_modes < 3
 
     %%% Plot: generalized matrix magntidue
     figure(figi);
+    
     if clear_plots
         clf
     end
@@ -165,15 +166,15 @@ if N_modes < 3
             %%% Construct labels
             if pii<2*N_modes+1
                 if pjj<2*N_modes+1
-                    Sgen_symbol = "S_{"+string(pii)+string(pjj)+"}" ;
+                    S_symbol = "S_{"+string(pii)+string(pjj)+"}" ;
                 else
-                    Sgen_symbol = "k_{"+string(pii)+"}" ;
+                    S_symbol = "k_{"+string(pii)+"}" ;
                 end
             else
                 if pjj<2*N_modes+1
-                    Sgen_symbol = "h_{"+string(pjj)+"}" ;
+                    S_symbol = "h_{"+string(pjj)+"}" ;
                 else
-                    Sgen_symbol = "z_b" ;
+                    S_symbol = "z_b" ;
                 end
             end                
 
@@ -191,7 +192,7 @@ if N_modes < 3
             ax = gca ;
             ax.FontSize = plt_fontsize ;
             xlabel("f / "+f_label, 'FontSize', plt_fontsize)
-            ylabel("|"+Sgen_symbol+"| / "+yunits(plti), 'FontSize', plt_fontsize)
+            ylabel("|"+S_symbol+"| / "+yunits(plti), 'FontSize', plt_fontsize)
             
             xticks(plt_xticks)
             
@@ -201,11 +202,15 @@ if N_modes < 3
             
             legend(legend_labels, 'Location', 'southeast')
 
+            title(S_symbol+" Magnitude")
+
         end
     end
-
-    %%% Plot: SGen_Mat phase
+    
+    
+    %%% Plot: GM phase
     figure(figi+1);
+    
     if clear_plots
         clf
     end
@@ -216,15 +221,15 @@ if N_modes < 3
             %%% Construct labels
             if pii<2*N_modes+1
                 if pjj<2*N_modes+1
-                    Sgen_symbol = "S_{"+string(pii)+string(pjj)+"}" ;
+                    S_symbol = "S_{"+string(pii)+string(pjj)+"}" ;
                 else
-                    Sgen_symbol = "k_{"+string(pii)+"}" ;
+                    S_symbol = "k_{"+string(pii)+"}" ;
                 end
             else
                 if pjj<2*N_modes+1
-                    Sgen_symbol = "h_{"+string(pjj)+"}" ;
+                    S_symbol = "h_{"+string(pjj)+"}" ;
                 else
-                    Sgen_symbol = "z_b" ;
+                    S_symbol = "z_b" ;
                 end
             end
             
@@ -242,7 +247,7 @@ if N_modes < 3
             ax = gca ;
             ax.FontSize = plt_fontsize ;
             xlabel("f / "+f_label, 'FontSize', plt_fontsize)
-            ylabel("arg("+Sgen_symbol+") / \circ", 'FontSize', plt_fontsize)
+            ylabel("arg("+S_symbol+") / \circ", 'FontSize', plt_fontsize)
 
             xticks(plt_xticks)
 
@@ -252,6 +257,8 @@ if N_modes < 3
             
             legend(legend_labels, 'Location', 'southwest')
 
+            title(S_symbol+" Phase")
+            
         end
     end
             
