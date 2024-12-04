@@ -39,12 +39,14 @@ problem_dir = "Pillbox" ;
 
 %% Directories for orthogonal and generalized matrices.
 % Directory containing generalized matrices
-seg_dir = "Matrices/"+problem_dir+"/Generalized_Matrices/" ;
+%seg_dir = "Matrices/"+problem_dir+"/Generalized_Matrices/" ;
+seg_dir = "Matrices/Thomas/Alistair/" ;
 
 % File names of for generalized matrices for all segments in beam path in sequential order...
 % ... from z=0 to z=maximum (i.e. upstream to downstream).
 N_segs = 2 ;    % Number of segments to be concatenated.
-segment_names = ["pillbox_3modes_augmented"] ;
+segment_names = ["cavityCSC_BEAM_Alistair"] ;
+%segment_names = ["pillbox_TM01_augmented"] ;
 segment_names = repmat(segment_names(1),1,N_segs) ;
 
 % Directory containing the orthogonal matrices.
@@ -53,7 +55,7 @@ orthogonal_matrices_dir = "Matrices/"+problem_dir+"/Orthogonal_Matrices/" ;
 
 %% Save directory and filename
 save_dir = "Matrices/"+N_segs+problem_dir ;
-save_filename = "Z_" + N_segs + segment_names(1) ;
+save_filename = N_segs + segment_names(1) + "_corrected" ;
 
 
 %% Plot?

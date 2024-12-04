@@ -63,7 +63,7 @@ N_segs = length(segment_names) ;
 
 
 %% Save filename
-save_filename = save_dir + "/Z_" + N_segs + segment_names(1) ;
+save_filename = save_dir + "/" + N_segs + segment_names(1) ;
 
 
 %% Plot?

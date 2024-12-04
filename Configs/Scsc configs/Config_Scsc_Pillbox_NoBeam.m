@@ -46,7 +46,7 @@ segment_names = ["pillbox_3TM_NoBeam", "pillbox_3TM_NoBeam"] ;
 orthogonal_matrices_dir = "Matrices/Pillbox/Orthogonal_Matrices" ;
 
 save_dir = "Results/"+problem_dir ;
-save_filename = "Z_NoBeam_" + segment_names(1) ;
+save_filename = "NoBeam_" + segment_names(1) ;
 
 
 %% Plot?
