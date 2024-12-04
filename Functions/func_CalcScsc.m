@@ -45,7 +45,7 @@ orthogonal_matrices_path = orthogonal_matrices_dir + "/" + ...
 load(orthogonal_matrices_path, 'P', 'F')
 
 % Total number of all internal modes being concatenated throughout entire structure.
-N_intmodes = length(F) ;
+N_intmodes = length(F) ;  %   includes both ports, i.e. N_intmodes = 2*N_int, usually.
 
 % Intialize final generalized matrix for complete path.
 S = complex(zeros(N_f,N_size,N_size)) ;
