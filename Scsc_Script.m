@@ -35,6 +35,7 @@ func_SaveGM(save_dir, save_filename, S, f, Length)
 %% Plot
 if plot_on
     f = f./f_CST2SI ;  % Plotting units == CST units
+    figi=5;
     Plot_GeneralizedMatrix
 end
 
