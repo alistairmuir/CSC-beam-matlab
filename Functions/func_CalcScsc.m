@@ -79,7 +79,7 @@ for fi = 1:N_f
         phi_segs(segi) = func_CalcPhase(freqs(fi), sum(L_segs(1:segi)), 0, c0) ;
         
     end
-        
+    
     % Create matrix for applying phase adjustment at each port 1.
     M = func_ConstructM(phi_segs(1:end-1), N_modes) ;
     
@@ -92,7 +92,7 @@ for fi = 1:N_f
     
 end
 
-% Sum lengths for total length.
+% Sum lengths for total length of structure.
 Length = sum(L_segs) ;
 
 end
