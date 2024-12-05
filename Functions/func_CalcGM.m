@@ -41,7 +41,7 @@ function [S, Length] = func_CalcGM(wake_dir, freq_dir, ...
 
 
 %%% Physical constants
-[mu0, eps0, c0] = func_EM_PhysicalConstants() ;
+[~, ~, c0] = func_EM_PhysicalConstants() ;
 
 
 %%% Convert to SI units
