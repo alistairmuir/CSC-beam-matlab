@@ -14,8 +14,8 @@ Two plotting scripts are also present, but are not integral to the workflow.
 Please note the three dependent subdirectories:
    - **Functions**: all proprietary functions are stored this folder.
    - **Configs**: all configuration files are stored in this folder.
-   - **Subscripts**: all subscripts called by the main scripts are stored in this
-     folder.
+   - **Plotting Scripts**: all plotting called by the main scripts are stored in this
+     folder, along with other scripts which can be used to analyse results manually.
 
 The three main scripts are described below.
 
