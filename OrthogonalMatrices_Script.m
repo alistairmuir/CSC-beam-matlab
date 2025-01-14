@@ -28,7 +28,7 @@ Config_OrthogonalMatrix
 
 %% Save P and F matrices
 % Check given folder exists, and if not, create it.
-if exist(save_dir, 'dir')==0
+if ~exist(save_dir, 'dir')
     mkdir(save_dir)
 end
 
