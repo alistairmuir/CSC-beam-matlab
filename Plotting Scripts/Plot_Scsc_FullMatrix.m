@@ -2,22 +2,33 @@
 
 % Add paths to matrices and results for easy access to all S matrices.
 addpath(genpath("Matrices"))
-addpath(genpath("Results"))
 
 
 %% USER INPUT
-% Directory for the S-matrix .mat file
-S_dir = "Matrices/2Pillbox/2cavityCSC_BEAM_Alistair" ;
+%%% Directory for the S-matrix .mat file
+S_dir = "Matrices/2Pillbox/Generalized_Matrices/2pillbox_direct_TM01_Dec5" ;
+marker_col = '#000' ;
+marker_size = 8 ;
+mkr = 'o' ;
 
-% Plot limits
+% S_dir = "Matrices/2Pillbox/2pillbox_TM01_Dec5" ;
+% marker_col = '#A0A' ;
+% marker_size = 8 ;
+% mkr = 'x' ;
+
+%%% Plot bits
+figi = 1 ;
+
+plot_switch = "real" ;
+clear_plots = false ;
 y_axis_limits = [0,0] ;
 f_label = "GHz" ;
- 
+legend_labels = ["Direct", "CSC-beam"] ;
+
 
 %% Import
 % Load S matrix, with frequencies and Length.
 load(S_dir)
-
 
 
 %% Plotting
@@ -28,15 +39,12 @@ end
 
 f = f./f_CST2SI ;
 
-% Plotting bits
-figi = 1 ;
-clear_plots = false ;
-marker_col = '#0AD' ;
-marker_size = 5 ;
-mkr = 'o' ;
-legend_labels = ["Thomas", "Alistair", "Alistair"] ;
-
-Plot_GeneralizedMatrix
-
+switch plot_switch
+    case "real"
+        Plot_GeneralizedMatrix_ReIm
+        
+    case "mag"
+        Plot_GeneralizedMatrix
+end
 
 %%%%%%%%%%%%   END   %%%%%%%%%%%%

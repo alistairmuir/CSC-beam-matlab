@@ -9,16 +9,12 @@
 % The listed parameters are the only parameters needed by the Scsc_Script.m, but other parameters
 % can be defined to help define those parameters (e.g. creating strings comprised of other strings).
 %
-% :param f_label: frequency label for plotting.
-% :type  f_label: string
-% :param N_modes: Number of modes included in all generalized matrices (GMs).
-% :type  N_modes: int
-% :param orthogonal_matrices_dir: directory containing the required orthogonal matrix.
-% :type  orthogonal_matrices_dir: string
 % :param seg_dir: directory containing the GMs for this problem.
 % :type  seg_dir: string
 % :param segment_names: array of filenames for all the GMs in the problem.
 % :type  segment_names: 1D array, string
+% :param orthogonal_matrices_dir: directory containing the required orthogonal matrix.
+% :type  orthogonal_matrices_dir: string
 % :param save_dir: directory in which the final matrix is saved.
 % :type  save_dir: string
 % :param save_filename: directory into which the result matrix is stored.
@@ -38,31 +34,34 @@ problem_dir = "Pillbox" ;
 
 
 %% Directories for orthogonal and generalized matrices.
-% Directory containing generalized matrices
-%seg_dir = "Matrices/"+problem_dir+"/Generalized_Matrices/" ;
-seg_dir = "Matrices/Thomas/Alistair/" ;
+%%% Directory containing segment generalized matrices (GMs).
+seg_dir = "Matrices/"+problem_dir+"/Generalized_Matrices/" ;
 
+%%% Array of segment GM filenames.
 % File names of for generalized matrices for all segments in beam path in sequential order...
 % ... from z=0 to z=maximum (i.e. upstream to downstream).
 N_segs = 2 ;    % Number of segments to be concatenated.
-segment_names = ["cavityCSC_BEAM_Alistair"] ;
-%segment_names = ["pillbox_TM01_augmented"] ;
+
+segment_names = ["pillbox_3modes_Dec5"] ;
+
+% Repeat matrices for N_seg-pillbox problem.
 segment_names = repmat(segment_names(1),1,N_segs) ;
 
-% Directory containing the orthogonal matrices.
+
+%%% Directory containing the orthogonal matrices.
 orthogonal_matrices_dir = "Matrices/"+problem_dir+"/Orthogonal_Matrices/" ;
 
 
 %% Save directory and filename
 save_dir = "Matrices/"+N_segs+problem_dir ;
-save_filename = N_segs + segment_names(1) + "_corrected" ;
+save_filename = N_segs + segment_names(1) ;
 
 
 %% Plot?
-plot_on  = true ;   % Plot the final generalized matrix?
-f_label  = "GHz" ;   % Frequency units for plotting.
-f_CST2SI = 1e9 ;
-y_axis_limits = [0,0] ; % Limits on the y-axis (0,0 = T. Flisgen's limits)
+plot_switch   = "real" ;   % Plot mag/phase ("mag"), real/imag ("real"), or "none".
+f_label       = "GHz" ;  % Frequency units for plotting.
+f_CST2SI      = 1e9 ;    % Frequency conversion factor.
+y_axis_limits = [0,0] ;  % Limits on the y-axis (0,0 = T. Flisgen's limits)
 
 %%%%%%%%%%%%%%%%%%%%   END   %%%%%%%%%%%%%%%%%%%%
 

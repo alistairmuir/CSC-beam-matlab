@@ -1,4 +1,4 @@
-%% Script for plotting the generalized matrix
+%% Script for plotting the generalized matrix (real and imag)
 % 
 % This script is called by both GeneralizedMatrix_Script.m and Scsc_Script.m.
 % It assumes the generalized matrix is held in variable, S.
@@ -24,7 +24,7 @@ end
 
 % Set default y-axis limits if not given.
 if ~exist('y_axis_limits', 'var')
-    y_axis_limits = [-150, 100] ;
+    y_axis_limits = [1e-5, 1e4] ;
 end
 
 % Figure numbers
@@ -69,12 +69,6 @@ if ~exist('N_modes', 'var')
     end
 end
 
-% Calc GM magnitude in dB.
-S_db = 20*log10(abs(S)) ;
-
-% Calc phase of generalized matrix.
-S_phase = rad2deg(angle(S)) ;
-
 
 %% Cut-off frequencies
 % If the port modes and directory to CST wake simulation results are available, retrieve
@@ -105,28 +99,16 @@ end
 if y_axis_limits(1)==0 && y_axis_limits(2)==0
     
     if N_modes==1
-        % T. Flisgen's plot limits for one pillbox
-        plt_y_mins = [-150, -200, -50 ;
-                      -200, -150, -50 ;
-                       -50,  -50, -50 ] ;
+        % Default y-axis limits - good for pillbox test case.
+        plt_y_mins = [1e-22, 1e-22, 1e-5 ;
+                      1e-22, 1e-22, 1e-5 ;
+                       1e-5,  1e-5, 1e-3 ] ;
 
-        plt_y_maxs = [   0,    0,   50 ;
-                         0,    0,   50 ;
-                        50,   50,  100 ] ;
-                    
-        % T. Flisgen's plot limits for two pillboxes
-%        plt_y_mins = [-200,-300, -150 ;
-%                      -300,-200,  -60 ;
-%                      -150,-100,  -20 ] ;
-%                     
-%         plt_y_maxs = [ 50,  50, 100 ;
-%                        50,  50,  60 ;
-%                       100, 100, 100 ] ;
-
+        plt_y_maxs = [ 1e0,  1e0,  1e4 ;
+                       1e0,  1e0,  1e4 ;
+                       1e4,  1e4,  1e5 ] ;
 
     else
-        % Default plot limits
-        y_axis_limits = [-150, 100] ;
 
         % Generate grid of plot limits from default values.
         plt_y_mins = y_axis_limits(1)*ones(2*N_modes + 1) ;
@@ -184,11 +166,10 @@ if N_modes < 3
 
             % Plot
             hold on    % Hold on - to allow multiple results.
-            plot(f(:),S_db(:,pii,pjj), mkr, 'MarkerSize', marker_size, 'MarkerEdgeColor', marker_col)
-            %xlim([0,10])
+            plot(f(:),abs(real(S(:,pii,pjj))), mkr, 'MarkerSize', marker_size, 'MarkerEdgeColor', marker_col)
             ylim([plt_y_mins(pii,pjj),plt_y_maxs(pii,pjj)])
+            
             grid on
-            %grid minor
             ax = gca ;
             ax.FontSize = plt_fontsize ;
             xlabel("f / "+f_label, 'FontSize', plt_fontsize)
@@ -201,14 +182,14 @@ if N_modes < 3
             end
             
             legend(legend_labels, 'Location', 'southeast')
-
-            title(S_symbol+" Magnitude")
+            set(gca, 'YScale', 'log')
+            title("Real("+S_symbol+")")
 
         end
     end
     
     
-    %%% Plot: GM phase
+    %%% Plot: imag(S)
     figure(figi+1);
     
     if clear_plots
@@ -239,15 +220,15 @@ if N_modes < 3
             
             % Plot
             hold on    % Hold on - to allow multiple results.
-            plot(f(:), S_phase(:,pii,pjj), mkr, 'MarkerSize', marker_size, 'MarkerEdgeColor', marker_col)
-            %xlim([0,10])
-            ylim([-200,200])
+            plot(f(:), abs(imag(S(:,pii,pjj))), mkr, 'MarkerSize', marker_size, 'MarkerEdgeColor', marker_col)
+            
+            ylim([plt_y_mins(pii,pjj),plt_y_maxs(pii,pjj)])
             grid on
-            %grid minor
+            
             ax = gca ;
             ax.FontSize = plt_fontsize ;
             xlabel("f / "+f_label, 'FontSize', plt_fontsize)
-            ylabel("arg("+S_symbol+") / \circ", 'FontSize', plt_fontsize)
+            ylabel("arg("+S_symbol+") / \Omega", 'FontSize', plt_fontsize)
 
             xticks(plt_xticks)
 
@@ -255,55 +236,55 @@ if N_modes < 3
                 xline(f_co, 'b--', 'LineWidth', fco_lw)
             end
             
-            legend(legend_labels, 'Location', 'southwest')
-
-            title(S_symbol+" Phase")
+            set(gca, 'YScale', 'log')
+            legend(legend_labels, 'Location', 'southeast')
+            title("Imag("+S_symbol+")")
             
         end
     end
             
 else
     %%% Just Beam impedance (z_b)
-    % Magnitude
+    % Real
     figure(figi);
     if clear_plots
         clf
     end
 
     hold on    % Hold on - to allow multiple results.
-    plot(f(:),S_db(:,end,end), mkr, 'MarkerSize', 8, 'MarkerEdgeColor', marker_col)
+    plot(f(:),abs(real(S(:,end,end))), mkr, 'MarkerSize', 8, 'MarkerEdgeColor', marker_col)
     grid on
     grid minor
     xlabel("f / "+f_label, 'FontSize', plt_fontsize)
-    ylabel("|z_b| / dB", 'FontSize', plt_fontsize)
+    ylabel("Re(z_b) / \Omega", 'FontSize', plt_fontsize)
 
     if exist('plt_xticks', 'var')
         xticks(plt_xticks)
     end
 
-    title("Beam Impedance (Magnitude)", 'FontSize', 15)
-    
-    legend(legend_labels, 'Location', 'best')
+    title("Beam Impedance (Real Component)", 'FontSize', 15)
+    set(gca, 'YScale', 'log')
+	legend(legend_labels, 'Location', 'best')
 
-    % Phase
+    % Imag
     figure(figi+1);
     if clear_plots
         clf
     end
     
     hold on    % Hold on - to allow multiple results.
-    plot(f(:),S_phase(:,end,end), mkr, 'MarkerSize', 8, 'MarkerEdgeColor', marker_col)
+    plot(f(:),abs(imag(S(:,end,end))), mkr, 'MarkerSize', 8, 'MarkerEdgeColor', marker_col)
     grid on
     grid minor
     xlabel("f / "+f_label, 'FontSize', plt_fontsize)
-    ylabel("arg(|z_b|) / \circ", 'FontSize', plt_fontsize)
+    ylabel("Im(z_b) / \Omega", 'FontSize', plt_fontsize)
 
     if exist('plt_xticks', 'var')
         xticks(plt_xticks)
     end
 
-    title("Beam Impedance (Phase)", 'FontSize', 15)
-    
+    title("Beam Impedance (Imaginary Component)", 'FontSize', 15)
+    set(gca, 'YScale', 'log')
     legend(legend_labels, 'Location', 'best')
 
 end

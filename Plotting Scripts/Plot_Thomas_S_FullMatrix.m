@@ -2,12 +2,12 @@
 
 % Add paths to matrices and results for easy access to all S matrices.
 addpath(genpath("Matrices"))
-addpath(genpath("Results"))
 
 
 %% USER INPUT
 % Directory for the S-matrix .mat file
-S_dir = "Matrices/Thomas/Alistair/2cavityCSC_BEAM_Alistair" ;
+S_dir = "Matrices/Thomas/Alistair/2cavity_Thomas" ;
+
 
 % Plot limits
 y_axis_limits = [0,0] ;
@@ -32,7 +32,7 @@ f = f./f_CST2SI ;
 % Plotting bits
 figi = 1 ;
 clear_plots =  true ;
-marker_col  = '#A0A' ;
+marker_col  = '#000' ;
 mkr         = 'X' ;
 marker_size = 10 ;
 legend_labels = "Thomas" ;
