@@ -172,7 +172,7 @@ if N_modes < 3
             ax = gca ;
             ax.FontSize = plt_fontsize ;
             xlabel("f / "+f_label, 'FontSize', plt_fontsize)
-            ylabel(S_symbol+" / "+yunits(plti), 'FontSize', plt_fontsize)
+            ylabel("|"+S_symbol+"| / "+yunits(plti), 'FontSize', plt_fontsize)
             
             xticks(plt_xticks)
             
@@ -227,7 +227,7 @@ if N_modes < 3
             ax = gca ;
             ax.FontSize = plt_fontsize ;
             xlabel("f / "+f_label, 'FontSize', plt_fontsize)
-            ylabel(S_symbol+" / "+yunits(plti), 'FontSize', plt_fontsize)
+            ylabel("|"+S_symbol+"| / "+yunits(plti), 'FontSize', plt_fontsize)
 
             xticks(plt_xticks)
 
@@ -255,7 +255,7 @@ else
     grid on
     grid minor
     xlabel("f / "+f_label, 'FontSize', plt_fontsize)
-    ylabel("Re(z_b) / \Omega", 'FontSize', plt_fontsize)
+    ylabel("|Re(z_b)| / \Omega", 'FontSize', plt_fontsize)
 
     if exist('plt_xticks', 'var')
         xticks(plt_xticks)
@@ -276,7 +276,7 @@ else
     grid on
     grid minor
     xlabel("f / "+f_label, 'FontSize', plt_fontsize)
-    ylabel("Im(z_b) / \Omega", 'FontSize', plt_fontsize)
+    ylabel("|Im(z_b)| / \Omega", 'FontSize', plt_fontsize)
 
     if exist('plt_xticks', 'var')
         xticks(plt_xticks)
