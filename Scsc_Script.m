@@ -39,13 +39,17 @@ f = f./f_CST2SI ;
 
 % Plot Mag/Phase or Real/Imag depending on the plot switch.
 switch plot_switch
-    case "mag" || "phase"
+    case {"mag", "phase"}
     % Run plotting script for Mag/Phase plots.
     Plot_GeneralizedMatrix
     
-    case "real" || "imag" || "reim" || "ReIm"
+    case {"real", "imag", "reim", "ReIm"}
     % Run plotting script for Real/Imag plots.
     Plot_GeneralizedMatrix_ReIm
+    
+    otherwise
+    % No plotting
+    dsip("Scsc_Script successfully run.")
 end
 
 %%%%%%%%%%%%%%%%%%%%   END   %%%%%%%%%%%%%%%%%%%%
