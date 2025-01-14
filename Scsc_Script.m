@@ -33,12 +33,20 @@ func_SaveGM(save_dir, save_filename, S, f, Length)
 
 
 %% Plot
-if plot_on
-    f = f./f_CST2SI ;  % Plotting units == CST units
-    figi=5;
-    Plot_GeneralizedMatrix
-end
 
+% Return freqs to CST units for plotting.
+f = f./f_CST2SI ;
+
+% Plot Mag/Phase or Real/Imag depending on the plot switch.
+switch plot_switch
+    case "mag" || "phase"
+    % Run plotting script for Mag/Phase plots.
+    Plot_GeneralizedMatrix
+    
+    case "real" || "imag" || "reim" || "ReIm"
+    % Run plotting script for Real/Imag plots.
+    Plot_GeneralizedMatrix_ReIm
+end
 
 %%%%%%%%%%%%%%%%%%%%   END   %%%%%%%%%%%%%%%%%%%%
 
