@@ -49,7 +49,7 @@ switch plot_switch
     
     otherwise
     % No plotting
-    dsip("Scsc_Script successfully run.")
+    disp("Scsc_Script successfully run.")
 end
 
 %%%%%%%%%%%%%%%%%%%%   END   %%%%%%%%%%%%%%%%%%%%
