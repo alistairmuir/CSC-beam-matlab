@@ -117,7 +117,8 @@ The script has the following sections:
         Loads the configuration file which specifies the number of internal and
         external modes, and the number sections.
    - *Call Function*:\
-        - ``func_OrthoMatrices`` returns the orthogonal matrices P and F. 
+          Returns the orthogonal matrices P and F. 
+        - ``func_OrthoMatrices``
    - *Save P and F matrices*:\
         The matrices are saved in the directory set in the config file.
         
