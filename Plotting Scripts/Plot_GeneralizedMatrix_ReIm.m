@@ -134,7 +134,6 @@ if N_modes < 3
     yunits = repmat(yunits, 2*N_modes, 1) ;
     yunits = [yunits ; repmat("dB\surd\Omega",1,2*N_modes), "dB\Omega"] ;
     
-
     %%% Plot: generalized matrix magntidue
     figure(figi);
     
@@ -148,15 +147,15 @@ if N_modes < 3
             %%% Construct labels
             if pii<2*N_modes+1
                 if pjj<2*N_modes+1
-                    S_symbol = "S_{"+string(pii)+string(pjj)+"}" ;
+                    S_symbol = "Real(S_{"+string(pii)+string(pjj)+"})" ;
                 else
-                    S_symbol = "k_{"+string(pii)+"}" ;
+                    S_symbol = "Real(k_{"+string(pii)+"})" ;
                 end
             else
                 if pjj<2*N_modes+1
-                    S_symbol = "h_{"+string(pjj)+"}" ;
+                    S_symbol = "Real(h_{"+string(pjj)+"})" ;
                 else
-                    S_symbol = "z_b" ;
+                    S_symbol = "Real(z_b)" ;
                 end
             end                
 
@@ -173,7 +172,7 @@ if N_modes < 3
             ax = gca ;
             ax.FontSize = plt_fontsize ;
             xlabel("f / "+f_label, 'FontSize', plt_fontsize)
-            ylabel("|"+S_symbol+"| / "+yunits(plti), 'FontSize', plt_fontsize)
+            ylabel(S_symbol+" / "+yunits(plti), 'FontSize', plt_fontsize)
             
             xticks(plt_xticks)
             
@@ -183,7 +182,7 @@ if N_modes < 3
             
             legend(legend_labels, 'Location', 'southeast')
             set(gca, 'YScale', 'log')
-            title("Real("+S_symbol+")")
+            title(S_symbol)
 
         end
     end
@@ -202,15 +201,15 @@ if N_modes < 3
             %%% Construct labels
             if pii<2*N_modes+1
                 if pjj<2*N_modes+1
-                    S_symbol = "S_{"+string(pii)+string(pjj)+"}" ;
+                    S_symbol = "Imag(S_{"+string(pii)+string(pjj)+"})" ;
                 else
-                    S_symbol = "k_{"+string(pii)+"}" ;
+                    S_symbol = "Imag(k_{"+string(pii)+"})" ;
                 end
             else
                 if pjj<2*N_modes+1
-                    S_symbol = "h_{"+string(pjj)+"}" ;
+                    S_symbol = "Imag(h_{"+string(pjj)+"})" ;
                 else
-                    S_symbol = "z_b" ;
+                    S_symbol = "Imag(z_b)" ;
                 end
             end
             
@@ -228,7 +227,7 @@ if N_modes < 3
             ax = gca ;
             ax.FontSize = plt_fontsize ;
             xlabel("f / "+f_label, 'FontSize', plt_fontsize)
-            ylabel("arg("+S_symbol+") / \Omega", 'FontSize', plt_fontsize)
+            ylabel(S_symbol+" / "+yunits(plti), 'FontSize', plt_fontsize)
 
             xticks(plt_xticks)
 
@@ -238,7 +237,7 @@ if N_modes < 3
             
             set(gca, 'YScale', 'log')
             legend(legend_labels, 'Location', 'southeast')
-            title("Imag("+S_symbol+")")
+            title(S_symbol)
             
         end
     end
