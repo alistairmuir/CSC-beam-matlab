@@ -14,8 +14,8 @@ Two plotting scripts are also present, but are not integral to the workflow.
 Please note the three dependent subdirectories:
    - **Functions**: all proprietary functions are stored this folder.
    - **Configs**: all configuration files are stored in this folder.
-   - **Subscripts**: all subscripts called by the main scripts are stored in this
-     folder.
+   - **Plotting Scripts**: all plotting called by the main scripts are stored in this
+     folder, along with other scripts which can be used to analyse results manually.
 
 The three main scripts are described below.
 
@@ -114,19 +114,11 @@ The script has the following sections:
    - *Add dependent paths*:\
         Adds the configuration file folder to the working path.
    - *Load config file*:\
-        Loads the configuration file.
-   - *Initialization*:\
-        Constructs empty matrices for P and F matrices with sizes calculated
-        from the number of segments and modes.
-   - *P: Create arrays containing indices for non-zero rows and columns*:\
-        Indices for the non-zero elements of each row and each column are
-        stored.
-   - *F: Create arrays containing indices for non-zero rows and columns*:\
-        Indices for the non-zero elements of each row and each column are
-        stored.
-   - *Loop over all co-ordinates to populate the matrices*:\
-        All pairs of [row,column] indices given in the above arrays are set
-        to 1, creating the complete P and F matrices.
+        Loads the configuration file which specifies the number of internal and
+        external modes, and the number sections.
+   - *Call Function*:\
+          Returns the orthogonal matrices P and F. 
+        - ``func_OrthoMatrices``
    - *Save P and F matrices*:\
         The matrices are saved in the directory set in the config file.
         
