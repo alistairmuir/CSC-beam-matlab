@@ -114,19 +114,10 @@ The script has the following sections:
    - *Add dependent paths*:\
         Adds the configuration file folder to the working path.
    - *Load config file*:\
-        Loads the configuration file.
-   - *Initialization*:\
-        Constructs empty matrices for P and F matrices with sizes calculated
-        from the number of segments and modes.
-   - *P: Create arrays containing indices for non-zero rows and columns*:\
-        Indices for the non-zero elements of each row and each column are
-        stored.
-   - *F: Create arrays containing indices for non-zero rows and columns*:\
-        Indices for the non-zero elements of each row and each column are
-        stored.
-   - *Loop over all co-ordinates to populate the matrices*:\
-        All pairs of [row,column] indices given in the above arrays are set
-        to 1, creating the complete P and F matrices.
+        Loads the configuration file which specifies the number of internal and
+        external modes, and the number sections.
+   - *Call Function*:\
+        - ``func_OrthoMatrices`` returns the orthogonal matrices P and F. 
    - *Save P and F matrices*:\
         The matrices are saved in the directory set in the config file.
         
