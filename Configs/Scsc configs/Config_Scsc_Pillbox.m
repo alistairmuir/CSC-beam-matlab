@@ -58,7 +58,7 @@ save_filename = N_segs + segment_names(1) ;
 
 
 %% Plot?
-plot_switch   = "real" ;   % Plot mag/phase ("mag"), real/imag ("real"), or "none".
+plot_switch   = "mag" ;   % Plot mag/phase ("mag"), real/imag ("real"), or "none".
 f_label       = "GHz" ;  % Frequency units for plotting.
 f_CST2SI      = 1e9 ;    % Frequency conversion factor.
 y_axis_limits = [0,0] ;  % Limits on the y-axis (0,0 = T. Flisgen's limits)
