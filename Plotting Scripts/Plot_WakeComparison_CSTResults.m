@@ -5,11 +5,12 @@ clear
 %% Import results
 %%% Import direct simulation no.1
 S_folder = "CST Files/Pillbox" ;
-S_filenames = ["Z_1pillbox_10GHz_15cpw_8modes_100k_10sigma" , ...
-               "Z_1pillbox_10GHz_15cpw_8modes_100k_10sigma"] ;
+S_filenames = ["Wake_hifi", ...
+               "Wake_15GHz_30cpw_3modes_10sigma_1M"] ;
 
-ledg = ["original", "original x2"] ;
+ledg = S_filenames ;
 
+S_filenames = S_filenames + "/Export/Particle Beams/ParticleBeam1/Wake impedance/Z" ;
 
 for ii=1:length(S_filenames)
     S_temp = readmatrix("CST Files/Pillbox/"+S_filenames(ii)+".txt") ;

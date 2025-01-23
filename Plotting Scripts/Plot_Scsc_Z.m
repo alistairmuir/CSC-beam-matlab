@@ -6,14 +6,16 @@ clc
 %% Load S_csc and direct wakes
 pmode = [1:3] ;
 
-plotlabels(1) = "old (TM01)" ;
-plotlabels(2) = "new (TM01)" ;
+plotlabels(1) = "Alistair Cylinder" ;
+plotlabels(2) = "Thomas Cylinder" ;
 
-S1 = load("Matrices/2Pillbox/2pillbox_TM01_hifi.mat") ;
-S2 = load("Matrices/2Pillbox/2pillbox_TM01_Dec5.mat") ;
+S1 = load("Matrices/2Example_CylindricalCavity/2ali_gm_segment_left_1_mode.mat") ;
+S2 = load("Matrices/2Example_CylindricalCavity/CylindricalCavity_Thomas_1mode.mat") ;
 
 %%% Turn on one-cavity plot
 plot_1cav = false ;
+
+plot_fco = false ;
 
 % Import direct impedance for 1 pillbox
 % S2.S = load("Matrices/Pillbox/Generalized_Matrices/pillbox_3TM_hifi_new") ;
@@ -50,8 +52,8 @@ S_diff = S1.S(:,end,end) - Sd1_terp ;
 %% Convert dB
 if convert_dB==true
     S1_plot = squeeze(20*log10(abs(S1.S(:,end,end)))) ;
+    S2_plot = squeeze(20*log10(abs(S2.S(:,end,end)))) ;
 
-    S2_plot    = squeeze(20*log10(abs(S2.S(:,end,end)))) ;
     S_diff_plot = squeeze(20*log10(abs(S_diff))) ;
     
     ylimits   = [-10,100] ;
@@ -67,6 +69,10 @@ else
                 10*max([S1_plot(:) ; S2_plot(:) ; S2_plot(:)])] ;
 
     imp_units = "|\Omega|" ;
+
+    % S1_plot   = squeeze(20*log10(abs(S1.S(:,end,end)))) ;
+    % ylimits   = [-10,100] ;
+    % imp_units = "|\Omega|dB" ;
 end
 
 
@@ -79,8 +85,10 @@ hold on
 plot(S1.f./1e9, S1_plot, 'bx', 'LineWidth', 1.5)
 plot(S2.f./1e9, S2_plot, 'ko')
 
-for ii=1:length(pmode)
-    xline(f_co(ii),":",'Color',[0,(ii+1)/(length(pmode)+1),0], 'LineWidth', 1.5)
+if plot_fco
+    for ii=1:length(pmode)
+        xline(f_co(ii),":",'Color',[0,(ii+1)/(length(pmode)+1),0], 'LineWidth', 1.5)
+    end
 end
 
 hold off
@@ -88,7 +96,7 @@ hold off
 ax1 = gca ;
 ax1.FontSize = 12 ;
 
-xlim([0,10])
+xlim([min(S1.f),max(S1.f)]/1e9)
 ylim(ylimits)
 
 if convert_dB == false
@@ -111,8 +119,10 @@ hold on
 plot(S1.f./1e9, squeeze(rad2deg(angle(S1.S(:,end,end)))), 'bx',  'LineWidth', 1.5)
 plot(S2.f./1e9, squeeze(rad2deg(angle(S2.S(:,end,end)))), 'ko')
 
-for ii=1:length(pmode)
-    xline(f_co(ii),":",'Color',[0,(ii+1)/(length(pmode)+1),0], 'LineWidth', 1.5)
+if plot_fco
+    for ii=1:length(pmode)
+        xline(f_co(ii),":",'Color',[0,(ii+1)/(length(pmode)+1),0], 'LineWidth', 1.5)
+    end
 end
 
 hold off
@@ -125,7 +135,7 @@ grid minor
 
 legend(plotlabels, 'FontSize', 9, 'Location', 'northwest')
 
-xlim([0,10])
+xlim([min(S1.f),max(S1.f)]/1e9)
 ylim([-200,200])
 xlabel("Frequency / GHz")
 ylabel("Phase / \circ")

@@ -11,8 +11,15 @@
 
 
 %% Plotting aesthetics
+% Plot full S-matrix or only z_b
+if ~exist('plot_full', 'var')
+    plot_full = true ;
+end
+
 % Font size for all axes.
-plt_fontsize = 10 ;
+if ~exist('plt_fontsize', 'var')
+    plt_fontsize = 10 ;
+end
 
 % Line width for cut-off frequencies.
 fco_lw = 1 ;
@@ -53,8 +60,17 @@ if ~exist('marker_size', 'var')
 end
 
 % Legend
+if ~exist('legend_on', 'var')
+    legend_on = true ;
+end
+
 if ~exist('legend_labels', 'var')
     legend_labels = 'CSC-beam' ;
+end
+
+% Plot cut-off freq
+if ~exist('plot_fco', 'var')
+    plot_fco = true ;
 end
 
 
@@ -79,7 +95,7 @@ S_phase = rad2deg(angle(S)) ;
 %% Cut-off frequencies
 % If the port modes and directory to CST wake simulation results are available, retrieve
 % cut-off freqs.
-if exist('Pmodes', 'var') && exist('wake_dir', 'var')
+if exist('Pmodes', 'var') && exist('wake_dir', 'var') && plot_fco
 
     % Default port is port 1.
     if ~exist('plt_port', 'var')
@@ -145,7 +161,7 @@ end
 
 %% The plotting
 %%% Only plot whole generalized S-matrix if it is not too large.
-if N_modes < 3
+if N_modes < 3 && plot_full
     
     %%% y-axis units
     yunits = [repmat("dB",1,2*N_modes), "dB\surd\Omega"] ;
@@ -196,11 +212,16 @@ if N_modes < 3
             
             xticks(plt_xticks)
             
-            if exist('f_co', 'var')
+            if exist('f_co', 'var') && plot_fco
                 xline(f_co, 'b--', 'LineWidth', fco_lw)
             end
             
-            legend(legend_labels, 'Location', 'southeast')
+            ledg = legend(legend_labels, 'Location', 'southeast') ;
+            fontsize(ledg, plt_fontsize, 'points')
+
+            if ~legend_on
+                set(ledg,'visible','off')
+            end
 
             title(S_symbol+" Magnitude")
 
@@ -239,7 +260,8 @@ if N_modes < 3
             
             % Plot
             hold on    % Hold on - to allow multiple results.
-            plot(f(:), S_phase(:,pii,pjj), mkr, 'MarkerSize', marker_size, 'MarkerEdgeColor', marker_col)
+            plot(f(:), S_phase(:,pii,pjj), mkr, ...
+                'MarkerSize', marker_size, 'MarkerEdgeColor', marker_col)
             %xlim([0,10])
             ylim([-200,200])
             grid on
@@ -251,12 +273,17 @@ if N_modes < 3
 
             xticks(plt_xticks)
 
-            if exist('f_co', 'var')
+            if exist('f_co', 'var') && plot_fco
                 xline(f_co, 'b--', 'LineWidth', fco_lw)
             end
             
-            legend(legend_labels, 'Location', 'southwest')
-
+            ledg = legend(legend_labels, 'Location', 'southwest') ;
+            fontsize(ledg, plt_fontsize, 'points')
+            
+            if ~legend_on
+                set(ledg,'visible','off')
+            end
+            
             title(S_symbol+" Phase")
             
         end
@@ -271,7 +298,7 @@ else
     end
 
     hold on    % Hold on - to allow multiple results.
-    plot(f(:),S_db(:,end,end), mkr, 'MarkerSize', 8, 'MarkerEdgeColor', marker_col)
+    plot(f(:),S_db(:,end,end), mkr, 'MarkerSize', marker_size, 'MarkerEdgeColor', marker_col)
     grid on
     grid minor
     xlabel("f / "+f_label, 'FontSize', plt_fontsize)
@@ -281,9 +308,17 @@ else
         xticks(plt_xticks)
     end
 
+    if exist('f_co', 'var') && plot_fco
+        xline(f_co, 'b--', 'LineWidth', fco_lw)
+    end
+
     title("Beam Impedance (Magnitude)", 'FontSize', 15)
     
-    legend(legend_labels, 'Location', 'best')
+    ledg = legend(legend_labels, 'Location', 'best') ;
+            
+    if ~legend_on
+        set(ledg,'visible','off')
+    end
 
     % Phase
     figure(figi+1);
@@ -292,11 +327,15 @@ else
     end
     
     hold on    % Hold on - to allow multiple results.
-    plot(f(:),S_phase(:,end,end), mkr, 'MarkerSize', 8, 'MarkerEdgeColor', marker_col)
+    plot(f(:),S_phase(:,end,end), mkr, 'MarkerSize', marker_size, 'MarkerEdgeColor', marker_col)
     grid on
     grid minor
     xlabel("f / "+f_label, 'FontSize', plt_fontsize)
-    ylabel("arg(|z_b|) / \circ", 'FontSize', plt_fontsize)
+    ylabel("arg(z_b) / \circ", 'FontSize', plt_fontsize)
+
+    if exist('f_co', 'var') && plot_fco
+        xline(f_co, 'b--', 'LineWidth', fco_lw)
+    end
 
     if exist('plt_xticks', 'var')
         xticks(plt_xticks)
@@ -304,6 +343,10 @@ else
 
     title("Beam Impedance (Phase)", 'FontSize', 15)
     
-    legend(legend_labels, 'Location', 'best')
+    ledg = legend(legend_labels, 'Location', 'best') ;
+
+    if ~legend_on
+        set(ledg,'visible','off')
+    end
 
 end
