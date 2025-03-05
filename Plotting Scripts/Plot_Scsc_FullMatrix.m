@@ -3,6 +3,7 @@
 % Add paths to matrices and results for easy access to all S matrices.
 addpath(genpath("Matrices"))
 close all
+clear all
 
 %% USER INPUT
 % Choose which plots to include in graph (edit the switch cases below).
@@ -10,22 +11,28 @@ choose_plots = [2,3] ;
 
 % Adjust legend for above plots (include empty entry in between CSC plots
 % to avoid including cut-off frequency plots in legend).
-legend_labels = ["Thomas", "", "Alistair", "", "Direct (CST)"] ;
-legend_labels = ["Alistair", "", "Direct (CST)"] ;
+legend_labels = ["Tom CSC", "", "Ali CSC", "", "Direct (CST)"] ;
+legend_labels = ["CSC^{Beam}", "", "Direct (CST)"] ;
 
 % Include cut-off frequency line?
 plot_fco = true ;
-wake_dir = "CST Files/2Pillbox/wake/Export" ;
+wake_dir = "CST Files/2Pillbox/Wake/Export" ;
 Pmodes   = 3 ;
 
 % Include legend on every plot?
-legend_on = false ;
-
-% Plot text font size
-plt_fontsize = 10 ;
+legend_on = true ;
 
 % Plot full S matrix or z_b only?
 plot_full = true ;
+
+%%% Plot bits
+figi = 1 ;
+plot_switch = "mag" ;
+f_label = "GHz" ;
+
+% Plotting aesthetics
+plt_fontsize = 10 ;
+y_axis_limits = [0,0] ;
 
 
 %% FOR loop through all desired results.
@@ -42,7 +49,7 @@ for which_plot = choose_plots
         
         case 2
             %%% S-matrix 2
-            S_dir = "Matrices/2Pillbox/2pillbox_TM01_Dec5" ;
+            S_dir = "Matrices/2Pillbox/Generalized_Matrices/2pillbox_15GHz_TM01_March" ;
             clear_plots = false ;
 
             marker_col = '#A0A' ;
@@ -59,14 +66,6 @@ for which_plot = choose_plots
             mkr = 'k-' ;
     end
 
-    %%% Plot bits
-    figi = 1 ;
-    
-    plot_switch = "mag" ;
-    y_axis_limits = [0,0] ;
-    f_label = "GHz" ;
-    
-    
     %%% Import
     % Load S matrix, with frequencies and Length.
     load(S_dir)

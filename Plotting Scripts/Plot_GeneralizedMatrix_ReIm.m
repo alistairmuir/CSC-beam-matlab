@@ -11,20 +11,27 @@
 
 
 %% Plotting aesthetics
+% Plot full S-matrix or only z_b
+if ~exist('plot_full', 'var')
+    plot_full = true ;
+end
+
 % Font size for all axes.
-plt_fontsize = 10 ;
+if ~exist('plt_fontsize', 'var')
+    plt_fontsize = 10 ;
+end
 
 % Line width for cut-off frequencies.
 fco_lw = 1 ;
 
 % Tick marks for x-axis
 if ~exist('plt_xticks', 'var')
-    plt_xticks = (0:10) ;
+    plt_xticks = (1:10) ;
 end
 
 % Set default y-axis limits if not given.
 if ~exist('y_axis_limits', 'var')
-    y_axis_limits = [1e-5, 1e4] ;
+    y_axis_limits = [1e-5, 1e5] ;
 end
 
 % Figure numbers
@@ -53,8 +60,17 @@ if ~exist('marker_size', 'var')
 end
 
 % Legend
+if ~exist('legend_on', 'var')
+    legend_on = true ;
+end
+
 if ~exist('legend_labels', 'var')
     legend_labels = 'CSC-beam' ;
+end
+
+% Plot cut-off freq
+if ~exist('plot_fco', 'var')
+    plot_fco = true ;
 end
 
 
@@ -109,7 +125,6 @@ if y_axis_limits(1)==0 && y_axis_limits(2)==0
                        1e4,  1e4,  1e5 ] ;
 
     else
-
         % Generate grid of plot limits from default values.
         plt_y_mins = y_axis_limits(1)*ones(2*N_modes + 1) ;
         plt_y_maxs = y_axis_limits(2)*ones(2*N_modes + 1) ;
@@ -127,10 +142,10 @@ end
 
 %% The plotting
 %%% Only plot whole generalized S-matrix if it is not too large.
-if N_modes < 3
+if N_modes < 3 && plot_full
     
     %%% y-axis units
-    yunits = [repmat("dB",1,2*N_modes), "dB\surd\Omega"] ;
+    yunits = [repmat("",1,2*N_modes), "dB\surd\Omega"] ;
     yunits = repmat(yunits, 2*N_modes, 1) ;
     yunits = [yunits ; repmat("dB\surd\Omega",1,2*N_modes), "dB\Omega"] ;
     
@@ -263,7 +278,17 @@ else
 
     title("Beam Impedance (Real Component)", 'FontSize', 15)
     set(gca, 'YScale', 'log')
-	legend(legend_labels, 'Location', 'best')
+    ylim([plt_y_mins(end,end), plt_y_maxs(end,end)])
+
+    if exist('f_co', 'var') && plot_fco
+        xline(f_co, 'b--', 'LineWidth', fco_lw)
+    end
+    
+    ledg = legend(legend_labels, 'Location', 'best') ;
+            
+    if ~legend_on
+        set(ledg,'visible','off')
+    end
 
     % Imag
     figure(figi+1);
@@ -284,6 +309,16 @@ else
 
     title("Beam Impedance (Imaginary Component)", 'FontSize', 15)
     set(gca, 'YScale', 'log')
-    legend(legend_labels, 'Location', 'best')
+    ylim([plt_y_mins(end,end), plt_y_maxs(end,end)])
+
+    if exist('f_co', 'var') && plot_fco
+        xline(f_co, 'b--', 'LineWidth', fco_lw)
+    end
+    
+    ledg = legend(legend_labels, 'Location', 'best') ;
+            
+    if ~legend_on
+        set(ledg,'visible','off')
+    end
 
 end

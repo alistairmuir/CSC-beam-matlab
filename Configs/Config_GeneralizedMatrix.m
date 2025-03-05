@@ -65,19 +65,19 @@ problem_name = "Pillbox" ;
 
 %%% Directories containing CST results.
 model_dir = "CST Files/"+problem_name ;
-wake_dir  = model_dir+"/Wake_15GHz_30cpw_3modes_10sigma_1M/Export" ;  % Wake CST directory
-freq_dir  = model_dir+"/Freq_12GHz_tetra_3modes/Export" ;  % High Freq CST directory
+wake_dir  = model_dir+"/Wake_15GHz_30cpw_3modes_10sigma_1M_b/Export" ;  % Wake CST directory
+freq_dir  = model_dir+"/Freq_15GHz_8cpw-tetra_3modes/Export" ;  % High Freq CST directory
 
 %%% Directory and filename to save generalized matrices.
 save_matrix   = true ;
 save_dir      = "Matrices/"+problem_name+"/Generalized_Matrices" ;
 
-save_filename = "pillbox_3modes_Dec5" ;
+save_filename = "pillbox_15GHz_3modes_March" ;
 
 
 %% Port modes
 %%% Choose modes for signal retrieval.
-Pmodes = [1:3] ;   % List of port modes to be included.
+Pmodes = [1,2,3] ;   % List of port modes to be included.
 
 
 %% Segment longitudinal length (CST units)
@@ -99,7 +99,7 @@ freqs_GM = freqs_FM ;
 
 
 %% Plotting
-plot_switch   = "real" ; % Plot mag/phase ("mag"), real/imag ("real"), or "none".
+plot_switch   = "mag" ; % Plot mag/phase ("mag"), real/imag ("real"), or "none".
 plt_port      = 1 ;       % Choose port mode for which the cut-off frequency will be plotted.
 y_axis_limits = [0,0] ;    % Limits on the y-axis (0,0 = T. Flisgen's limits)
 

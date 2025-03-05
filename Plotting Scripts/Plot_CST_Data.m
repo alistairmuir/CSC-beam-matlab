@@ -2,6 +2,8 @@
 clc
 clear
 
+addpath("Functions")
+
 %% USER INPUT
 fname = ["o1(3),pb.txt", "o2(3),pb.txt"] ;
 file_string = "CST Files/Pillbox/Wake_15GHz_30cpw_3modes_10sigma_1M/Export/Port signals/"+fname ;

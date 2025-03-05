@@ -42,7 +42,7 @@ seg_dir = "Matrices/"+problem_dir+"/Generalized_Matrices/" ;
 % ... from z=0 to z=maximum (i.e. upstream to downstream).
 N_segs = 2 ;    % Number of segments to be concatenated.
 
-segment_names = ["pillbox_3modes_Dec5"] ;
+segment_names = ["pillbox_15GHz_3modes_March"] ;
 
 % Repeat matrices for N_seg-pillbox problem.
 segment_names = repmat(segment_names(1),1,N_segs) ;
@@ -53,7 +53,7 @@ orthogonal_matrices_dir = "Matrices/"+problem_dir+"/Orthogonal_Matrices/" ;
 
 
 %% Save directory and filename
-save_dir = "Matrices/"+N_segs+problem_dir ;
+save_dir = "Matrices/"+N_segs+problem_dir+"/Generalized_Matrices" ;
 save_filename = N_segs + segment_names(1) ;
 
 
