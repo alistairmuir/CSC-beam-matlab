@@ -3,16 +3,16 @@
 % Add paths to matrices and results for easy access to all S matrices.
 addpath(genpath("Matrices"))
 close all
-clear all
+clear
 
 %% USER INPUT
 % Choose which plots to include in graph (edit the switch cases below).
-choose_plots = [2,3] ;
+choose_plots = [1,2,3] ;
 
 % Adjust legend for above plots (include empty entry in between CSC plots
 % to avoid including cut-off frequency plots in legend).
 legend_labels = ["Tom CSC", "", "Ali CSC", "", "Direct (CST)"] ;
-legend_labels = ["CSC^{Beam}", "", "Direct (CST)"] ;
+%legend_labels = ["CSC^{Beam}", "", "Direct (CST)"] ;
 
 % Include cut-off frequency line?
 plot_fco = true ;
@@ -49,7 +49,7 @@ for which_plot = choose_plots
         
         case 2
             %%% S-matrix 2
-            S_dir = "Matrices/2Pillbox/Generalized_Matrices/2pillbox_15GHz_TM01_March" ;
+            S_dir = "Matrices/2Pillbox/Generalized_Matrices/2cavityCSC_BEAM_Alistair" ;
             clear_plots = false ;
 
             marker_col = '#A0A' ;
