@@ -42,7 +42,7 @@ seg_dir = "Matrices/"+problem_dir+"/Generalized_Matrices/" ;
 % ... from z=0 to z=maximum (i.e. upstream to downstream).
 N_segs = 2 ;    % Number of segments to be concatenated.
 
-segment_names = ["pillbox_15GHz_3modes_March"] ;
+segment_names = ["segment_matrix_name"] ;
 
 % Repeat matrices for N_seg-pillbox problem.
 segment_names = repmat(segment_names(1),1,N_segs) ;
