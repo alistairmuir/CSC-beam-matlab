@@ -20,12 +20,12 @@ clear
 
 %% USER INPUT
 filepath = ...
-    "/home/alistair/git/CSC-beam-matlab/Matrices/Pillbox/Orthogonal_Matrices/"+...
+    "c:/Users/alistair/git/CSC-beam-matlab/Matrices/Pillbox/Orthogonal_Matrices/"+...
     "2segments_3modes" ;
 
 %%% Info regarding modes and segments (for plotting axes)
-N_modes_int = 3 ;    % number of internal modes expected
-N_modes_ext = 3 ;    % number of external modes expected
+N_modes_ext = 3 ;             % number of external modes expected
+N_modes_int = N_modes_ext ;    % number of internal modes expected
 N_segs      = 2 ;    % number of segments expected
 
 markercolour = [0.7, 0, 0.7] ;

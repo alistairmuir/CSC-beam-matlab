@@ -6,11 +6,11 @@ clc
 %% Load S_csc and direct wakes
 pmode = [1:3] ;
 
-plotlabels(1) = "Alistair Cylinder" ;
-plotlabels(2) = "Thomas Cylinder" ;
+plotlabels(1) = "CSC-Beam" ;
+plotlabels(2) = "Direct" ;
 
-S1 = load("Matrices/2Example_CylindricalCavity/2ali_gm_segment_left_1_mode.mat") ;
-S2 = load("Matrices/2Example_CylindricalCavity/CylindricalCavity_Thomas_1mode.mat") ;
+S1 = load("Matrices/2Pillbox/Generalized_Matrices/2pillbox_15GHz_TM01_March_seg2.mat") ;
+S2 = load("Matrices/2Pillbox/Generalized_Matrices/2pillbox_direct_TM01_Dec5.mat") ;
 
 %%% Turn on one-cavity plot
 plot_1cav = false ;

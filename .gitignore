@@ -10,12 +10,12 @@ Results/
 CST Files/
 
 # Sphinx and virtual environment stuff
-source/
-bin/
-build/
-lib/
-include/
-lib64
-Makefile
-make.bat
-pyvenv.cfg
+#source/
+#bin/
+#build/
+#lib/
+#include/
+#lib64
+#Makefile
+#make.bat
+#pyvenv.cfg
