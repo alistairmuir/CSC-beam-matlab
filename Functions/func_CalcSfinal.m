@@ -1,4 +1,4 @@
-function S = func_CalcSfinal(M, G, F, N_intmodes)
+function S = func_CalcSfinal(M, G, F)
 % A function to calculate the final generalized matrix as given CSC-beam method given in ref [1].
 %
 % References:
@@ -11,17 +11,16 @@ function S = func_CalcSfinal(M, G, F, N_intmodes)
 % :type  G: double
 % :param F: Feedback matrix (M-by-M) for matching modes between internal ports.
 % :type  F: double
-% :param N_intmodes: Total number of internal modes from all segments.
-% :type  N_intmodes: integer
 % 
-% :returns: S (2*N_ext+1-by-2*N_ext+1, where N_ext = number of external modes)
+% :returns: S (2*N_ext+1-by-2*N_ext+1, where N_ext = number of external port modes)
 
+% Total number of all internal modes being concatenated throughout entire structure.
+N_intmodes = length(F) ;
 
 % Split block matrix G into quadrants ready for concatenation (Ref. [1])
 %
 %  G  =  [ G11 G12 ]
 %        [ G21 G22 ]
-
 G11 = G(1:N_intmodes, 1:N_intmodes) ;
 G12 = G(1:N_intmodes, 1+N_intmodes:end) ;
 
