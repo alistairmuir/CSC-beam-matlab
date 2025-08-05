@@ -45,25 +45,26 @@ seg_dir = "Matrices/"+problem_dir+"/Generalized_Matrices/" ;
 % File names of for generalized matrices for all segments in beam path in sequential order...
 % ... from z=0 to z=maximum (i.e. upstream to downstream).
 
-segment_names = ["segment_1_name", "segment_2_name"] ;
+segment_names = ["pillbox_TM01_hifi", "pillbox_TM01_hifi"] ;
 
 %%% Number of modes for each port: [port1(seg1,seg2,...) ;
 %%%                                [port2(seg1,seg2,...)];
-nport1  = [40, 40] ;
-nport2  = [40, 40] ;
+nport1  = [1, 1] ;
+nport2  = [1, 1] ;
 N_modes = [ nport1 ;
             nport2 ] ;
 
 
-%%% Directory containing the orthogonal matrices.
+%%% Filepath containing the orthogonal matrices.
 orthogonal_matrices_dir = "Matrices/"+problem_dir+"/Orthogonal_Matrices/" ;
 orthogonal_matrices_path = orthogonal_matrices_dir + "/" + ...
-    length(segment_names) + "segments_" + num2str(N_modes(1,end)+N_modes(end,end)) + "modes" ;
+    length(segment_names) + "segments_" + N_modes(1,1) + "modes" ;
 
 
 %% Save directory and filename
-save_dir = "Matrices/"+N_segs+problem_dir+"/Generalized_Matrices" ;
-save_filename = N_segs + segment_names(1) ;
+save_dir = "Matrices/"+length(segment_names)+problem_dir+"/Generalized_Matrices" ;
+save_dir = "./" ;
+save_filename = length(segment_names) + segment_names(1) ;
 
 
 %% Plot?
