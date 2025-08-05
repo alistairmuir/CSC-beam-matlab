@@ -11,11 +11,6 @@
 
 
 %% Plotting aesthetics
-% Plot full S-matrix or only z_b
-if ~exist('plot_full', 'var')
-    plot_full = true ;
-end
-
 % Font size for all axes.
 if ~exist('plt_fontsize', 'var')
     plt_fontsize = 10 ;
@@ -76,13 +71,11 @@ end
 
 %% Calculations from S matrix
 % Get number of port modes, if not already known.
-if ~exist('N_modes', 'var')
-    switch mod(length(S(1,1,:)),2)
-        case 0
-            N_modes = length(S(1,1,:))/2 ;   % without beam.
-        case 1
-            N_modes = (length(S(1,1,:))-1)/2 ;   % with beam.
-    end
+switch mod(length(S(1,1,:)),2)
+    case 0
+        N_modes = length(S(1,1,:))/2 ;   % without beam.
+    case 1
+        N_modes = (length(S(1,1,:))-1)/2 ;   % with beam.
 end
 
 % Calc GM magnitude in dB.
@@ -161,7 +154,7 @@ end
 
 %% The plotting
 %%% Only plot whole generalized S-matrix if it is not too large.
-if N_modes < 3 && plot_full
+if N_modes < 3
     
     %%% y-axis units
     yunits = [repmat("dB",1,2*N_modes), "dB\surd\Omega"] ;
