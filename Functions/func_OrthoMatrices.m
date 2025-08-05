@@ -13,7 +13,7 @@ function [P, F] = func_OrthoMatrices(N_ext, N_int, N_segs)
 % :param N_segs: Number of segments to be concatenated by Scsc_Script.
 % :tpye  N_segs: integer
 %
-% :returns: P, F (permutation matrix and feedback matrix, both are orthogonal matrices)
+% :returns: P (N-by-N), F (M-by-M) where M=2*N_int*(N_segs-1) and N=M+2*N_ext+1
 
 
 %%% Initialization
