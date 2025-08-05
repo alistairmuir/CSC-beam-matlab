@@ -126,8 +126,8 @@ if y_axis_limits(1)==0 && y_axis_limits(2)==0
 
     else
         % Generate grid of plot limits from default values.
-        plt_y_mins = y_axis_limits(1)*ones(2*N_modes + 1) ;
-        plt_y_maxs = y_axis_limits(2)*ones(2*N_modes + 1) ;
+        plt_y_mins = -200 ;
+        plt_y_maxs =  200 ;
 
     end
     
@@ -266,7 +266,7 @@ else
     end
 
     hold on    % Hold on - to allow multiple results.
-    plot(f(:),abs(real(S(:,end,end))), mkr, 'MarkerSize', 8, 'MarkerEdgeColor', marker_col)
+    plot(f(:),real(S(:,end,end)), mkr, 'MarkerSize', 8, 'MarkerEdgeColor', marker_col)
     grid on
     grid minor
     xlabel("f / "+f_label, 'FontSize', plt_fontsize)
@@ -277,7 +277,6 @@ else
     end
 
     title("Beam Impedance (Real Component)", 'FontSize', 15)
-    set(gca, 'YScale', 'log')
     ylim([plt_y_mins(end,end), plt_y_maxs(end,end)])
 
     if exist('f_co', 'var') && plot_fco
@@ -297,7 +296,7 @@ else
     end
     
     hold on    % Hold on - to allow multiple results.
-    plot(f(:),abs(imag(S(:,end,end))), mkr, 'MarkerSize', 8, 'MarkerEdgeColor', marker_col)
+    plot(f(:),imag(S(:,end,end)), mkr, 'MarkerSize', 8, 'MarkerEdgeColor', marker_col)
     grid on
     grid minor
     xlabel("f / "+f_label, 'FontSize', plt_fontsize)
@@ -308,7 +307,7 @@ else
     end
 
     title("Beam Impedance (Imaginary Component)", 'FontSize', 15)
-    set(gca, 'YScale', 'log')
+
     ylim([plt_y_mins(end,end), plt_y_maxs(end,end)])
 
     if exist('f_co', 'var') && plot_fco
