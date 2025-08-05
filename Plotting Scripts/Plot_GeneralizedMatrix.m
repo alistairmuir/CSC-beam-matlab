@@ -69,15 +69,16 @@ if ~exist('plot_fco', 'var')
 end
 
 
-%% Calculations from S matrix
-% Get number of port modes, if not already known.
+%% Number of port modes
 switch mod(length(S(1,1,:)),2)
     case 0
-        N_modes = length(S(1,1,:))/2 ;   % without beam.
+        N_modes = length(S(1,1,:)) ;   % without beam.
     case 1
-        N_modes = (length(S(1,1,:))-1)/2 ;   % with beam.
+        N_modes = length(S(1,1,:))-1 ;   % with beam.
 end
 
+
+%% S-Matrix conversion to magnitude and phase
 % Calc GM magnitude in dB.
 S_db = 20*log10(abs(S)) ;
 
@@ -113,7 +114,7 @@ end
 %% Y-axis limits for magnitudes.
 if y_axis_limits(1)==0 && y_axis_limits(2)==0
     
-    if N_modes==1
+    if N_modes==2
         % T. Flisgen's plot limits for one pillbox
         plt_y_mins = [-150, -200, -50 ;
                       -200, -150, -50 ;
@@ -138,16 +139,16 @@ if y_axis_limits(1)==0 && y_axis_limits(2)==0
         y_axis_limits = [-150, 100] ;
 
         % Generate grid of plot limits from default values.
-        plt_y_mins = y_axis_limits(1)*ones(2*N_modes + 1) ;
-        plt_y_maxs = y_axis_limits(2)*ones(2*N_modes + 1) ;
+        plt_y_mins = y_axis_limits(1)*ones(N_modes + 1) ;
+        plt_y_maxs = y_axis_limits(2)*ones(N_modes + 1) ;
 
     end
     
 else
     
     % Generate grid of plot limits from user-given values.
-    plt_y_mins = y_axis_limits(1)*ones(2*N_modes + 1) ;
-    plt_y_maxs = y_axis_limits(2)*ones(2*N_modes + 1) ;
+    plt_y_mins = y_axis_limits(1)*ones(N_modes + 1) ;
+    plt_y_maxs = y_axis_limits(2)*ones(N_modes + 1) ;
 
 end
 
@@ -157,9 +158,9 @@ end
 if N_modes < 3
     
     %%% y-axis units
-    yunits = [repmat("dB",1,2*N_modes), "dB\surd\Omega"] ;
-    yunits = repmat(yunits, 2*N_modes, 1) ;
-    yunits = [yunits ; repmat("dB\surd\Omega",1,2*N_modes), "dB\Omega"] ;
+    yunits = [repmat("dB",1,N_modes), "dB\surd\Omega"] ;
+    yunits = repmat(yunits, N_modes, 1) ;
+    yunits = [yunits ; repmat("dB\surd\Omega",1,N_modes), "dB\Omega"] ;
     
 
     %%% Plot: generalized matrix magntidue
@@ -169,18 +170,18 @@ if N_modes < 3
         clf
     end
     
-    for pii=1:2*N_modes+1
-        for pjj=1:2*N_modes+1
+    for pii=1:N_modes+1
+        for pjj=1:N_modes+1
 
             %%% Construct labels
-            if pii<2*N_modes+1
-                if pjj<2*N_modes+1
+            if pii<N_modes+1
+                if pjj<N_modes+1
                     S_symbol = "S_{"+string(pii)+string(pjj)+"}" ;
                 else
                     S_symbol = "k_{"+string(pii)+"}" ;
                 end
             else
-                if pjj<2*N_modes+1
+                if pjj<N_modes+1
                     S_symbol = "h_{"+string(pjj)+"}" ;
                 else
                     S_symbol = "z_b" ;
@@ -188,8 +189,8 @@ if N_modes < 3
             end                
 
             % Create this element's plot
-            plti = (2*N_modes+1)*(pii-1)+pjj ;
-            subplot(2*N_modes+1,2*N_modes+1,plti)
+            plti = (N_modes+1)*(pii-1)+pjj ;
+            subplot(N_modes+1,N_modes+1,plti)
 
             % Plot
             hold on    % Hold on - to allow multiple results.
@@ -229,18 +230,18 @@ if N_modes < 3
         clf
     end
     
-    for pii=1:2*N_modes+1
-        for pjj=1:2*N_modes+1
+    for pii=1:N_modes+1
+        for pjj=1:N_modes+1
 
             %%% Construct labels
-            if pii<2*N_modes+1
-                if pjj<2*N_modes+1
+            if pii<N_modes+1
+                if pjj<N_modes+1
                     S_symbol = "S_{"+string(pii)+string(pjj)+"}" ;
                 else
                     S_symbol = "k_{"+string(pii)+"}" ;
                 end
             else
-                if pjj<2*N_modes+1
+                if pjj<N_modes+1
                     S_symbol = "h_{"+string(pjj)+"}" ;
                 else
                     S_symbol = "z_b" ;
@@ -248,8 +249,8 @@ if N_modes < 3
             end
             
             % Create this element's plot
-            plti = (2*N_modes+1)*(pii-1)+pjj ;
-            subplot(2*N_modes+1,2*N_modes+1,plti)
+            plti = (N_modes+1)*(pii-1)+pjj ;
+            subplot(N_modes+1,N_modes+1,plti)
             
             % Plot
             hold on    % Hold on - to allow multiple results.
