@@ -1,4 +1,4 @@
-function [S, freqs, Length] = func_CalcScsc_NoBeam(seg_dir, segment_names, orthogonal_matrices_dir)
+function [S, freqs, Length] = func_CalcScsc_NoBeam(seg_dir, segment_names, orthogonal_matrices_path)
 % A function to carry out Scsc-beam for generalized matrices representing adjecent
 % sections of beam path. The list order in segment_names dictates the section order.
 %
@@ -36,10 +36,6 @@ L_segs(1) = seg_matrix.Length ;
 % Calculate number of modes from first segment matrix.
 N_size  = length(seg_matrix.S(1,1,:)) ;
 N_modes = N_size/2 ;
-
-% Construct path for orthogonal matrices file.
-orthogonal_matrices_path = orthogonal_matrices_dir + "/NoBeam_" + ...
-N_segs + "segments_" + N_modes + "modes" ;
 
 % Load permutation matrix, P, and feedback matrix, F.
 load(orthogonal_matrices_path, 'P', 'F')
