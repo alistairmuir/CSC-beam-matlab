@@ -12,7 +12,11 @@
 % :param seg_dir: directory containing the GMs for this problem.
 % :type  seg_dir: string
 % :param segment_names: array of filenames for all the GMs in the problem.
-% :type  segment_names: 1D array, string
+% :param segment_names: array of filenames for all the GMs in the problem.
+% :param N_modes: 2D-array giving number of port modes for all segments in the form:
+%                 [port1(seg1,seg2,...) ;
+%                  port2(seg1,seg2,...) ]
+% :type  N_modes: integer
 % :param orthogonal_matrices_path: filepath for .mat file containing P and F.
 % :type  orthogonal_matrices_path: string
 % :param save_dir: directory in which the final matrix is saved.
@@ -30,7 +34,7 @@
 
 
 %% Directories for loading and saving generalized matrices.
-problem_dir = "Example_CylindricalCavity" ;
+problem_dir = "Stepped Rectangular Waveguide" ;
 
 
 %% Directories for orthogonal and generalized matrices.
@@ -40,22 +44,26 @@ seg_dir = "Matrices/"+problem_dir+"/Generalized_Matrices/" ;
 %%% Array of segment GM filenames.
 % File names of for generalized matrices for all segments in beam path in sequential order...
 % ... from z=0 to z=maximum (i.e. upstream to downstream).
-N_segs = 2 ;    % Number of segments to be concatenated.
+segment_names = "steprect_" + ["seg1", "seg2"] ;
 
-segment_names = ["ali_gm_segment_left_1_mode", ...
-                 "ali_gm_segment_right_1_mode"] ;
+%%% Number of modes for each port: [port1(seg1,seg2,...) ;
+%%%                                [port2(seg1,seg2,...)];
+nport1  = [40, 40] ;
+nport2  = [40, 40] ;
+N_modes = [ nport1 ;
+            nport2 ] ;
 
 %%% Directory containing the orthogonal matrices.
-orthogonal_matrices_dir = "Matrices/"+problem_dir+"/Orthogonal_Matrices/" ;
+orthogonal_matrices_path = "Matrices/"+problem_dir+"/Orthogonal_Matrices" ;
 
 
 %% Save directory and filename
-save_dir = "Matrices/"+N_segs+problem_dir ;
-save_filename = N_segs + segment_names(1) ;
+save_dir = "Matrices/"+problem_dir+"/Generalized_Matrices" ;
+save_filename = "Full-CSC-beam-2order" ;
 
 
 %% Plot?
-plot_switch   = "mag" ;   % Plot mag/phase ("mag"), real/imag ("real"), or "none".
+plot_switch   = "real" ;   % Plot mag/phase ("mag"), real/imag ("real"), or "none".
 f_label       = "GHz" ;  % Frequency units for plotting.
 f_CST2SI      = 1e9 ;    % Frequency conversion factor.
 y_axis_limits = [0,0] ;  % Limits on the y-axis (0,0 = T. Flisgen's limits)

@@ -13,8 +13,12 @@
 % :type  seg_dir: string
 % :param segment_names: array of filenames for all the GMs in the problem.
 % :type  segment_names: 1D array, string
-% :param orthogonal_matrices_dir: directory containing the required orthogonal matrix.
-% :type  orthogonal_matrices_dir: string
+% :param N_modes: 2D-array giving number of port modes for all segments in the form:
+%                 [port1(seg1,seg2,...) ;
+%                  port2(seg1,seg2,...) ]
+% :type  N_modes: integer
+% :param orthogonal_matrices_path: filepath for .mat file containing P and F.
+% :type  orthogonal_matrices_path: string
 % :param save_dir: directory in which the final matrix is saved.
 % :type  save_dir: string
 % :param save_filename: directory into which the result matrix is stored.
@@ -40,16 +44,21 @@ seg_dir = "Matrices/"+problem_dir+"/Generalized_Matrices/" ;
 %%% Array of segment GM filenames.
 % File names of for generalized matrices for all segments in beam path in sequential order...
 % ... from z=0 to z=maximum (i.e. upstream to downstream).
-N_segs = 2 ;    % Number of segments to be concatenated.
 
-segment_names = ["segment_matrix_name"] ;
+segment_names = ["segment_1_name", "segment_2_name"] ;
 
-% Repeat matrices for N_seg-pillbox problem.
-segment_names = repmat(segment_names(1),1,N_segs) ;
+%%% Number of modes for each port: [port1(seg1,seg2,...) ;
+%%%                                [port2(seg1,seg2,...)];
+nport1  = [40, 40] ;
+nport2  = [40, 40] ;
+N_modes = [ nport1 ;
+            nport2 ] ;
 
 
 %%% Directory containing the orthogonal matrices.
 orthogonal_matrices_dir = "Matrices/"+problem_dir+"/Orthogonal_Matrices/" ;
+orthogonal_matrices_path = orthogonal_matrices_dir + "/" + ...
+    length(segment_names) + "segments_" + num2str(N_modes(1,end)+N_modes(end,end)) + "modes" ;
 
 
 %% Save directory and filename
