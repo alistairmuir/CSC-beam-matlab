@@ -9,16 +9,16 @@
 % The listed parameters are the only parameters needed by the Scsc_Script.m, but other parameters
 % can be defined to help define those parameters (e.g. creating strings comprised of other strings).
 %
-% :param f_label: frequency label for plotting.
-% :type  f_label: string
-% :param N_modes: Number of modes included in all generalized matrices (GMs).
-% :type  N_modes: int
-% :param orthogonal_matrices_dir: directory containing the required orthogonal matrix.
-% :type  orthogonal_matrices_dir: string
 % :param seg_dir: directory containing the GMs for this problem.
 % :type  seg_dir: string
 % :param segment_names: array of filenames for all the GMs in the problem.
-% :type  segment_names: 1D array, string
+% :param segment_names: array of filenames for all the GMs in the problem.
+% :param N_modes: 2D-array giving number of port modes for all segments in the form:
+%                 [port1(seg1,seg2,...) ;
+%                  port2(seg1,seg2,...) ]
+% :type  N_modes: integer
+% :param orthogonal_matrices_path: filepath for .mat file containing P and F.
+% :type  orthogonal_matrices_path: string
 % :param save_dir: directory in which the final matrix is saved.
 % :type  save_dir: string
 % :param save_filename: directory into which the result matrix is stored.
