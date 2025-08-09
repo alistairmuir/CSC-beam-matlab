@@ -79,7 +79,7 @@ for ii=1:N_segs-1
     end
 
     % Check sample frequencies for all segments are the same.
-    if isequal(seg_matrix(ii).f, seg_matrix(ii+1).f)
+    if ~isequal(seg_matrix(ii).f, seg_matrix(ii+1).f)
         error('Inconsistent frequencies in segment S-matrices.');
     end
 end
@@ -122,5 +122,9 @@ for fi = 1:N_f
     S(fi,:,:) = func_CalcSfinal(M, G, F) ;
     
 end
+
+% Assign output frequency array
+freqs = seg_matrix(1).f(:) ;
+
 end
 
