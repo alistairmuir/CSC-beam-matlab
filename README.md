@@ -4,20 +4,43 @@ A test-bed implementation of CSC-beam using Matlab and CST Suite results files.
 Introduction
 ====
 
-This repository contains three main scripts:
+This repository contains four main scripts:
 
+   - ``FormatFELISResults_Script.m``
    - ``GeneralizedMatrix_Script.m``
    - ``Scsc_Script.m`` 
    - ``OrthogonalMatrices_Script.m``
 
-Two plotting scripts are also present, but are not integral to the workflow.
 Please note the three dependent subdirectories:
    - **Functions**: all proprietary functions are stored this folder.
    - **Configs**: all configuration files are stored in this folder.
    - **Plotting Scripts**: all plotting called by the main scripts are stored in this
      folder, along with other scripts which can be used to analyse results manually.
 
-The three main scripts are described below.
+The four main scripts are described below.
+
+``FormatFELISResults_Script.m``
+----
+This script generates generalized matrices and corresponding orthogonal matrices 
+for a set of FELIS simulation results, given in the configuration file.
+
+The script has the following sections:
+
+   - *Add dependent paths*:\
+        Adds the configuration file folder to the working path.
+   - *Load config file*:\
+        Loads the configuration file which specifies the number of internal and
+        external modes, and the number sections.
+   - *Sanity Check*:\
+        A check is done to ensure the length of all relevant arrays correspond
+        to the number of segments.
+   - *Construct and save S-matrix for each segment*:\
+          Returns the generalized matrices for all sections.
+        - ``func_Import_FELISdata``
+        - ``func_SaveGM``
+   - *Construct and save orthogonal matrices*:\
+          Returns the orthogonal matrices P and F and stores them in the 
+        user-specified directory.
 
 ``GeneralizedMatrix_Script.m``
 ----
