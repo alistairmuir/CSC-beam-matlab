@@ -8,7 +8,7 @@
 %
 % :param segment_names: String array containing folder names for all segments in this problem.
 % :type  segment_names: string
-% :param felisresults_folder: Directory for the folder containing all FELIS results for this problem.
+% :param felisresults_folder: Directory for the folder containing all FELIS results for this problem. 
 % :type  felisresults_folder: string
 % :param save_filenames: Array of output filenames for the GM for every segment.
 % :type  save_filenames: string
@@ -20,6 +20,10 @@
 % :type  N_segs: integer
 % :param Length: Array containing the length of each segment.
 % :type  Length: double
+% :param P1_labels: List of port 1 labels, dependent on boundary indices - see FELIS config files.
+% :type  P1_labels: string
+% :param P2_labels: List of port 2 labels, dependent on boundary indices - see FELIS config files.
+% :type  P2_labels: string
 % :param nTE1: Number of TE modes at port 1
 % :type  nTE1: integer
 % :param nTM1: Number of TM modes at port 1
@@ -29,19 +33,16 @@
 % :param nTM2: Number of TM modes at port 2
 % :type  nTM2: integer
 
+
 %%% FOLDERS
-% Folders containing FELIS output for each segment.
-segment_names = "steprect_seg" + (1:2) ;
-felisresults_folders = "FELIS Files/Stepped Rectangular Waveguide/2order_20TE_20TM" ;
+% Problem name for consistent directory name construction.
+problem_name = "Stepped Rectangular Waveguide" ;
 
-% Filename for each segment S-matrix.
-save_filenames = "2order_"+segment_names ;
+% FELIS output folder names for each segment.
+segment_names = "steprectveryfine_1order_20TE_20TM_seg" + ["1" , "2"] ;
 
-% Folder into which all S-matrices will be stored.
-S_output_folder = "Matrices/Stepped Rectangular Waveguide/Generalized_Matrices" ;
-
-% Folder into which the orthogonal matrices, P and F, will be saved.
-PF_output_folder = "Matrices/Stepped Rectangular Waveguide/Orthogonal_Matrices" ;
+% Directory containing the segment results folders above.
+felisresults_folder = "FELIS Files/"+problem_name+"/1st order veryfine" ;
 
 
 %%% SEGMENT ARRAYS
@@ -49,22 +50,34 @@ PF_output_folder = "Matrices/Stepped Rectangular Waveguide/Orthogonal_Matrices" 
 N_segs = length(segment_names) ;
 
 % List containing the lengths of all segments (in metres)
-Length = [400, 400] * 1e-3 ;
+Length = [0, 0] * 1e-3 ;
 
 
 %%% PORT MODES
-% Number of TE and TM modes at each port
-N_TE = 20 ;
-N_TM = 20 ;
+% Labels for each ports (see labels of FELIS files or config files for each segment)
+P1_labels = ["P1", "P1"] ;
+P2_labels = ["P2", "P2"] ;
 
-% Number of incoming port modes at each port.
-nTE1(1:N_segs) = N_TE ; % Port 1 of all subsequent cells.
-nTM1(1:N_segs) = N_TM ;
-nTE2 = nTE1 ;  % Port 2 couples to port 1 of next cell.
-nTM2 = nTM1 ;
+% Number of port modes at each port.
+Nm = 20 ;
+nTE1 = [Nm,Nm] ; % Port 1 of all cells.
+nTM1 = [Nm,Nm] ;
+nTE2 = [Nm,Nm] ;  % Port 2 couples to port 1 of previous cell.
+nTM2 = [Nm,Nm] ;
 
-%nTE1(1) = 0 ; % Cell 1 - port 1
-%nTM1(1) = 0 ;
-%nTE2(end) = 0 ; % Final cell - port 2
-%nTM2(end) = 0 ; 
+
+
+%%%% Saving Matrices
+% Folder into which all S-matrices will be stored.
+S_output_folder = "Matrices/"+problem_name+"/Generalized_Matrices" ;
+save_filenames = "steprect_veryfine_1order_40modes_seg" + ["1", "2"] ;  % Filenames of the resultant S matrices.
+
+
+% Folder into which the orthogonal matrices, P and F, will be saved.
+PF_output_folder = "Matrices/"+problem_name+"/Orthogonal_Matrices" ;
+PF_savefilename = "FELIS_steprect_40modes" ;  % Filename containing orthogonal matrices
+
+
+%PF_output_folder = "Matrices/"+problem_name+"/Orthogonal_Matrices/FELIS_"+...
+%    N_segs+"segs_"+num2str(N_tE+N_TM)+"modes" ;
 
