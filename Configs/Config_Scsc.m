@@ -1,4 +1,4 @@
 %% Config_Scsc (Runs user-specified config file)
 
 % Run this .m config file
-Config_Scsc_Pillbox
+Config_Scsc_StepRect

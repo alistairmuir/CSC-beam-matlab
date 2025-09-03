@@ -44,29 +44,31 @@ seg_dir = "Matrices/"+problem_dir+"/Generalized_Matrices/" ;
 %%% Array of segment GM filenames.
 % File names of for generalized matrices for all segments in beam path in sequential order...
 % ... from z=0 to z=maximum (i.e. upstream to downstream).
-segment_names = "steprect_" + ["seg1", "seg2"] ;
+nameprefix = "steprect_veryfine_1order_40modes" ;
+segment_names = nameprefix + ["_seg1", "_seg2"] ;
 
 %%% Number of modes for each port: [port1(seg1,seg2,...) ;
 %%%                                [port2(seg1,seg2,...)];
-nport1  = [40, 40] ;
-nport2  = [40, 40] ;
+nport1  = [40,40] ;
+nport2  = [40,40] ;
 N_modes = [ nport1 ;
             nport2 ] ;
 
 %%% Directory containing the orthogonal matrices.
-orthogonal_matrices_path = "Matrices/"+problem_dir+"/Orthogonal_Matrices" ;
+orthogonal_matrices_path = "Matrices/"+problem_dir+"/Orthogonal_Matrices/"+...
+    "FELIS_2segs_40modes" ;
 
 
 %% Save directory and filename
 save_dir = "Matrices/"+problem_dir+"/Generalized_Matrices" ;
-save_filename = "Full-CSC-beam-2order" ;
+save_filename = "CSCbeam_"+nameprefix ;
 
 
 %% Plot?
 plot_switch   = "real" ;   % Plot mag/phase ("mag"), real/imag ("real"), or "none".
 f_label       = "GHz" ;  % Frequency units for plotting.
 f_CST2SI      = 1e9 ;    % Frequency conversion factor.
-y_axis_limits = [0,0] ;  % Limits on the y-axis (0,0 = T. Flisgen's limits)
+y_axis_limits = [-200,200] ;  % Limits on the y-axis (0,0 = T. Flisgen's limits)
 
 %%%%%%%%%%%%%%%%%%%%   END   %%%%%%%%%%%%%%%%%%%%
 

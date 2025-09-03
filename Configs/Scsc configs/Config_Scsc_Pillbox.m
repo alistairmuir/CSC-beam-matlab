@@ -34,41 +34,40 @@
 
 
 %% Directories for loading and saving generalized matrices.
-problem_dir = "Pillbox" ;
+problem_name = "Pillbox FELIS" ;
 
 
 %% Directories for orthogonal and generalized matrices.
 %%% Directory containing segment generalized matrices (GMs).
-seg_dir = "Matrices/"+problem_dir+"/Generalized_Matrices/" ;
+seg_dir = "Matrices/"+problem_name+"/Generalized_Matrices/" ;
 
 %%% Array of segment GM filenames.
 % File names of for generalized matrices for all segments in beam path in sequential order...
 % ... from z=0 to z=maximum (i.e. upstream to downstream).
 
-segment_names = ["pillbox_TM01_hifi", "pillbox_TM01_hifi"] ;
+segment_names = ["felis_order2_4modes_seg1", "felis_order2_4modes_seg2"] ;
 
 %%% Number of modes for each port: [port1(seg1,seg2,...) ;
 %%%                                [port2(seg1,seg2,...)];
-nport1  = [1, 1] ;
-nport2  = [1, 1] ;
+nport1  = [4, 4] ;
+nport2  = [4, 4] ;
 N_modes = [ nport1 ;
             nport2 ] ;
 
 
 %%% Filepath containing the orthogonal matrices.
-orthogonal_matrices_dir = "Matrices/"+problem_dir+"/Orthogonal_Matrices/" ;
+orthogonal_matrices_dir = "Matrices/"+problem_name+"/Orthogonal_Matrices/" ;
 orthogonal_matrices_path = orthogonal_matrices_dir + "/" + ...
-    length(segment_names) + "segments_" + N_modes(1,1) + "modes" ;
+    "felis_2segs_4modes" ;
 
 
 %% Save directory and filename
-save_dir = "Matrices/"+length(segment_names)+problem_dir+"/Generalized_Matrices" ;
-save_dir = "./" ;
-save_filename = length(segment_names) + segment_names(1) ;
+save_dir = "Matrices/"+length(segment_names)+problem_name+"/Generalized_Matrices" ;
+save_filename = problem_name + "_" + length(segment_names) + "segs_CSC" ;
 
 
 %% Plot?
-plot_switch   = "mag" ;   % Plot mag/phase ("mag"), real/imag ("real"), or "none".
+plot_switch   = "real" ;   % Plot mag/phase ("mag"), real/imag ("real"), or "none".
 f_label       = "GHz" ;  % Frequency units for plotting.
 f_CST2SI      = 1e9 ;    % Frequency conversion factor.
 y_axis_limits = [0,0] ;  % Limits on the y-axis (0,0 = T. Flisgen's limits)
