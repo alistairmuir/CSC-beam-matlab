@@ -1,6 +1,9 @@
 %% Script to construct S-matrices ready for CSC-Beam from FELIS results.
 clc
 clear
+
+
+%% Add dependent paths
 addpath("Functions")
 addpath("Configs")
 
