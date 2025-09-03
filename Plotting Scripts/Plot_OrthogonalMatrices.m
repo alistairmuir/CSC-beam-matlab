@@ -20,11 +20,11 @@ clear
 
 %% USER INPUT
 filepath = ...
-    "c:/Users/alistair/git/CSC-beam-matlab/Matrices/Pillbox/Orthogonal_Matrices/"+...
-    "2segments_3modes" ;
+    "c:/Users/alistair/git/CSC-beam-matlab/Matrices/Stepped Rectangular Waveguide/Orthogonal_Matrices/FELIS_steprect_40modes" ;
+%    "c:/Users/alistair/git/CSC-beam-matlab/ErionCSC/erion_orth" ;
 
 %%% Info regarding modes and segments (for plotting axes)
-N_modes_ext = 3 ;             % number of external modes expected
+N_modes_ext = 40 ;             % number of external modes expected
 N_modes_int = N_modes_ext ;    % number of internal modes expected
 N_segs      = 2 ;    % number of segments expected
 

@@ -6,11 +6,11 @@ clc
 %% Load S_csc and direct wakes
 pmode = [1:3] ;
 
-plotlabels(1) = "CSC-Beam" ;
-plotlabels(2) = "Direct" ;
+plotlabels(1) = "Erion" ;
+plotlabels(2) = "Alistair" ;
 
-S1 = load("Matrices/2Pillbox/Generalized_Matrices/2pillbox_15GHz_TM01_March_seg2.mat") ;
-S2 = load("Matrices/2Pillbox/Generalized_Matrices/2pillbox_direct_TM01_Dec5.mat") ;
+S1 = load("Matrices/Stepped Rectangular Waveguide/Generalized_Matrices/steprect_veryfine_1order_40modes_seg1.mat") ;
+S2 = load("ErionCSC/S_erion.mat") ;
 
 %%% Turn on one-cavity plot
 plot_1cav = false ;
