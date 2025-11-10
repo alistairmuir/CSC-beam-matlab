@@ -32,9 +32,11 @@ end
 
 
 %% Construct and save orthogonal matrices
-[P, F] = func_OrthoMatrices_FELIS(N_segs, nTE1, nTM1, nTE2, nTM2) ;
-mkdir(PF_output_folder)
-save(PF_output_folder+"/"+PF_savefilename, 'P', 'F')
+if create_OrthoMatrices
+    [P, F] = func_OrthoMatrices_FELIS(N_segs, nTE1, nTM1, nTE2, nTM2) ;
+    mkdir(PF_output_folder)
+    save(PF_output_folder+"/"+PF_savefilename, 'P', 'F')
+end
 
 
 %% Message upon completion
