@@ -36,13 +36,16 @@
 
 %%% FOLDERS
 % Problem name for consistent directory name construction.
-problem_name = "Stepped Rectangular Waveguide" ;
+problem_name = "CPMU17" ;
+subproblem = "Entry Only" ;
+datafolder = "cpmu17_entryonly_3order_20-20" ;
+
 
 % FELIS output folder names for each segment.
-segment_names = "steprectveryfine_1order_20TE_20TM_seg" + ["1" , "2"] ;
+segment_names = "" ;
 
 % Directory containing the segment results folders above.
-felisresults_folder = "FELIS Files/"+problem_name+"/1st order veryfine" ;
+felisresults_folder = "FELIS Files\"+problem_name+"\"+subproblem+"\"+datafolder ;
 
 
 %%% SEGMENT ARRAYS
@@ -50,34 +53,33 @@ felisresults_folder = "FELIS Files/"+problem_name+"/1st order veryfine" ;
 N_segs = length(segment_names) ;
 
 % List containing the lengths of all segments (in metres)
-Length = [0, 0] * 1e-3 ;
+Length = zeros(1,N_segs) ;
 
 
 %%% PORT MODES
-% Labels for each ports (see labels of FELIS files or config files for each segment)
-P1_labels = ["P1", "P1"] ;
-P2_labels = ["P2", "P2"] ;
+% Labels for each port
+P1_labels = ["P1"] ; % P1 label for each segment
+P2_labels = ["P2"] ; % P2 label for each segment
 
 % Number of port modes at each port.
 Nm = 20 ;
-nTE1 = [Nm,Nm] ; % Port 1 of all cells.
-nTM1 = [Nm,Nm] ;
-nTE2 = [Nm,Nm] ;  % Port 2 couples to port 1 of previous cell.
-nTM2 = [Nm,Nm] ;
-
+nTE1 = repmat(Nm,1,N_segs) ; % Port 1, TE modes
+nTM1 = repmat(Nm,1,N_segs) ; % Port 1, TM modes
+nTE2 = repmat(Nm,1,N_segs) ; % Port 2, TE modes
+nTM2 = repmat(Nm,1,N_segs) ; % Port 2, TM modes
 
 
 %%%% Saving Matrices
 % Folder into which all S-matrices will be stored.
 S_output_folder = "Matrices/"+problem_name+"/Generalized_Matrices" ;
-save_filenames = "steprect_veryfine_1order_40modes_seg" + ["1", "2"] ;  % Filenames of the resultant S matrices.
+save_filenames = datafolder ;  % Filenames of the resultant S matrices.
 
 
 % Folder into which the orthogonal matrices, P and F, will be saved.
+create_OrthoMatrices = 0 ;
+
 PF_output_folder = "Matrices/"+problem_name+"/Orthogonal_Matrices" ;
-PF_savefilename = "FELIS_steprect_40modes" ;  % Filename containing orthogonal matrices
+PF_savefilename = "FELIS_"+...
+   N_segs+"segs_"+num2str(Nm+Nm)+"modes" ;  % Filename containing orthogonal matrices
 
-
-%PF_output_folder = "Matrices/"+problem_name+"/Orthogonal_Matrices/FELIS_"+...
-%    N_segs+"segs_"+num2str(N_tE+N_TM)+"modes" ;
 

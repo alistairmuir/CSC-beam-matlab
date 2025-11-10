@@ -44,19 +44,16 @@ seg_dir = "Matrices/"+problem_dir+"/Generalized_Matrices/" ;
 %%% Array of segment GM filenames.
 % File names of for generalized matrices for all segments in beam path in sequential order...
 % ... from z=0 to z=maximum (i.e. upstream to downstream).
-nameprefix = "steprect_veryfine_1order_40modes" ;
-segment_names = nameprefix + ["_seg1", "_seg2"] ;
+nameprefix = "steprect_4seg_3order" ;
+segment_names = nameprefix + "_" + ["seg1", "seg2", "seg3", "seg4"] ;
 
 %%% Number of modes for each port: [port1(seg1,seg2,...) ;
 %%%                                [port2(seg1,seg2,...)];
-nport1  = [40,40] ;
-nport2  = [40,40] ;
-N_modes = [ nport1 ;
-            nport2 ] ;
+N_modes = 40 * ones(2, length(segment_names)) ;
 
 %%% Directory containing the orthogonal matrices.
 orthogonal_matrices_path = "Matrices/"+problem_dir+"/Orthogonal_Matrices/"+...
-    "FELIS_2segs_40modes" ;
+    "FELIS_4segs_40modes" ;
 
 
 %% Save directory and filename
