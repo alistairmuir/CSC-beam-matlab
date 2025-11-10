@@ -103,32 +103,17 @@ if exist('Pmodes', 'var') && exist('wake_dir', 'var')
 end
 
 
-%% Y-axis limits for magnitudes.
-if y_axis_limits(1)==0 && y_axis_limits(2)==0
-    
-    if N_modes==2
-        % Default y-axis limits - good for pillbox test case.
-        plt_y_mins = [1e-22, 1e-22, 1e-5 ;
-                      1e-22, 1e-22, 1e-5 ;
-                       1e-5,  1e-5, 1e-3 ] ;
+%% Y-axis limits.
+if y_axis_limits(1)~=0 && y_axis_limits(2)~=0
 
-        plt_y_maxs = [ 1e0,  1e0,  1e4 ;
-                       1e0,  1e0,  1e4 ;
-                       1e4,  1e4,  1e5 ] ;
-
-    else
-        % Generate grid of plot limits from default values.
-        plt_y_mins = -200 ;
-        plt_y_maxs =  200 ;
-
-    end
-    
-else
-    
     % Generate grid of plot limits from user-given values.
     plt_y_mins = y_axis_limits(1)*ones(N_modes + 1) ;
     plt_y_maxs = y_axis_limits(2)*ones(N_modes + 1) ;
 
+    tightplotting = 0 ;
+
+else 
+    tightplotting = 1 ;
 end
 
 
@@ -173,8 +158,13 @@ if N_modes < 3
             % Plot
             hold on    % Hold on - to allow multiple results.
             plot(f(:),abs(real(S(:,pii,pjj))), mkr, 'MarkerSize', marker_size, 'MarkerEdgeColor', marker_col)
-            ylim([plt_y_mins(pii,pjj),plt_y_maxs(pii,pjj)])
-            
+
+            if tightplotting
+                ylim('auto')
+            else
+                ylim([plt_y_mins(pii,pjj),plt_y_maxs(pii,pjj)])
+            end
+
             grid on
             ax = gca ;
             ax.FontSize = plt_fontsize ;
@@ -228,7 +218,12 @@ if N_modes < 3
             hold on    % Hold on - to allow multiple results.
             plot(f(:), abs(imag(S(:,pii,pjj))), mkr, 'MarkerSize', marker_size, 'MarkerEdgeColor', marker_col)
             
-            ylim([plt_y_mins(pii,pjj),plt_y_maxs(pii,pjj)])
+            if tightplotting
+                ylim('auto')
+            else
+                ylim([plt_y_mins(pii,pjj),plt_y_maxs(pii,pjj)])
+            end
+            
             grid on
             
             ax = gca ;
@@ -269,8 +264,13 @@ else
     end
 
     title("Beam Impedance (Real Component)", 'FontSize', 15)
-    ylim([plt_y_mins(end,end), plt_y_maxs(end,end)])
-
+    
+    if tightplotting
+        ylim('auto')
+    else
+        ylim([plt_y_mins(end,end), plt_y_maxs(end,end)])
+    end
+    
     if exist('f_co', 'var') && plot_fco
         xline(f_co, 'b--', 'LineWidth', fco_lw)
     end
@@ -300,8 +300,12 @@ else
 
     title("Beam Impedance (Imaginary Component)", 'FontSize', 15)
 
-    ylim([plt_y_mins(end,end), plt_y_maxs(end,end)])
-
+    if tightplotting
+        ylim('auto')
+    else
+        ylim([plt_y_mins(end,end), plt_y_maxs(end,end)])
+    end
+    
     if exist('f_co', 'var') && plot_fco
         xline(f_co, 'b--', 'LineWidth', fco_lw)
     end
