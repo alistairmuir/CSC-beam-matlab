@@ -8,8 +8,8 @@ This repository contains four main scripts:
 
    - ``FormatFELISResults_Script.m``
    - ``GeneralizedMatrix_Script.m``
-   - ``Scsc_Script.m`` 
    - ``OrthogonalMatrices_Script.m``
+   - ``Scsc_Script.m``
 
 Please note the three dependent subdirectories:
    - **Functions**: all proprietary functions are stored this folder.
@@ -98,6 +98,25 @@ The script has the following sections, which call the given functions:
        and only plots the direct impedance for larger matrices.
       - ``Plot_GeneralizedMatrix``
 
+``OrthogonalMatrices_Script.m``
+----
+This script generates the orthogonal matrices from the parameters specified in a
+configuration file (namely, the number of segments, the number of internal and
+external port modes, and the save directory).
+
+The script has the following sections:
+
+   - *Add dependent paths*:\
+        Adds the configuration file folder to the working path.
+   - *Load config file*:\
+        Loads the configuration file which specifies the number of internal and
+        external modes, and the number sections.
+   - *Call Function*:\
+          Returns the orthogonal matrices P and F. 
+        - ``func_OrthoMatrices``
+   - *Save P and F matrices*:\
+        The matrices are saved in the directory set in the config file.
+        
 ``Scsc_Script.m``
 ----
 This script carries out CSC-beam on the generalized S-parameter
@@ -125,23 +144,3 @@ The script has the following sections:
         Runs a script which plots the whole matrix when only 1 or 2 modes are included,
         and only plots the direct impedance for larger matrices.
       - ``Plot_GeneralizedMatrix``
-
-``OrthogonalMatrices_Script.m``
-----
-This script generates the orthogonal matrices from the parameters specified in a
-configuration file (namely, the number of segments, the number of internal and
-external port modes, and the save directory).
-
-The script has the following sections:
-
-   - *Add dependent paths*:\
-        Adds the configuration file folder to the working path.
-   - *Load config file*:\
-        Loads the configuration file which specifies the number of internal and
-        external modes, and the number sections.
-   - *Call Function*:\
-          Returns the orthogonal matrices P and F. 
-        - ``func_OrthoMatrices``
-   - *Save P and F matrices*:\
-        The matrices are saved in the directory set in the config file.
-        
