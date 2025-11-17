@@ -24,6 +24,12 @@ for segi=1:N_segs
     [S, f] = func_Import_FELISdata(felisresults_folder+"/"+segment_names(segi), ...
         P1_labels(segi), nTE1(segi), nTM1(segi), ...
         P2_labels(segi), nTE2(segi), nTM2(segi)) ;
+
+    %%% Save cut-off frequencies for each port in separate file within FELIS results folder.
+    fco = func_ScrapeCutOffFreqs(felisresults_folder+"/"+segment_names(segi)+"/G-Matrix/B1", ...
+        nTE1(segi), nTM1(segi), nTE2(segi), nTM2(segi)) ;
+
+    save(felisresults_folder+"/"+segment_names(segi)+"/G-Matrix/B1/f_cutoff", "fco") ;
     
     %%% Save matrices
     func_SaveGM(S_output_folder, save_filenames(segi), S, f, Length(segi)) ;
