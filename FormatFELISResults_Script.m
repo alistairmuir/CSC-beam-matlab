@@ -27,6 +27,7 @@ for segi=1:N_segs
 
     %%% Save cut-off frequencies for each port in separate file within FELIS results folder.
     fco = func_ScrapeCutOffFreqs(felisresults_folder+"/"+segment_names(segi)+"/G-Matrix/B1", ...
+        P1_labels(segi), P2_labels(segi), ...
         nTE1(segi), nTM1(segi), nTE2(segi), nTM2(segi)) ;
 
     save(felisresults_folder+"/"+segment_names(segi)+"/G-Matrix/B1/f_cutoff", "fco") ;
@@ -42,9 +43,8 @@ if create_OrthoMatrices
     [P, F] = func_OrthoMatrices_FELIS(N_segs, nTE1, nTM1, nTE2, nTM2) ;
     mkdir(PF_output_folder)
     save(PF_output_folder+"/"+PF_savefilename, 'P', 'F')
+
+    % Message upon completion
+    disp("Stored orthogonal matrices for concatenating "+N_segs+" segments.")
 end
-
-
-%% Message upon completion
-disp("Stored orthogonal matrices for concatenating "+N_segs+" segments.")
 
