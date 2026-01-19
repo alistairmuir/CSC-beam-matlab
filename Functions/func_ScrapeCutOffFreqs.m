@@ -1,4 +1,4 @@
-function fco = func_ScrapeCutOffFreqs(felis_results_dir, nTE1, nTM1, nTE2, nTM2)
+function fco = func_ScrapeCutOffFreqs(felis_results_dir, P1_name, P2_name, nTE1, nTM1, nTE2, nTM2)
 % A function that outputs all the cut-off frequencies as stored in a set of FELIS results files.
 %
 % :param felis_results_dir: String of directory containing FELIS results for one simulation.
@@ -31,25 +31,25 @@ function fco = func_ScrapeCutOffFreqs(felis_results_dir, nTE1, nTM1, nTE2, nTM2)
 
     % --- Port 1 TE modes ---
     for m = 1:nTE1
-        filename = fullfile(felis_results_dir, sprintf('P1_TE%d.txt', m)) ;
+        filename = fullfile(felis_results_dir, sprintf(P1_name+'_TE%d.txt', m)) ;
         fco.TE1(m) = read_cutoff(filename) ;
     end
 
     % --- Port 1 TM modes ---
     for m = 1:nTM1
-        filename = fullfile(felis_results_dir, sprintf('P1_TM%d.txt', m)) ;
+        filename = fullfile(felis_results_dir, sprintf(P1_name+'_TM%d.txt', m)) ;
         fco.TM1(m) = read_cutoff(filename) ;
     end
 
     % --- Port 2 TE modes ---
     for m = 1:nTE2
-        filename = fullfile(felis_results_dir, sprintf('P2_TE%d.txt', m)) ;
+        filename = fullfile(felis_results_dir, sprintf(P2_name+'_TE%d.txt', m)) ;
         fco.TE2(m) = read_cutoff(filename) ;
     end
 
     % --- Port 2 TM modes ---
     for m = 1:nTM2
-        filename = fullfile(felis_results_dir, sprintf('P2_TM%d.txt', m)) ;
+        filename = fullfile(felis_results_dir, sprintf(P2_name+'_TM%d.txt', m)) ;
         fco.TM2(m) = read_cutoff(filename) ;
     end
 end

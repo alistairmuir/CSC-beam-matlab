@@ -37,12 +37,12 @@
 %%% FOLDERS
 % Problem name for consistent directory name construction.
 problem_name = "CPMU17" ;
-subproblem = "Entry Only" ;
-datafolder = "cpmu17_entryonly_3order_20-20" ;
+subproblem   = "cpmu17_9seg" ;
+datafolder   = "cpmu17_9seg" ;
 
 
 % FELIS output folder names for each segment.
-segment_names = "" ;
+segment_names = "seg"+string(1:9) ;
 
 % Directory containing the segment results folders above.
 felisresults_folder = "FELIS Files\"+problem_name+"\"+subproblem+"\"+datafolder ;
@@ -58,8 +58,8 @@ Length = zeros(1,N_segs) ;
 
 %%% PORT MODES
 % Labels for each port
-P1_labels = ["P1"] ; % P1 label for each segment
-P2_labels = ["P2"] ; % P2 label for each segment
+P1_labels = "P"+string(1:9) ; % P1 label for each segment
+P2_labels = "P"+string(2:10) ; % P2 label for each segment
 
 % Number of port modes at each port.
 Nm = 20 ;
@@ -71,15 +71,14 @@ nTM2 = repmat(Nm,1,N_segs) ; % Port 2, TM modes
 
 %%%% Saving Matrices
 % Folder into which all S-matrices will be stored.
-S_output_folder = "Matrices/"+problem_name+"/Generalized_Matrices" ;
-save_filenames = datafolder ;  % Filenames of the resultant S matrices.
+S_output_folder = "Matrices/"+problem_name+"/Generalized_Matrices/"+subproblem ;
+save_filenames = datafolder + "_" + segment_names ;
 
+% Boolean: create file containing orthogonal matrices?
+create_OrthoMatrices = true ;
 
 % Folder into which the orthogonal matrices, P and F, will be saved.
-create_OrthoMatrices = 0 ;
-
 PF_output_folder = "Matrices/"+problem_name+"/Orthogonal_Matrices" ;
-PF_savefilename = "FELIS_"+...
-   N_segs+"segs_"+num2str(Nm+Nm)+"modes" ;  % Filename containing orthogonal matrices
+PF_savefilename  = subproblem + "_" + num2str(Nm+Nm)+"modes" ;
 
 
