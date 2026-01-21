@@ -25,7 +25,9 @@ Config_Scsc
 
 
 %% Carry out CSC-beam
+tic
 [S, f, Length] = func_CalcScsc(seg_dir, segment_names, N_modes, orthogonal_matrices_path) ;
+toc
 
 
 %% Save new GM
