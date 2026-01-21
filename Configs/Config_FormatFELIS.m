@@ -37,15 +37,15 @@
 %%% FOLDERS
 % Problem name for consistent directory name construction.
 problem_name = "CPMU17" ;
-subproblem   = "cpmu17_9seg" ;
-datafolder   = "cpmu17_9seg" ;
+subproblem   = "cpmu17_9seg_4GHz" ;
+datafolder   = "cpmu17_9seg_4GHz" ;
 
 
 % FELIS output folder names for each segment.
 segment_names = "seg"+string(1:9) ;
 
 % Directory containing the segment results folders above.
-felisresults_folder = "FELIS Files\"+problem_name+"\"+subproblem+"\"+datafolder ;
+felisresults_folder = "C:\Users\alistair\git\Impedance Results\FELIS Files\"+problem_name+"\"+datafolder ;
 
 
 %%% SEGMENT ARRAYS
