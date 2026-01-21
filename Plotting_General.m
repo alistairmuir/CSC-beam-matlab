@@ -78,7 +78,7 @@ if plot_num>3
     colors = cool(plot_num)*0.8 ;
     colors = [0,0,0 ; colors] ;
 else
-    colors = [0,0,0 ; 1,0,1 ; 0.8,0,0] ;
+    colors = [0,0,0.7 ; 1,0,1 ; 0.8,0,0] ;
 end
 
 %%%% REAL and IMAG parts of impedance
@@ -114,7 +114,7 @@ switch plot_type
                 tempdata = abs(error) ;
             end
             
-            plot(data(1).freqs, tempdata, linestyle(end), 'MarkerSize', msize, 'LineWidth',lwidth, 'Color',colors(end,:))
+            plot(data(1).freqs, tempdata, linestyle(end), 'MarkerSize', msize/1.5, 'LineWidth',lwidth, 'Color',[0,0,0])
         end
 
         legend(legend_list,'Location','best')
@@ -161,7 +161,7 @@ switch plot_type
                 tempdata = real(error) ;
             end
 
-            plot(data(1).freqs, tempdata, linestyle(end), 'MarkerSize', msize, 'LineWidth',lwidth, 'Color',colors(end,:))
+            plot(data(1).freqs, tempdata, linestyle(end), 'MarkerSize', msize/1.5, 'LineWidth',lwidth, 'Color',[0,0,0])
         end
 
         xlabel(your_xlabel)
@@ -193,7 +193,7 @@ switch plot_type
                 tempdata = imag(error) ;
             end
             
-            plot(data(1).freqs, tempdata, linestyle(end), 'MarkerSize', msize, 'LineWidth',lwidth, 'Color',colors(end,:))
+            plot(data(1).freqs, tempdata, linestyle(end), 'MarkerSize', msize/1.5, 'LineWidth',lwidth, 'Color',[0,0,0])
         end
 
         xlabel(your_xlabel)
@@ -229,7 +229,7 @@ switch plot_type
                 tempdata = real(error) ;
             end
 
-            plot(data(1).freqs, tempdata, linestyle(end), 'MarkerSize', msize, 'LineWidth',lwidth, 'Color',colors(end,:))
+            plot(data(1).freqs, tempdata, linestyle(end), 'MarkerSize', msize/1.5, 'LineWidth',lwidth, 'Color',[0,0,0])
         end
         
         if log_yaxis
@@ -269,7 +269,7 @@ switch plot_type
                 tempdata = abs(error) ;
             end
             
-            plot(data(1).freqs, tempdata, linestyle(end), 'MarkerSize', msize, 'LineWidth',lwidth, 'Color',colors(end,:))
+            plot(data(1).freqs, tempdata, linestyle(end), 'MarkerSize', msize/1.5, 'LineWidth',lwidth, 'Color',[0,0,0])
         end
         
         xlabel(your_xlabel)
@@ -322,7 +322,7 @@ switch plot_type
                 tempdata = real(error) ;
             end
 
-            plot(data(1).freqs, tempdata, linestyle(end), 'MarkerSize', msize, 'LineWidth',lwidth, 'Color',colors(end,:))
+            plot(data(1).freqs, tempdata, linestyle(end), 'MarkerSize', msize/1.5, 'LineWidth',lwidth, 'Color',[0,0,0])
         end
 
         xlabel(your_xlabel)
@@ -354,7 +354,7 @@ switch plot_type
                 tempdata = imag(error) ;
             end
             
-            plot(data(1).freqs, tempdata, linestyle(end), 'MarkerSize', msize, 'LineWidth',lwidth, 'Color',colors(end,:))
+            plot(data(1).freqs, tempdata, linestyle(end), 'MarkerSize', msize/1.5, 'LineWidth',lwidth, 'Color',[0,0,0])
         end
 
         xlabel(your_xlabel)
